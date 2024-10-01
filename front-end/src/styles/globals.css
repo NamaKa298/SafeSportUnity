@@ -6,6 +6,6 @@
 
 @layer base {
     html {
-        font-family: inter, system_ui, sans-serif;
+        font-family: 'Inter', system-ui, sans-serif;
     }
 }
