@@ -20,7 +20,7 @@ export const Typography = ({
     let variantStyles: string = "";
     switch (variant) {
         case "display":
-            variantStyles = "text-red-500";
+            variantStyles = "text-8xl";
             break;
         case "h1":
             variantStyles = "text-green-500";
@@ -28,7 +28,7 @@ export const Typography = ({
     }
 
     return (
-        <Component className={clsx(variantStyles, weight === "medium" && "font-medium", className)}>
+        <Component className={clsx(variantStyles, weight === "medium" && "font-medium", className, "text-8xl")}>
             {children}
         </Component>
     );
