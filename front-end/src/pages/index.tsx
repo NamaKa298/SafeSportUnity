@@ -1,4 +1,4 @@
-import { Seo } from "@/ui/components/seo";
+import { Seo } from "@/ui/components/seo/seo";
 
 export default function Home() {
   return (
