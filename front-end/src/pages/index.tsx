@@ -1,11 +1,13 @@
 import { Seo } from "@/ui/components/seo/seo";
+import { Typography } from "@/ui/design-system/typography";
 
 export default function Home() {
   return (
-      <>
-        <Seo title="SafeSportUnity" description="Description..." />
-        <h1 className="text-3xl font-blod underline text-red-500">SafeSportUnity Just Do It Safely Un Projet cool !!!</h1>
-          
-      </>
+    <>
+      <Seo title="SafeSportUnity" description="Description..." />
+      <Typography variant="h1" component="h1">
+        SafeSportUnity
+      </Typography>
+    </>
   );
 }
