@@ -1,18 +1,37 @@
 import { Seo } from "@/ui/components/seo/seo";
 import { Button } from "@/ui/design-system/button/button";
 import { Typography } from "@/ui/design-system/typography";
-
+import { RiUser6Fill } from "react-icons/ri";
 export default function Home() {
   return (
     <>
       <Seo title="SafeSportUnity" description="Description..." />
+
       <div className="flex items-center gap-4 p-10">
+        <Button
+          size="medium"
+          icon={{ icon: RiUser6Fill }}
+          iconPosition="left"
+        >
+          Accent
+        </Button>
+        <Button
+          size="large"
+          icon={{ icon: RiUser6Fill }}
+        >
+          Accent
+        </Button>
         <Button size="small">Accent</Button>
         <Button size="small" variant="secondary">Secondary</Button>
         <Button size="small" variant="outline">Accent</Button>
         <Button size="small" variant="disabled" disabled>
           Accent
         </Button>
+        <Button
+          size="small"
+          variant="ico"
+          icon={{ icon: RiUser6Fill }}
+        />
       </div>
 
       <div className="flex items-center gap-4 p-10">
@@ -22,6 +41,10 @@ export default function Home() {
         <Button variant="disabled" disabled>
           Accent
         </Button>
+        <Button
+          variant="ico"
+          icon={{ icon: RiUser6Fill }}
+        />
       </div>
 
       <div className="flex items-center gap-4 p-10">
@@ -31,6 +54,23 @@ export default function Home() {
         <Button size="large" variant="disabled" disabled>
           Accent
         </Button>
+        <Button
+          size="large"
+          variant="ico"
+          icon={{ icon: RiUser6Fill }}
+          iconTheme="secondary"
+        />
+        <Button
+          size="large"
+          variant="ico"
+          icon={{ icon: RiUser6Fill }}
+          iconTheme="gray"
+        />
+        <Button
+          size="large"
+          variant="ico"
+          icon={{ icon: RiUser6Fill }}
+        />
       </div>
 
       {/*
