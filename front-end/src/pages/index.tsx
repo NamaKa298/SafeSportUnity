@@ -133,54 +133,50 @@ export default function Home() {
           </div>
 
           <div className="py-5">
-              {/* Grid with 4 columns and 3 rows */}
-              <div className="grid grid-cols-4 gap-4 text-center">
-                {/* First row (Captions) */}
-                <Typography variant="caption3" weight="medium">
-                  Caption 1
-                </Typography>
-                <Typography variant="caption3" weight="medium">
-                  Caption 2
-                </Typography>
-                <Typography variant="caption3" weight="medium">
-                  Caption 3
-                </Typography>
-                <Typography variant="caption3" weight="medium">
-                  Caption 4
-                </Typography>
+            {/* Grid with 4 columns and 3 rows */}
+            <div className="grid grid-cols-4 gap-4 text-center">
+              {/* First row (Captions) */}
+              <Typography variant="caption3" weight="medium">
+                Caption 1
+              </Typography>
+              <Typography variant="caption3" weight="medium">
+                Caption 2
+              </Typography>
+              <Typography variant="caption3" weight="medium">
+                Caption 3
+              </Typography>
+              <Typography variant="caption3" weight="medium">
+                Caption 4
+              </Typography>
 
-                {/* Second row (Regular examples) */}
-                <Typography variant="caption1" weight="regular">
-                  Regular
-                </Typography>
-                <Typography variant="caption2" weight="regular">
-                  Regular
-                </Typography>
-                <Typography variant="caption3" weight="regular">
-                  Regular
-                </Typography>
-                <Typography variant="caption4" weight="regular">
-                  Regular
-                </Typography>
+              {/* Second row (Regular examples) */}
+              <Typography variant="caption1" weight="regular">
+                Regular
+              </Typography>
+              <Typography variant="caption2" weight="regular">
+                Regular
+              </Typography>
+              <Typography variant="caption3" weight="regular">
+                Regular
+              </Typography>
+              <Typography variant="caption4" weight="regular">
+                Regular
+              </Typography>
 
-                {/* Third row (Medium examples) */}
-                <Typography variant="caption1" weight="medium">
-                  Medium
-                </Typography>
-                <Typography variant="caption2" weight="medium">
-                  Medium
-                </Typography>
-                <Typography variant="caption3" weight="medium">
-                  Medium
-                </Typography>
-                <Typography variant="caption4" weight="medium">
-                  Medium
-                </Typography>
+              {/* Third row (Medium examples) */}
+              <Typography variant="caption1" weight="medium">
+                Medium
+              </Typography>
+              <Typography variant="caption2" weight="medium">
+                Medium
+              </Typography>
+              <Typography variant="caption3" weight="medium">
+                Medium
+              </Typography>
+              <Typography variant="caption4" weight="medium">
+                Medium
+              </Typography>
             </div>
-
-
-
-
 
             <div className="flex items-center gap-4 p-10">
               <Spinner size="small" />
@@ -313,5 +309,5 @@ export default function Home() {
         </div>
       </div>
     </>
-      )
+  )
 }
