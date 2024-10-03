@@ -3,6 +3,8 @@ import { Button } from "@/ui/design-system/button/button";
 import { Spinner } from "@/ui/design-system/spinner/spinner";
 import { Typography } from "@/ui/design-system/typography";
 import { RiUser6Fill } from "react-icons/ri";
+import { Logo } from "@/ui/design-system/logo/logo";
+
 export default function Home() {
   return (
     <>
@@ -117,6 +119,18 @@ export default function Home() {
         />
       </div>
 
+      <div className="space-y-2">
+        <Typography variant="caption2" weight="medium">
+          Logo
+        </Typography>
+        <div className="flex items-center gap-2 p-5 border border-gray-400 rounded">
+          <Logo size="very-small" />
+          <Logo size="small" />
+          <Logo />
+          <Logo size="large" />
+        </div>
+      </div>
+
       {/*
       <div className="space-y-5">
         <Typography>SafeSportUnity</Typography>
@@ -138,5 +152,6 @@ export default function Home() {
       </div>
       */}
     </>
+
   );
 }
