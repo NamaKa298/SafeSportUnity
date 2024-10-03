@@ -8,6 +8,9 @@ export default function Home() {
     <>
       <Seo title="SafeSportUnity" description="Description..." />
 
+      <div className="max-w-6xl mx-auto space-y-5 py-10">
+      </ div>
+
       <div className="flex items-center gap-4 p-10">
         <Spinner size="small" />
         <Spinner />
@@ -16,9 +19,9 @@ export default function Home() {
 
       <div className="flex items-center gap-4 p-10">
         <Button
-        isLoading size="small">Accent</Button>
+          isLoading size="small">Accent</Button>
         <Button
-        isLoading
+          isLoading
           size="small"
           icon={{ icon: RiUser6Fill }}
           iconPosition="left"
@@ -26,22 +29,22 @@ export default function Home() {
           Accent
         </Button>
         <Button
-        isLoading
+          isLoading
           size="small"
           icon={{ icon: RiUser6Fill }}
         >
           Accent
         </Button>
         <Button
-        isLoading size="small" variant="secondary">Secondary</Button>
+          isLoading size="small" variant="secondary">Secondary</Button>
         <Button
-        isLoading size="small" variant="outline">Accent</Button>
+          isLoading size="small" variant="outline">Accent</Button>
         <Button
-        isLoading size="small" variant="disabled" disabled>
+          isLoading size="small" variant="disabled" disabled>
           Accent
         </Button>
         <Button
-        isLoading
+          isLoading
           size="small"
           variant="ico"
           icon={{ icon: RiUser6Fill }}
