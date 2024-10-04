@@ -4,6 +4,7 @@ import { Spinner } from "@/ui/design-system/spinner/spinner";
 import { Typography } from "@/ui/design-system/typography";
 import { RiUser6Fill } from "react-icons/ri";
 import { Logo } from "@/ui/design-system/logo/logo";
+import { Avatar } from "@/ui/design-system/avatar/avatar";
 
 export default function Home() {
   return (
@@ -61,6 +62,7 @@ export default function Home() {
         <Typography variant="caption2" weight="medium">
           Typography
         </Typography>
+
 
         <div className="flex flex-col gap-2 p-5 border border-gray-400 divide-y-2 divide-gray-400 rounded">
           <div className="pb-5 space-y-2">
@@ -221,114 +223,188 @@ export default function Home() {
                 Medium
               </Typography>
             </div>
+          </div>
+        </div>
+      </div>
 
-            <div className="flex items-center gap-4 p-10">
-              <Spinner size="small" />
-              <Spinner />
-              <Spinner size="large" />
-            </div>
+      <div className="flex items-start gap-7">
+        {/* Spinner */}
+        <div className="space-y-2">
+          <Typography variant="caption2" weight="medium">
+            Spinner
+          </Typography>
+          <div className="flex items-center gap-2 p-5 border border-gray-400 rounded">
+            <Spinner size="small" />
+            <Spinner />
+            <Spinner size="large" />
+          </div>
+        </div>
 
-            <div className="flex items-center gap-4 p-10">
-              <Button
-                isLoading size="small">Accent</Button>
-              <Button
-                isLoading
-                size="small"
-                icon={{ icon: RiUser6Fill }}
-                iconPosition="left"
-              >
-                Accent
-              </Button>
-              <Button
-                isLoading
-                size="small"
-                icon={{ icon: RiUser6Fill }}
-              >
-                Accent
-              </Button>
-              <Button
-                isLoading size="small" variant="secondary">Secondary</Button>
-              <Button
-                isLoading size="small" variant="outline">Accent</Button>
-              <Button
-                isLoading size="small" variant="disabled" disabled>
-                Accent
-              </Button>
-              <Button
-                isLoading
-                size="small"
-                variant="ico"
-                icon={{ icon: RiUser6Fill }}
-              />
-            </div>
+        {/* Avatar */}
+        <div className="space-y-2">
+          <Typography variant="caption2" weight="medium">
+            Avatar
+          </Typography>
+          <div className="flex items-center gap-2 p-5 border border-gray-400 rounded">
+            <Avatar
+              size="small"
+              src="/assets/images/avatar.png"
+              alt="Avatar de nous"
+            />
+            <Avatar
+              src="/assets/images/avatar.png"
+              alt="Avatar de nous"
+            />
+            <Avatar
+              size="large"
+              src="assets/images/fabrice.png"
+              alt="Avatar de nous"
+            />
+          </div>
+        </div>
 
-            <div className="flex items-center gap-4 p-10">
-              <Button size="small">Accent</Button>
-              <Button
-                size="small"
-                icon={{ icon: RiUser6Fill }}
-                iconPosition="left"
-              >
-                Accent
-              </Button>
-              <Button
-                size="small"
-                icon={{ icon: RiUser6Fill }}
-              >
-                Accent
-              </Button>
-              <Button size="small" variant="secondary">Secondary</Button>
-              <Button isLoading size="small" variant="outline">Accent</Button>
-              <Button size="small" variant="disabled" disabled>
-                Accent
-              </Button>
-              <Button
-                size="small"
-                variant="ico"
-                icon={{ icon: RiUser6Fill }}
-              />
-            </div>
+        {/* Logo */}
+        <div className="space-y-2">
+          <Typography variant="caption2" weight="medium">
+            Logo
+          </Typography>
+          <div className="flex items-center gap-2 p-5 border border-gray-400 rounded">
+            <Logo size="very-small" />
+            <Logo size="small" />
+            <Logo />
+            <Logo size="large" />
+          </div>
+        </div>
+      </div>
 
-            <div className="flex items-center gap-4 p-10">
-              <Button>Accent</Button>
-              <Button variant="secondary">Secondary</Button>
-              <Button variant="outline">Accent</Button>
-              <Button variant="disabled" disabled>
-                Accent
-              </Button>
-              <Button
-                variant="ico"
-                icon={{ icon: RiUser6Fill }}
-              />
-            </div>
+      {/* Buttons */}
+      <div className="space-y-2">
+        <Typography variant="caption2" weight="medium">
+          Buttons
+        </Typography>
+        <div className="p-5 space-y-8 border border-gray-400 rounded">
+          <div className="space-y-2">
+            <Button>Accent</Button>
+            <Button variant="secondary">Secondary</Button>
+            <Button variant="outline">Accent</Button>
+            <Button variant="disabled" disabled>
+              Accent
+            </Button>
+            <Button
+              variant="ico"
+              icon={{ icon: RiUser6Fill }}
+            />
+          </div>
+        </div>
+      </div>
 
-            <div className="flex items-center gap-4 p-10">
-              <Button size="large">Accent</Button>
-              <Button size="large" variant="secondary">Secondary</Button>
-              <Button size="large" variant="outline">Accent</Button>
-              <Button size="large" variant="disabled" disabled>
-                Accent
-              </Button>
-              <Button
-                size="large"
-                variant="ico"
-                icon={{ icon: RiUser6Fill }}
-                iconTheme="secondary"
-              />
-              <Button
-                size="large"
-                variant="ico"
-                icon={{ icon: RiUser6Fill }}
-                iconTheme="gray"
-              />
-              <Button
-                size="large"
-                variant="ico"
-                icon={{ icon: RiUser6Fill }}
-              />
-            </div>
+      <div className="flex items-center gap-4 p-10">
+        <Spinner size="small" />
+        <Spinner />
+        <Spinner size="large" />
+      </div>
 
-            {/*
+      <div className="flex items-center gap-4 p-10">
+        <Button
+          isLoading size="small">Accent</Button>
+        <Button
+          isLoading
+          size="small"
+          icon={{ icon: RiUser6Fill }}
+          iconPosition="left"
+        >
+          Accent
+        </Button>
+        <Button
+          isLoading
+          size="small"
+          icon={{ icon: RiUser6Fill }}
+        >
+          Accent
+        </Button>
+        <Button
+          isLoading size="small" variant="secondary">Secondary</Button>
+        <Button
+          isLoading size="small" variant="outline">Accent</Button>
+        <Button
+          isLoading size="small" variant="disabled" disabled>
+          Accent
+        </Button>
+        <Button
+          isLoading
+          size="small"
+          variant="ico"
+          icon={{ icon: RiUser6Fill }}
+        />
+      </div>
+
+      <div className="flex items-center gap-4 p-10">
+        <Button size="small">Accent</Button>
+        <Button
+          size="small"
+          icon={{ icon: RiUser6Fill }}
+          iconPosition="left"
+        >
+          Accent
+        </Button>
+        <Button
+          size="small"
+          icon={{ icon: RiUser6Fill }}
+        >
+          Accent
+        </Button>
+        <Button size="small" variant="secondary">Secondary</Button>
+        <Button isLoading size="small" variant="outline">Accent</Button>
+        <Button size="small" variant="disabled" disabled>
+          Accent
+        </Button>
+        <Button
+          size="small"
+          variant="ico"
+          icon={{ icon: RiUser6Fill }}
+        />
+      </div>
+
+      <div className="flex items-center gap-4 p-10">
+        <Button>Accent</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="outline">Accent</Button>
+        <Button variant="disabled" disabled>
+          Accent
+        </Button>
+        <Button
+          variant="ico"
+          icon={{ icon: RiUser6Fill }}
+        />
+      </div>
+
+      <div className="flex items-center gap-4 p-10">
+        <Button size="large">Accent</Button>
+        <Button size="large" variant="secondary">Secondary</Button>
+        <Button size="large" variant="outline">Accent</Button>
+        <Button size="large" variant="disabled" disabled>
+          Accent
+        </Button>
+        <Button
+          size="large"
+          variant="ico"
+          icon={{ icon: RiUser6Fill }}
+          iconTheme="secondary"
+        />
+        <Button
+          size="large"
+          variant="ico"
+          icon={{ icon: RiUser6Fill }}
+          iconTheme="gray"
+        />
+        <Button
+          size="large"
+          variant="ico"
+          icon={{ icon: RiUser6Fill }}
+        />
+      </div>
+
+
       <div className="space-y-2">
         <Typography variant="caption2" weight="medium">
           Logo
@@ -341,19 +417,17 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="space-y-2">
-        <Typography variant="caption2" weight="medium">
-          Logo
-        </Typography>
-        <div className="flex items-center gap-2 p-5 border border-gray-400 rounded">
-          <Logo size="very-small" />
-          <Logo size="small" />
-          <Logo />
-          <Logo size="large" />
-        </div>
-      </div>
 
-      {/*
+
+
+
+
+    </>
+
+  );
+
+}
+{/*
       <div className="space-y-5">
         <Typography>SafeSportUnity</Typography>
         <Typography theme="primary" variant="body-lg" component="h1">
@@ -373,12 +447,3 @@ export default function Home() {
         </Typography>
       </div>
       */}
-
-          </div>
-        </div>
-      </div>
-    </>
-
-  );
-
-}
