@@ -1,5 +1,7 @@
+/* eslint-disable */
 import { Typography } from "@/ui/design-system/typography/typography";
 import { Container } from "../container/container";
+import { Logo } from "@/ui/design-system/logo/logo";
 
 interface Props { }
 
