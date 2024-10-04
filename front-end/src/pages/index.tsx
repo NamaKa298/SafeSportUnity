@@ -8,15 +8,17 @@ import { RiUser6Fill } from "react-icons/ri";
 import { Logo } from "@/ui/design-system/logo/logo";
 import { Container } from "@/ui/components/container/container";
 import { Navigation } from "@/ui/components/navigation/navigation";
+import { Avatar } from "@/ui/design-system/avatar/avatar";
 
 export default function Home() {
   return (
     <>
       <Seo title="SafeSportUnity" description="Description..." />
-
-      <Navigation />
+      
+     <Navigation />
 
       <Container className="py-10 space-y-10">
+
         {/* Typography */}
         <div className="space-y-2">
           <Typography variant="caption2" weight="medium">
@@ -182,6 +184,80 @@ export default function Home() {
                   Medium
                 </Typography>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex items-start gap-7">
+          {/* Spinner */}
+          <div className="space-y-2">
+            <Typography variant="caption2" weight="medium">
+              Spinner
+            </Typography>
+            <div className="flex items-center gap-2 p-5 border border-gray-400 rounded">
+              <Spinner size="small" />
+              <Spinner />
+              <Spinner size="large" />
+            </div>
+          </div>
+
+          {/* Avatar */}
+          <div className="space-y-2">
+            <Typography variant="caption2" weight="medium">
+              Avatar
+            </Typography>
+            <div className="flex items-center gap-2 p-5 border border-gray-400 rounded">
+              <Avatar
+                size="small"
+                src="/assets/images/avatar.png"
+                alt="Avatar de nous"
+              />
+              <Avatar
+                src="/assets/images/avatar.png"
+                alt="Avatar de nous"
+              />
+              <Avatar
+                size="large"
+                src="assets/images/fabrice.png"
+                alt="Avatar de nous"
+              />
+            </div>
+          </div>
+
+          {/* Logo */}
+          <div className="space-y-2">
+            <Typography variant="caption2" weight="medium">
+              Logo
+            </Typography>
+            <div className="flex items-center gap-2 p-5 border border-gray-400 rounded">
+              <Logo size="very-small" />
+              <Logo size="small" />
+              <Logo />
+              <Logo size="large" />
+            </div>
+          </div>
+        </div>
+
+        {/* Buttons */}
+        <div className="space-y-2">
+          <Typography variant="caption2" weight="medium">
+            Buttons
+          </Typography>
+          <div className="p-5 space-y-8 border border-gray-400 rounded">
+            <div className="space-y-2">
+              <Button>Accent</Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="outline">Accent</Button>
+              <Button variant="disabled" disabled>
+                Accent
+              </Button>
+              <Button
+                variant="ico"
+                icon={{ icon: RiUser6Fill }}
+              />
+            </div>
+          </div>
+        </div>
 
               <div className="flex items-center gap-4 p-10">
                 <Spinner size="small" />
@@ -288,21 +364,8 @@ export default function Home() {
                   icon={{ icon: RiUser6Fill }}
                 />
               </div>
-
-              {/*
-      <div className="space-y-2">
-        <Typography variant="caption2" weight="medium">
-          Logo
-        </Typography>
-        <div className="flex items-center gap-2 p-5 border border-gray-400 rounded">
-          <Logo size="very-small" />
-          <Logo size="small" />
-          <Logo />
-          <Logo size="large" />
-        </div>
-      </div>
-
-      {/*
+   
+{/*
       <div className="space-y-5">
         <Typography>SafeSportUnity</Typography>
         <Typography theme="primary" variant="body-lg" component="h1">
