@@ -6,6 +6,7 @@ import { Button } from "@/ui/design-system/button/button";
 import { RiRunLine } from "react-icons/ri";
 import { GiHumanTarget } from "react-icons/gi";
 
+
 interface Props {}
 
 export const Navigation = ({ }: Props) => {
