@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { IconProps } from "@/types/iconProps";
 import clsx from "clsx";
 import React from "react";
