@@ -8,8 +8,8 @@ import { RiUser6Fill } from "react-icons/ri";
 import { Logo } from "@/ui/design-system/logo/logo";
 import { Container } from "@/ui/components/container/container";
 import { Navigation } from "@/ui/components/navigation/navigation";
-
 import { Avatar } from "@/ui/design-system/avatar/avatar";
+import { Footer } from "@/ui/components/navigation/footer";
 
 
 export default function Home() {
@@ -367,6 +367,7 @@ export default function Home() {
         </div>
 
       </Container >
+      <Footer />
     </>
 
   );
