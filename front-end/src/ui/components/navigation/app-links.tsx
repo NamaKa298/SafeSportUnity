@@ -1,4 +1,4 @@
-import { AppLinks } from "next/dist/lib/metadata/types/extra-types";
+import { AppLinks } from "@/types/app-links";
 
 export const footerRessourcesLinks: AppLinks[] = [
     {
