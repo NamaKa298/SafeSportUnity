@@ -30,7 +30,7 @@ export default function DesignSystem() {
               </Typography>
               <Typography variant="display">
                 Just Do It
-              </Typography>
+              </Typography>*
             </div>
 
             <div className="py-5 space-y-2">
