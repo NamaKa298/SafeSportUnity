@@ -8,7 +8,7 @@ import Link from "next/link";
 import { ActiveLink } from "./active-link";
 
 
-interface Props {}
+interface Props { }
 
 export const Navigation = ({ }: Props) => {
   return (
@@ -16,11 +16,11 @@ export const Navigation = ({ }: Props) => {
       <Container className="flex items-center justify-between py-1.5 gap-7">
         <Link href="/">
         <div className="flex items-center gap-2.5">
-          
           <Logo size="small" />
+          
           <div className="flex flex-col">
             <div className="text-gray font-extrabold text-[24px]"
-            >
+              >
               SafeSportUnity
             </div>
             <Typography
@@ -28,14 +28,14 @@ export const Navigation = ({ }: Props) => {
               component="span"
               theme="gray"
             >
-              Just Do It Safely with your Partners !
-            </Typography>
-          </div>
+                Just Do It Safely with your Partners !
+              </Typography>
+            </div>
           
         </div>
         </Link>
         
-        <div className="flex items-center gap-16 p-10">
+       <div className="flex items-center gap-16 p-10">
           <ActiveLink href="/Activities">
           <Button size="small">
             Activities
@@ -53,7 +53,7 @@ export const Navigation = ({ }: Props) => {
             size="small"
             icon={{ icon: GiHumanTarget }}
             iconPosition="left"
-            >
+          >
             MyProfile
           </Button>
           </ActiveLink>
