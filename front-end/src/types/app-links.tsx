@@ -1,4 +1,5 @@
 import { LinkType } from "@/lib/link-type";
+import { IconType } from "react-icons";
 
 export interface LogoLinks {
     label: string;
@@ -9,6 +10,7 @@ export interface AppLinks {
     label: string;
     baseUrl: string;
     type: LinkType;
+    icon?: IconType;
 }
  
 export interface FooterLinks {

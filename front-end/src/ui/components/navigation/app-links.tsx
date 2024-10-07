@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import { AppLinks } from "@/types/app-links";
+import { RiInstagramFill, RiLinkedinFill, RiTwitterFill } from "react-icons/ri";
 
 const footerLogoLinks: AppLinks[] = [
     {
@@ -35,22 +36,25 @@ const footerAboutLinks: AppLinks[] = [
     },
 ];
 
-const footerSocialNetworksLinks: AppLinks[] = [
+export const footerSocialNetworksLinks: AppLinks[] = [
     {
         label: "Twitter",
         baseUrl: "https://x.com/Accueil",
         type: "external",
+        icon: RiTwitterFill,
     },
     {
         label: "LinkedIn",
         baseUrl: "https://fr.linkedin.com/",
         type: "external",
+        icon: RiLinkedinFill,
     },
     {
         label: "Instagram",
         baseUrl: "https://www.instagram.com/",
         type: "external",
-    }
+        icon: RiInstagramFill,
+    },
 ];
 
 export const footerLinks = [
