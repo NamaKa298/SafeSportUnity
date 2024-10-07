@@ -1,15 +1,10 @@
 /* eslint-disable */
-
-import { Seo } from "@/ui/components/seo/seo";
-import { Button } from "@/ui/design-system/button/button";
-import { Spinner } from "@/ui/design-system/spinner/spinner";
-import { Typography } from "@/ui/design-system/typography";
-import { RiUser6Fill } from "react-icons/ri";
-import { Logo } from "@/ui/design-system/logo/logo";
-import { Container } from "@/ui/components/container/container";
-import { Navigation } from "@/ui/components/navigation/navigation";
-import { Avatar } from "@/ui/design-system/avatar/avatar";
+/** COMPONENTS */
+import { Layout } from "@/ui/components/layout/layout";
 import { Footer } from "@/ui/components/navigation/footer";
+import { Navigation } from "@/ui/components/navigation/navigation";
+import { Seo } from "@/ui/components/seo/seo";
+import { HomePageContainer } from "@/ui/modules/home-page/home-page.container";
 
 
 export default function Home() {
@@ -17,10 +12,9 @@ export default function Home() {
     <>
       <Seo title="SafeSportUnity" description="Description..." />
 
-      <Navigation />
-      <Footer />
-      
-
+      <Layout>
+          <HomePageContainer />
+      </Layout>
     </>
       
   );
