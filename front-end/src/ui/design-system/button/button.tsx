@@ -4,6 +4,8 @@ import { IconProps } from "@/types/iconProps";
 import clsx from "clsx";
 import React from "react";
 import { Spinner } from "../spinner/spinner";
+import { LinkType, LinkTypes } from "@/lib/link-type";
+import Link from "next/link";
 
 interface Props {
     size?: "small" | "medium" | "large";
@@ -14,6 +16,9 @@ interface Props {
     disabled?: boolean;
     isLoading?: boolean;
     children?: React.ReactNode;
+    baseUrl?: string;
+    linkType?: LinkType;
+    action?: Function;
 }
 
 export const Button = ({
@@ -25,6 +30,9 @@ export const Button = ({
     disabled,
     isLoading,
     children,
+    baseUrl,
+    linkType = "internal",
+    action = () => {},
 }: Props) => {
     let variantStyles: string = "",
         sizeStyles: string = "",
@@ -54,7 +62,7 @@ export const Button = ({
                 variantStyles = "bg-primary-200 hover:bg-primary-300/50 text-primary rounded-full";
             }
             if (iconTheme === "gray") {
-                variantStyles = "bg-gray-700 hover:bg-gray-600 text-white rounded-full";
+                variantStyles = "bg-gray-800 hover:bg-gray-700 text-white rounded-full";
             }
             break;
     }
@@ -77,47 +85,72 @@ export const Button = ({
             break;
     }
 
-    return (
+    const handleClick = () => {
+        if (action) {
+            action()
+        }
+
+    }
+
+    const buttonContent = (
         <>
-            <button
-                type="button"
-                className={clsx(
-                    variantStyles,
-                    sizeStyles,
-                    icoSize,
-                    isLoading && "cursor-wait",
-                    "relative animate"
-                )}
-                onClick={() => console.log('click')}
-                disabled={disabled}
-            >
-
-                {isLoading && (
-                    < div className="absolute inset-0 flex items-center justify-center">
-                        {variant === "accent" || variant === "ico" ? (
-                            <Spinner size="small" variant="white" />
-                        ) : (
-                            <Spinner size="small" />
-                        )}
-                    </div >
-                )}
-
-                <div className={clsx(isLoading && "invisible")}>
-                    {icon && variant === "ico" ? (
-                        <icon.icon size={icoSize} />
+            {isLoading && (
+                < div className="absolute inset-0 flex items-center justify-center">
+                    {variant === "accent" || variant === "ico" ? (
+                        <Spinner size="small" variant="white" />
                     ) : (
-                        <div className={clsx(icon && "flex items-center gap-1")}>
-                            {icon && iconPosition === "left" && (
-                                <icon.icon size={icoSize} />
-                            )}
-                            {children}
-                            {icon && iconPosition === "right" && (
-                                <icon.icon size={icoSize} />
-                            )}
-                        </div>
+                        <Spinner size="small" />
                     )}
-                </div>
-            </button >
+                </div >
+            )}
+
+            <div className={clsx(isLoading && "invisible")}>
+                {icon && variant === "ico" ? (
+                    <icon.icon size={icoSize} />
+                ) : (
+                    <div className={clsx(icon && "flex items-center gap-1")}>
+                        {icon && iconPosition === "left" && (
+                            <icon.icon size={icoSize} />
+                        )}
+                        {children}
+                        {icon && iconPosition === "right" && (
+                            <icon.icon size={icoSize} />
+                        )}
+                    </div>
+                )}
+            </div>
         </>
-    );
+    )
+
+    const buttonElement = (
+        <button
+            type="button"
+            className={clsx(
+                variantStyles,
+                sizeStyles,
+                icoSize,
+                isLoading && "cursor-wait",
+                "relative animate"
+            )}
+            onClick={handleClick}
+            disabled={disabled}
+        >
+            {buttonContent}
+
+        </button >
+    )
+
+    if (baseUrl) {
+        if (linkType === LinkTypes.EXTERNAL) {
+            return (
+                <a href={baseUrl} target="_blank">
+                    {buttonElement}
+                </a>
+            )
+        } else {
+            return <Link href={baseUrl}>{buttonElement}</Link>
+        }
+    }
+
+    return buttonElement
 };
