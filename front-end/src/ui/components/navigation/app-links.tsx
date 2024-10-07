@@ -33,6 +33,23 @@ const footerAboutLinks: AppLinks[] = [
     },
 ];
 
+const footerSocialNetworksLinks: AppLinks[] = [
+    {
+        label: "Twitter",
+        baseUrl: "https://x.com/Accueil",
+        type: "external",
+    },
+    {
+        label: "LinkedIn",
+        baseUrl: "https://fr.linkedin.com/",
+        type: "external",
+    },
+    {
+        label: "Instagram",
+        baseUrl: "https://www.instagram.com/",
+        type: "external",
+    }
+];
 
 export const footerLinks = [
     {

@@ -53,9 +53,6 @@ export const Footer = () => {
                     <div className="">
 
                     </div>
-                    <div className="">
-
-                    </div>
                 </div>
             </Container>
         </div>
