@@ -16,8 +16,7 @@ export const Navigation = ({ }: Props) => {
         <div className="flex items-center gap-2.5">
           <Logo size="small" />
           <div className="flex flex-col">
-            <div className="text-gray font-extrabold text-[24px]"
-            >
+            <div className="text-gray font-extrabold text-[24px]">
               SafeSportUnity
             </div>
             <Typography

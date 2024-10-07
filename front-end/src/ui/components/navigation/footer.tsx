@@ -1,16 +1,16 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable */
 import { Container } from "../container/container";
 import { Typography } from "@/ui/design-system/typography/typography";
 import Image from "next/image";
 import { footerRessourcesLinks } from "./app-links";
 import { v4 as uuidv4 } from 'uuid';
+import { ActiveLink } from "./active-link";
 
 export const Footer = () => {
     const currentYear = new Date().getFullYear();
-
-    const footerNavigationList = footerRessourcesLinks.map((element) =>
-        <div key={uuidv4()}> {element.label}</div >
-    );
+    const footerNavigationList = footerRessourcesLinks.map((element) => (
+        <div key={uuidv4()}>{element.label}</div >
+    ));
 
     return (
         <div className="bg-gray">
@@ -38,7 +38,7 @@ export const Footer = () => {
                         How It Works
                     </Typography>
                 </div>
-                <div className="">{footerNavigationList}</div>
+                <div className=""><FooterLink /></div>
             </Container>
             <Container className="pt-9 pb-11 space-y-11">
                 <hr className="text-gray-800" />
@@ -59,6 +59,20 @@ export const Footer = () => {
 }
 
 const FooterLink = () => {
+    const linksList = footerRessourcesLinks.map((link) => (
+        <div key={uuidv4()}>
+            {link.type === "internal" && (
+                <ActiveLink href={link.baseUrl}>{link.label}</ActiveLink>
+            )}
+            {link.type === "external" && (
+                <a href={link.baseUrl} target='_blank'>
+                    {link.label}
+                </a>
+            )}
+        </div >
+
+    ));
+
     return (
         <div className="min-w-[190px]">
             <Typography
@@ -67,14 +81,11 @@ const FooterLink = () => {
                 weight="medium"
                 className="pb-5"
             >
-                Titre
+                RESSOURCES
             </Typography>
             <Typography theme="gray" variant="caption3" className="space-y-4" >
-                <div>Link 1</div>
-                <div>Link 2</div>
-                <div>Link 3</div>
-                <div>Link 4</div>
+                {linksList}
             </Typography>
         </div>
     );
-}
+};
