@@ -1,3 +1,5 @@
+
+
 import { Button } from '@/ui/design-system/button/button';
 import { footerSocialNetworksLinks } from './app-links';
 import { v4 as uuidv4 } from 'uuid';

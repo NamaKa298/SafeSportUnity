@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { AppLinks } from "@/types/app-links";
 
 const footerLogoLinks: AppLinks[] = [
