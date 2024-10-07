@@ -5,31 +5,34 @@ import { Logo } from "@/ui/design-system/logo/logo";
 import { Button } from "@/ui/design-system/button/button";
 import { RiRunLine } from "react-icons/ri";
 import { GiHumanTarget } from "react-icons/gi";
+import Link from "next/link";
 
 
-interface Props {}
+interface Props { }
 
 export const Navigation = ({ }: Props) => {
   return (
     <div className="border-b-2 border-gray-400">
       <Container className="flex items-center justify-between py-1.5 gap-7">
-        <div className="flex items-center gap-2.5">
-          <Logo size="small" />
-          <div className="flex flex-col">
-            <div className="text-gray font-extrabold text-[24px]">
-              SafeSportUnity
+        <Link href="/">
+          <div className="flex items-center gap-2.5">
+            <Logo size="small" />
+            <div className="flex flex-col">
+              <div className="text-gray font-extrabold text-[24px]">
+                SafeSportUnity
+              </div>
+              <Typography
+                variant="caption4"
+                component="span"
+                theme="gray"
+              >
+                Just Do It Safely with your Partners !
+              </Typography>
             </div>
-            <Typography
-              variant="caption4"
-              component="span"
-              theme="gray"
-            >
-              Just Do It Safely with your Partners !
-            </Typography>
           </div>
-        </div>
+        </Link>
         <div className="flex items-center gap-16 p-10">
-        <Button
+          <Button
             size="small"
             icon={{ icon: RiRunLine }}
             iconPosition="left"
@@ -42,11 +45,11 @@ export const Navigation = ({ }: Props) => {
           <Button size="small">
             They Made It !
           </Button>
-          <Button 
+          <Button
             size="small"
             icon={{ icon: GiHumanTarget }}
             iconPosition="left"
-            >
+          >
             MyProfile
           </Button>
           <Button size="small" variant="secondary">
