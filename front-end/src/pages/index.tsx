@@ -18,7 +18,7 @@ export default function Home() {
       <Seo title="SafeSportUnity" description="Description..." />
 
       <Navigation />
-
+    <Footer/>
     </>
       
   );
