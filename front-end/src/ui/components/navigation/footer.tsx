@@ -17,7 +17,7 @@ export const Footer = () => {
     return (
         <div className="bg-gray">
             <Container className="flex justify-between pt-16">
-                <div className="flex flex-col items-center gap-2">
+                {/* <div className="flex flex-col items-center gap-2">
                     <Typography
                         variant="caption1"
                         theme="white"
@@ -39,15 +39,15 @@ export const Footer = () => {
                     >
                         How It Works
                     </Typography>
-                </div>
-                <div className="flex gap-7">
+                </div> */}
+                <div className="flex flex-grow gap-7">
                     {footerNavigationList}
                 </div>
             </Container>
             <Container className="pt-9 pb-11 space-y-11">
                 <hr className="text-gray-800" />
-                <div className="flex items-center justify-between">
-                    <Typography variant="caption4" theme="gray" >
+                <div className="flex items-center justify-center">
+                    <Typography variant="caption4" theme="gray" className="text-center">
                         {`Copyright © ${currentYear} | By Benoît Beti & Marion Saint-Martin - SafeSportUnity`}
                     </Typography>
                     <div className="">
@@ -82,7 +82,7 @@ const FooterLink = ({ data }: footerLinkProps) => {
     ));
 
     return (
-        <div className="min-w-[190px]">
+        <div className="flex-grow min-w-[190px]">
             <Typography
                 theme="white"
                 variant="caption2"
