@@ -1,4 +1,4 @@
-/* eslint-disable */
+
 import { Container } from "../container/container";
 import { Typography } from "@/ui/design-system/typography/typography";
 import { footerLinks } from "./app-links";

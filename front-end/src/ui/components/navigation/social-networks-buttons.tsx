@@ -10,15 +10,10 @@ interface Props {
     className?: string;
 }
 
-export const SocialNetworksButtons = ({ className,
-     theme = "accent",
-
- }: Props) => {
-
-    const actionTest = () => {
-        console.log("hello world !");
-    }
-
+export const SocialNetworksButtons = ({
+    className,
+    theme = "accent",
+}: Props) => {
     const icoList = footerSocialNetworksLinks.map((socialNetwork) => (
         <Button
             key={uuidv4()}
@@ -26,13 +21,13 @@ export const SocialNetworksButtons = ({ className,
             iconTheme={theme}
             icon={{
                 icon: socialNetwork.icon
-                ? socialNetwork.icon
-                : RiFacebookFill,
+                    ? socialNetwork.icon
+                    : RiFacebookFill,
             }}
             baseUrl={socialNetwork.baseUrl}
             linkType={socialNetwork.type}
         />
-    ))
+    ));
 
     return (
         <div className={clsx(className, "flex items-center gap-2.5")}>{icoList}</div>
