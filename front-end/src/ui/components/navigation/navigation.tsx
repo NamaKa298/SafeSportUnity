@@ -3,8 +3,9 @@ import { Typography } from "@/ui/design-system/typography/typography";
 import { Container } from "../container/container";
 import { Logo } from "@/ui/design-system/logo/logo";
 import { Button } from "@/ui/design-system/button/button";
-import { RiRunLine } from "react-icons/ri";
 import { GiHumanTarget } from "react-icons/gi";
+import Link from "next/link";
+import { ActiveLink } from "./active-link";
 
 
 interface Props {}
@@ -13,7 +14,9 @@ export const Navigation = ({ }: Props) => {
   return (
     <div className="border-b-2 border-gray-400">
       <Container className="flex items-center justify-between py-1.5 gap-7">
+        <Link href="/">
         <div className="flex items-center gap-2.5">
+          
           <Logo size="small" />
           <div className="flex flex-col">
             <div className="text-gray font-extrabold text-[24px]"
@@ -28,21 +31,24 @@ export const Navigation = ({ }: Props) => {
               Just Do It Safely with your Partners !
             </Typography>
           </div>
+          
         </div>
+        </Link>
+        
         <div className="flex items-center gap-16 p-10">
-        <Button
-            size="small"
-            icon={{ icon: RiRunLine }}
-            iconPosition="left"
-          >
-            SafeSportUnity
-          </Button>
+          <ActiveLink href="/Activities">
           <Button size="small">
             Activities
           </Button>
+          </ActiveLink>
+          
+          <ActiveLink href="/They_made_it">
           <Button size="small">
             They Made It !
           </Button>
+          </ActiveLink>
+          
+          <ActiveLink href="/MyProfile">
           <Button 
             size="small"
             icon={{ icon: GiHumanTarget }}
@@ -50,9 +56,13 @@ export const Navigation = ({ }: Props) => {
             >
             MyProfile
           </Button>
+          </ActiveLink>
+          
+          <ActiveLink href="/Login">
           <Button size="small" variant="secondary">
             Login
           </Button>
+          </ActiveLink>
         </div>
       </Container>
     </div>
