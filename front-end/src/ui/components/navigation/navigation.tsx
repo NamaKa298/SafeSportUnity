@@ -58,11 +58,11 @@ export const Navigation = ({ }: Props) => {
           </Button>
           </ActiveLink>
           
-          <ActiveLink href="/Login">
-          <Button size="small" variant="secondary">
+
+          <Button baseUrl="/connexion" size="small" variant="secondary">
             Login
           </Button>
-          </ActiveLink>
+
         </div>
       </Container>
     </div>
