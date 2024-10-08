@@ -32,7 +32,7 @@ export const Logo = ({ size = "medium" }: Props) => {
         >
             <rect width="227" height="228" fill="#F5F5F5" />
             <rect width="227" height="228" fill="url(#pattern0_0_1)" />
-            <rect width="227" height="228" fill="black" fill-opacity="0.2" />
+            <rect width="227" height="228" fill="black" fillOpacity="0.2" />
             <defs>
                 <pattern id="pattern0_0_1" patternContentUnits="objectBoundingBox" width="1" height="1">
                     <use xlinkHref="#image0_0_1" transform="scale(0.00440529 0.00438596)" />
