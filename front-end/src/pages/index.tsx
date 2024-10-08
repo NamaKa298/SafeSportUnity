@@ -6,7 +6,6 @@ import { Navigation } from "@/ui/components/navigation/navigation";
 import { Seo } from "@/ui/components/seo/seo";
 import { HomePageContainer } from "@/ui/modules/home-page/home-page.container";
 
-
 export default function Home() {
   return (
     <>
