@@ -22,7 +22,7 @@ export const RegisterView = ({ form }: Props) => {
                                 Already have an acount ?
                             </Typography>
                             <Typography variant="caption4" component="span" theme="primary">
-                                <Link href="/connexion">Connection</Link>
+                                <Link href="/connexion">Sign In</Link>
                             </Typography>
                         </div>
                     </div>

@@ -133,12 +133,12 @@ export const Button = ({
                 variantStyles,
                 sizeStyles,
                 icoSize,
-                isLoading && "cursor-wait",
+                isLoading && "cursor-not-allowed",
                 fullWidth && "w-full",
                 "relative animate"
             )}
             onClick={handleClick}
-            disabled={disabled}
+            disabled={disabled || isLoading ? true : false}
         >
             {buttonContent}
 

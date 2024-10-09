@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const RegisterForm = ({ form }: Props) => {
-    const { control, onSubmit, errors, isLoading, register, handleSubmit } =
+    const { onSubmit, errors, isLoading, register, handleSubmit } =
         form;
     console.log("form", form)
     return (
@@ -100,7 +100,7 @@ export const RegisterForm = ({ form }: Props) => {
                 id="password"
             />
             <Button isLoading={isLoading} type="submit" fullWidth>
-                Create Account
+                Create Acount
             </Button>
         </form>
     );

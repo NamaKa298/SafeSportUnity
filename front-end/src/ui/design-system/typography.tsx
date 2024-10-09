@@ -3,7 +3,7 @@ import clsx from "clsx";
 interface Props {
     variant?: "display" | "h1" | "h2" | "h3" | "h4" | "h5" | "lead" | "body-lg" | "body-base" | "body-sm" | "caption1" | "caption2" | "caption3" | "caption4";
     component?: "h1" | "h2" | "h3" | "h4" | "h5" | "p" | "span" | "div";
-    theme?: "black" | "gray" | "primary" | "secondary" | "white";
+    theme?: "black" | "gray" | "primary" | "secondary" | "white" | "danger" | "success" | "warning";
     weight?: "regular" | "medium";
     className?: string;
     children: React.ReactNode;
@@ -78,6 +78,15 @@ export const Typography = ({
             break;
         case "secondary":
             colorStyles = "text-secondary";
+            break;
+        case "danger":
+            colorStyles = "text-alert-danger";
+            break;
+        case "success":
+            colorStyles = "text-alert-success";
+            break;
+        case "warning":
+            colorStyles = "text-alert-warning";
             break;
     }
 

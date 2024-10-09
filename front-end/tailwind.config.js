@@ -28,7 +28,12 @@ module.exports = {
 				'700': '#808080',
 				'800': '#333333',
 				DEFAULT: '#1D1D1D'
-			}
+			},
+			alert: {
+				danger: "#FF4E4E",
+				success: "#90DA1",
+				warning: "#FEB72F",
+			},
 		},
 		fontSize: {
 			'8xl': ["120px", { lineHeight: "120px", letterSpacing: "-6px", fontWeight: '500' }],
@@ -57,9 +62,6 @@ module.exports = {
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
-			colors: {
-				secondary: '#ff6347'
-			}
 		}
 	},
 	plugins: [tailwindcssAnimate],
