@@ -1,11 +1,15 @@
+/*eslint-disable*/
 import { SubmitHandler, useForm } from "react-hook-form";
 import { RegisterView } from "./register.view";
 import { RegisterFormFieldsType } from "@/types/forms";
-import { useState } from "react";
+import { firebaseCreateUser } from "@/api/authentication";
+import { toast } from 'react-toastify';
+import { useToggle } from "@/hooks/use-toggle";
 
 export const RegisterContainer = () => {
-
-    const [isLoading, setIsloading] = useState<boolean>(false);
+    const { value: isLoading,
+        setValue: setIsLoading,
+    } = useToggle({ initial: true });
 
     const {
         handleSubmit,
@@ -15,12 +19,46 @@ export const RegisterContainer = () => {
         reset,
     } = useForm<RegisterFormFieldsType>();
 
+    const handleCreateUserAuthentication = async ({
+        firstName,
+        lastName,
+        userName,
+        postalAddress,
+        newEmail,
+        email,
+        confirmEmail,
+        password,
+        confirmPassword,
+    }: RegisterFormFieldsType) => {
+        const { error, data } = await firebaseCreateUser(email, password)
+        if (error) {
+            setIsLoading(false);
+            toast.error(error.message);
+            console.log(error);
+            return
+        }
+
+        toast.success("User created successfully");
+        setIsLoading(false);
+        reset();
+    };
+    //* @todo create user document
     const onSubmit: SubmitHandler<RegisterFormFieldsType> = async (formData) => {
-        setIsloading(true);
-        console.log('formData', formData);
+        setIsLoading(true);
+        const { password } = formData;
+
+        if (password.length <= 5) {
+            setError("password", {
+                type: "manual",
+                message: "Password must be at least 6 characters long",
+            });
+            return;
+        }
+        handleCreateUserAuthentication(formData);
     };
 
     return (
+
         <RegisterView
             form={{
                 errors,

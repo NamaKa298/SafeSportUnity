@@ -5,7 +5,7 @@ import { LoginView } from "./login.view";
 
 export const LoginContainer = () => {
 
-    const [isLoading, setIsloading] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const {
         handleSubmit,
@@ -16,7 +16,7 @@ export const LoginContainer = () => {
     } = useForm<LoginFormFieldsType>();
 
     const onSubmit: SubmitHandler<LoginFormFieldsType> = async (formData) => {
-        setIsloading(true);
+        setIsLoading(true);
         console.log('formData', formData);
     };
 

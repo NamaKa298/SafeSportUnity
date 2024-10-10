@@ -1,5 +1,7 @@
 // This file is used to initialize the Firebase SDK and connect to the Firebase project.
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -13,4 +15,5 @@ const firebaseConfig = {
 
 // Initialize Firebase
 /* eslint-disable @typescript-eslint/no-unused-vars */
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
