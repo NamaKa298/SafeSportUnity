@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { ForgetPasswordView } from "./forget-password.view"
 
 export const ForgetPasswordContainer = () => {
-    const [isLoading, setIsloading] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const {
         handleSubmit,
@@ -15,7 +15,7 @@ export const ForgetPasswordContainer = () => {
     } = useForm<ForgetPasswordFormFieldsType>();
 
     const onSubmit: SubmitHandler<ForgetPasswordFormFieldsType> = async (formData) => {
-        setIsloading(true);
+        setIsLoading(true);
         console.log('formData', formData);
     };
     return (
