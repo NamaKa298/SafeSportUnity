@@ -22,6 +22,7 @@ module.exports = {
 				DEFAULT: '#2AB691'
 			},
 			gray: {
+				'300': '#fafafa',
 				'400': '#f2f2f2',
 				'500': '#e5e5e5',
 				'600': '#b2b2b2',
@@ -57,9 +58,6 @@ module.exports = {
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
-			colors: {
-				secondary: '#ff6347'
-			}
 		}
 	},
 	plugins: [tailwindcssAnimate],
