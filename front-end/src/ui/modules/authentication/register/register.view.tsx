@@ -26,7 +26,23 @@ export const RegisterView = ({ form }: Props) => {
                             </Typography>
                         </div>
                     </div>
-                    <RegisterForm form={form}/>
+                    <RegisterForm form={form} />
+                    <Typography variant="caption4" theme="gray" className="max-w-md mx-auto space-y-1 text-center">
+                        <div>
+                            By creating an account, you agree to our
+                            <div>
+                                <Link href="/#" className="text-gray">
+                                    Terms of Service
+                                </Link>
+                                {" "}and{" "}
+                                <Link href="/#" className="text-gray">
+                                    Privacy Policy
+                                </Link>
+                                .
+                            </div>
+                        </div>
+
+                    </Typography>
                 </Box>
             </div>
         </Container>

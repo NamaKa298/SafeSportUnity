@@ -9,7 +9,7 @@ import { useToggle } from "@/hooks/use-toggle";
 export const RegisterContainer = () => {
     const { value: isLoading,
         setValue: setIsLoading,
-    } = useToggle({ initial: true });
+    } = useToggle();
 
     const {
         handleSubmit,
@@ -30,7 +30,7 @@ export const RegisterContainer = () => {
         password,
         confirmPassword,
     }: RegisterFormFieldsType) => {
-        const { error, data } = await firebaseCreateUser(email, password)
+        const { error, data } = await firebaseCreateUser(email, password);
         if (error) {
             setIsLoading(false);
             toast.error(error.message);
