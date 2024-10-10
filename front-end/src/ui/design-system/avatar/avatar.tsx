@@ -26,11 +26,14 @@ export const Avatar = ({ size = "medium", src, alt }: Props) => {
     return (
         <div className={clsx(sizeStyles, "bg-gray-400 rounded-full relative")}>
             <Image
-            fill
+                fill
                 src={src}
                 alt={alt}
                 className="object-cover object-center rounded-full"
-            />
+                style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                }} />
         </div>
     );
 }

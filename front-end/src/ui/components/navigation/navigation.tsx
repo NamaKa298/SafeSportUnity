@@ -13,7 +13,7 @@ interface Props { }
 export const Navigation = ({ }: Props) => {
   return (
     <div className="border-b-2 border-gray-400">
-      <Container className="flex items-center justify-between py-1.5 gap-7">
+      <Container className="flex items-center justify-between py-0 gap-7">
         <Link href="/">
         <div className="flex items-center gap-2.5">
           <Logo size="small" />
