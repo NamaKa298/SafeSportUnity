@@ -5,6 +5,7 @@ import { RegisterFormFieldsType } from "@/types/forms";
 import { firebaseCreateUser } from "@/api/authentication";
 import { toast } from 'react-toastify';
 import { useToggle } from "@/hooks/use-toggle";
+import { firestoreCreateDocument} from "@/api/firestore";
 
 export const RegisterContainer = () => {
     const { value: isLoading,
@@ -18,6 +19,23 @@ export const RegisterContainer = () => {
         setError,
         reset,
     } = useForm<RegisterFormFieldsType>();
+
+    const handleCreateUserDocument = async (collectionName: string, documentID: string, document: object) => {
+        const { error } = await firestoreCreateDocument(
+            collectionName,
+            documentID,
+            document
+        );
+        if (error) {
+            toast.error(error.message);
+            setIsLoading(false);
+            return;
+        }
+        toast.success("User created successfully");
+        setIsLoading(false);
+        reset();
+        // @todo send email confirmation procedure
+    };
 
     const handleCreateUserAuthentication = async ({
         firstName,
@@ -34,15 +52,26 @@ export const RegisterContainer = () => {
         if (error) {
             setIsLoading(false);
             toast.error(error.message);
-            console.log(error);
             return
         }
 
-        toast.success("User created successfully");
-        setIsLoading(false);
-        reset();
+        const userDocumentData = {
+            firstName: firstName,
+            lastName: lastName,
+            userName: userName,
+            postalAddress: postalAddress,
+            newEmail: newEmail,
+            email: email,
+            confirmEmail: confirmEmail,
+            password: password,
+            confirmPassword: confirmPassword,
+            uid: data.uid,
+            creation_date: new Date(),
+        }
+
+        handleCreateUserDocument( "users", data.uid, userDocumentData);
     };
-    //* @todo create user document
+
     const onSubmit: SubmitHandler<RegisterFormFieldsType> = async (formData) => {
         setIsLoading(true);
         const { password } = formData;
