@@ -29,7 +29,7 @@ export const RegisterForm = ({ form }: Props) => {
                 register={register}
                 errors={errors}
                 errorMsg="Tu dois renseigner ce champ"
-                id="LastName"
+                id="lastName"
             />
             <Input
                 isLoading={isLoading}
@@ -60,7 +60,7 @@ export const RegisterForm = ({ form }: Props) => {
                     register={register}
                     errors={errors}
                     errorMsg="Tu dois renseigner ce champ"
-                    id="email"
+                    id="newEmail"
                 />
                 <Input
                     isLoading={isLoading}
@@ -78,7 +78,7 @@ export const RegisterForm = ({ form }: Props) => {
                     register={register}
                     errors={errors}
                     errorMsg="Tu dois renseigner ce champ"
-                    id="email"
+                    id="confirmEmail"
                 />
             </Box>
             <Input
@@ -97,7 +97,7 @@ export const RegisterForm = ({ form }: Props) => {
                 register={register}
                 errors={errors}
                 errorMsg="Tu dois renseigner ce champ"
-                id="password"
+                id="confirmPassword"
             />
             <Button isLoading={isLoading} type="submit" fullWidth>
                 Create Acount
