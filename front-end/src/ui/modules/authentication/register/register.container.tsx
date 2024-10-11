@@ -2,7 +2,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { RegisterView } from "./register.view";
 import { RegisterFormFieldsType } from "@/types/forms";
-import { firebaseCreateUser } from "@/api/authentication";
+import { firebaseCreateUser, sendEmailVerificationProcedure } from "@/api/authentication";
 import { toast } from 'react-toastify';
 import { useToggle } from "@/hooks/use-toggle";
 import { firestoreCreateDocument} from "@/api/firestore";
@@ -34,7 +34,7 @@ export const RegisterContainer = () => {
         toast.success("User created successfully");
         setIsLoading(false);
         reset();
-        // @todo send email confirmation procedure
+        sendEmailVerificationProcedure();
     };
 
     const handleCreateUserAuthentication = async ({
