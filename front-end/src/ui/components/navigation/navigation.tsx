@@ -6,11 +6,16 @@ import { Button } from "@/ui/design-system/button/button";
 import { GiHumanTarget } from "react-icons/gi";
 import Link from "next/link";
 import { ActiveLink } from "./active-link";
+import { useAuth } from "@/context/AuthUserContext";
 
 
 interface Props { }
 
 export const Navigation = ({ }: Props) => {
+  const { authUser, authUserIsLoading } = useAuth();
+  console.log('authUser', authUser);
+  console.log('authUserIsLoading', authUserIsLoading);
+  
   return (
     <div className="border-b-2 border-gray-400">
       <Container className="flex items-center justify-between py-0 gap-7">
