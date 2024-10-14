@@ -3,70 +3,65 @@ import { Typography } from "@/ui/design-system/typography/typography";
 import { Container } from "../container/container";
 import { Logo } from "@/ui/design-system/logo/logo";
 import { Button } from "@/ui/design-system/button/button";
-import { GiHumanTarget } from "react-icons/gi";
 import Link from "next/link";
 import { ActiveLink } from "./active-link";
 import { useAuth } from "@/context/AuthUserContext";
+import { AccountAvatarNavigationLink } from "./account-avatar-link";
 
 
 interface Props { }
 
 export const Navigation = ({ }: Props) => {
-  const { authUser, authUserIsLoading } = useAuth();
+  const { authUser } = useAuth();
   console.log('authUser', authUser);
-  console.log('authUserIsLoading', authUserIsLoading);
-  
+
+  const authentificationSystem = (
+    <Button baseUrl="/connexion" size="small" variant="secondary">
+      Login
+    </Button>
+  );
+
   return (
     <div className="border-b-2 border-gray-400">
       <Container className="flex items-center justify-between py-0 gap-7">
         <Link href="/">
-        <div className="flex items-center gap-2.5">
-          <Logo size="small" />
-          
-          <div className="flex flex-col">
-            <div className="text-gray font-extrabold text-[24px]"
+          <div className="flex items-center gap-2.5">
+            <Logo size="small" />
+
+            <div className="flex flex-col">
+              <div className="text-gray font-extrabold text-[24px]"
               >
-              SafeSportUnity
-            </div>
-            <Typography
-              variant="caption4"
-              component="span"
-              theme="gray"
-            >
+                SafeSportUnity
+              </div>
+              <Typography
+                variant="caption4"
+                component="span"
+                theme="gray"
+              >
                 Just Do It Safely with your Partners !
               </Typography>
             </div>
-          
-        </div>
+          </div>
         </Link>
-        
-       <div className="flex items-center gap-36 p-10">
-          <ActiveLink href="/Activities">
-          <Button size="small">
-            Activities
-          </Button>
-          </ActiveLink>
-          
-          <ActiveLink href="/They_made_it">
-          <Button size="small">
-            They Did It !
-          </Button>
-          </ActiveLink>
-          
-          <ActiveLink href="/MyProfile">
-          <Button 
-            size="small"
-            icon={{ icon: GiHumanTarget }}
-            iconPosition="left"
-          >
-            MyProfile
-          </Button>
-          </ActiveLink>
-          
 
-          <Button baseUrl="/connexion" size="small" variant="secondary">
-            Login
-          </Button>
+       <div className="flex items-center gap-36 p-10">
+
+          <ActiveLink href="/Activities">
+            <Button size="small">
+              Activities
+            </Button>
+          </ActiveLink>
+
+          <ActiveLink href="/They_made_it">
+            <Button size="small">
+              They Made It !
+            </Button>
+
+          </ActiveLink>
+
+
+
+          {!authUser ? authentificationSystem : <AccountAvatarNavigationLink />}
 
         </div>
       </Container>
