@@ -12,7 +12,7 @@ export default function Home() {
       <Seo title="SafeSportUnity" description="Description..." />
 
       <Layout>
-          <HomePageContainer />
+          <HomePageContainer /> {/* On pourrait mettre une condition pour ne pas afficher la même pas si on est connecté ou non*/}
       </Layout>
     </>
       
