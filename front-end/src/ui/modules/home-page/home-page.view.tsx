@@ -10,11 +10,11 @@ export const HomePageView = () => {
     return (
         <> 
             <HeroTopView />
-            <FeaturedView />
-            <SlackView />
-            <FormationView/>
-            <HighLightListView/>
-            <CallToActionView/>
+            {/* <FeaturedView />  pour la page activities*/}
+            {/* <SlackView /> */}
+            {/* <FormationView/> */}
+            {/* <HighLightListView/> */}
+            {/* <CallToActionView/> */}
         </>
     
     );
