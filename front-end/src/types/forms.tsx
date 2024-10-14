@@ -27,3 +27,12 @@ export interface LoginFormFieldsType {
 export interface ForgetPasswordFormFieldsType {
     email: string;
 }
+
+export interface ContactDetailsFormFieldsType {
+    firstName: string;
+    lastName: string;
+    userName: string;
+    postalAddress: string;
+    password: string;
+    email: string;
+}
