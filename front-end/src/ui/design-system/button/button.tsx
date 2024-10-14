@@ -58,7 +58,7 @@ export const Button = ({
             variantStyles = "bg-gray-400 border border-gray-500 text-gray-600 rounded cursor-not-allowed";
             break;
         case "success":
-            variantStyles = "bg-alert-success hover:bg-alert-success/75 text-white rounded";
+            variantStyles = "bg-secondary hover:bg-secondary-400 text-white rounded";
             break;
         case "danger":
             variantStyles = "bg-alert-danger hover:bg-alert-danger/75 text-white rounded";
