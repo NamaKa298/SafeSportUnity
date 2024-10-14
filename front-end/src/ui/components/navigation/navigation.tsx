@@ -35,7 +35,7 @@ export const Navigation = ({ }: Props) => {
         </div>
         </Link>
         
-       <div className="flex items-center gap-16 p-10">
+       <div className="flex items-center gap-36 p-10">
           <ActiveLink href="/Activities">
           <Button size="small">
             Activities
@@ -44,7 +44,7 @@ export const Navigation = ({ }: Props) => {
           
           <ActiveLink href="/They_made_it">
           <Button size="small">
-            They Made It !
+            They Did It !
           </Button>
           </ActiveLink>
           
