@@ -18,7 +18,8 @@ export const HighLightListView = () => {
           <div className="space y-3">
             <ListPoint>Take 5 minutes to assess your current condition.</ListPoint>
             <ListPoint> Choose your goal</ListPoint>
-            <ListPoint> Put your running shoes on and Let's go!</ListPoint>
+            <ListPoint> Put your running shoes on!</ListPoint>
+            <ListPoint> Localize your partners and Let's Go Running!! </ListPoint>
           </div>
           <div className="relative inline-block">
               <Button baseUrl="/connexion" icon={{icon: RiArrowRightLine}} iconPosition="right">
@@ -40,6 +41,7 @@ export const HighLightListView = () => {
             <ListPoint>Take 5 minutes to assess your current condition.</ListPoint>
             <ListPoint> Choose your goal</ListPoint>
             <ListPoint> Hop on your bike and let's go!!</ListPoint>
+            <ListPoint> Localize your partners and Let's Go Biking!! </ListPoint>
           </div>
           <div className="relative inline-block">
               <Button variant="secondary" baseUrl="/connexion" icon={{icon: RiArrowRightLine}} iconPosition="right">
