@@ -1,12 +1,13 @@
-import { FeaturedView } from "./components/featured/featured.view";
 import { HeroTopView } from "./components/hero-top/hero-top.view";
+import { HighLightListView } from "./components/highlight-list/highlight-list.view";
 
 
-export const HomePageView = () => {
+
+export const ActivitiesPageView = () => {
     return (
         <> 
             <HeroTopView />
-            <FeaturedView />
+            <HighLightListView />
 
         </>
     

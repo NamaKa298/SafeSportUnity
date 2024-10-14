@@ -1,10 +1,8 @@
 /* eslint-disable */
 /** COMPONENTS */
 import { Layout } from "@/ui/components/layout/layout";
-import { Footer } from "@/ui/components/navigation/footer";
-import { Navigation } from "@/ui/components/navigation/navigation";
 import { Seo } from "@/ui/components/seo/seo";
-import { HomePageContainer } from "@/ui/modules/home-page/home-page.container";
+import { ActivitiesPageContainer } from "@/ui/modules/Activities-page/activities-page.container";
 
 export default function Home() {
   return (
@@ -13,7 +11,7 @@ export default function Home() {
           If the user want to start with us He can go to the login page" />
 
       <Layout>
-          <HomePageContainer />
+          <ActivitiesPageContainer />
       </Layout>
     </>
       

@@ -1,5 +1,5 @@
-import { HomePageView } from "./activities-page.view";
+import { ActivitiesPageView } from "./activities-page.view";
 
-export const HomePageContainer = () => {
-  return <> <HomePageView /> </>;
+export const ActivitiesPageContainer = () => {
+  return <> <ActivitiesPageView /> </>;
 };
