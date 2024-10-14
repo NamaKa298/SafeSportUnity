@@ -30,20 +30,20 @@ export const HighLightListView = () => {
       </div>
       <div className="flex flex-row-reverse justify-center gap-24">
         <div className="w-[520px] h-[350px] relative mt-10">
-          <Image fill src="/assets/images/pedale.png" alt="pedal picture" />
+          <Image fill src="/assets/images/bike.jpg" alt="bike picture" />
         </div>
         <div className="max-w-md space-y-7">
           <Typography variant="h3" component="h2">
-            mettre le texte que nous voulons ici
+          Generate custom biking workouts to achieve your goal.
           </Typography>
           <div className="space y-3">
-            <ListPoint> 1/Lorem ipsum dolor sit amet,</ListPoint>
-            <ListPoint> 2/Lorem ipsum dolor sit amet,</ListPoint>
-            <ListPoint> 3/Lorem ipsum dolor sit amet,</ListPoint>
+            <ListPoint>Take 5 minutes to assess your current condition.</ListPoint>
+            <ListPoint> Choose your goal</ListPoint>
+            <ListPoint> Hop on your bike and let's go!!</ListPoint>
           </div>
           <div className="relative inline-block">
-              <Button variant="secondary" baseUrl="/#" icon={{icon: RiArrowRightLine}} iconPosition="right">
-                texte libre
+              <Button variant="secondary" baseUrl="/connexion" icon={{icon: RiArrowRightLine}} iconPosition="right">
+              Let's go create your account!
               </Button>
           </div>
         </div>
