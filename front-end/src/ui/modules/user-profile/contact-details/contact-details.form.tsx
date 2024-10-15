@@ -70,7 +70,7 @@ export const ContactDetailsForm = ({ form }: Props) => {
                         label="Password"
                         isLoading={isLoading}
                         placeholder="password"
-                        type="text"
+                        type="password"
                         register={register}
                         errors={errors}
                         errorMsg="Password is required"
