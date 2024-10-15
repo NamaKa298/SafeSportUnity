@@ -33,7 +33,7 @@ export const LoginContainer = () => {
         toast.success("Welcome on SafeSportUnity !");
         setIsLoading(false);
         reset();
-        router.push("/mon-espace");
+        router.push("/dashboard");
     };
 
     const onSubmit: SubmitHandler<LoginFormFieldsType> = async (formData) => {

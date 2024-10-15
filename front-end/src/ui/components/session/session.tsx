@@ -17,7 +17,7 @@ export const Session = ({ children, sessionStatus }: Props) => {
         if (!authUser) {
             return <>{children}</>;
         } else {
-            router.push("/mon-espace"); // ici j'invoque une redirection
+            router.push("/dashboard"); // ici j'invoque une redirection
         }
     }
 

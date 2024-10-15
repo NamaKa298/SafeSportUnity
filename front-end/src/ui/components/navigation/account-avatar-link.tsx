@@ -4,7 +4,7 @@ import { ActiveLink } from "./active-link"
 
 export const AccountAvatarNavigationLink = () => {
     return (
-        <ActiveLink href="/mon-espace">
+        <ActiveLink href="/dashboard">
         <Button
           size="small"
           icon={{ icon: GiHumanTarget }}
