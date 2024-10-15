@@ -6,7 +6,6 @@ import { ContactDetailsFormFieldsType } from "@/types/forms";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { firestoreUpdateDocument } from "@/api/firestore";
-
 export const ContactDetailsContainer = () => {
     const { authUser } = useAuth();
     const { value: isLoading, setValue: setIsLoading } = useToggle();
@@ -41,7 +40,7 @@ export const ContactDetailsContainer = () => {
         formData: ContactDetailsFormFieldsType
     ) => {
         setIsLoading(true);
-        const {error} = await firestoreUpdateDocument (
+        const { error } = await firestoreUpdateDocument(
             "users",
             authUser.uid,
             formData
@@ -66,6 +65,21 @@ export const ContactDetailsContainer = () => {
             postalAddress !== formData.postalAddress ||
             userName !== formData.userName
         ) {
+
+            if (email !== formData.email || authUser.email !== formData.email) {
+                const body = {email: formData.email,}
+            }
+
+            // const {error} = await updateUserIdentification(
+            //     authUser.uid,
+            //     body
+            // );
+            // if (error) {
+            //     setIsLoading(false);
+            //     toast.error(error.message);
+            //     return;
+            // }
+
             for (const key in formData) {
                 if (
                     formData.hasOwnProperty(key) &&
