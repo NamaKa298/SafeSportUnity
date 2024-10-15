@@ -4,13 +4,15 @@ import { Typography } from "@/ui/design-system/typography/typography";
 import Image from "next/image";
 import { v4 as uuidv4 } from 'uuid';
 import Link from "next/link";  // Importer Link de Next.js pour les liens internes
+import { handleLogOutUser } from "@/ui/modules/user-profile/disconnect/disconnect";
 
 export interface FeaturesListInterface {
     imagePath: string;
     imageAlt: string;
     title: string;
     description: string;
-    link: string;  // Ajout d'un lien pour chaque feature
+    link?: string;  // Ajout d'un lien pour chaque feature
+    action?: () => void;  // Ajout d'une action pour chaque feature
 }
 
 const featuresData: FeaturesListInterface[] = [
@@ -47,7 +49,7 @@ const featuresData: FeaturesListInterface[] = [
         imageAlt: "icone disconnect",
         title: "Disconnect",
         description: "Allows the user to log out",
-        link: "/mon-espace",
+        action: handleLogOutUser,  // Appelle la fonction de déconnexion
     },
     {
         imagePath: "/assets/images/subscription.png",
@@ -63,9 +65,12 @@ export const FeaturedView = () => {
         <div
             key={uuidv4()} className="flex flex-col items-center justify-center bg-white rounded p-7"
         >
-            {/* Lien autour de l'image uniquement */}
-            <Link href={feature.link}>
-                <div className="relative w-[130px] h-[130px] rounded-full mb-6 p-10 overflow-hidden transition-transform duration-300 hover:scale-95 cursor-pointer">
+            {/* Si l'action est présente, on ne met pas de Link, sinon on utilise Link */}
+            {feature.action ? (
+                <div 
+                    onClick={feature.action}  // Appelle l'action sur clic
+                    className="relative w-[130px] h-[130px] rounded-full mb-6 p-10 overflow-hidden transition-transform duration-300 hover:scale-95 cursor-pointer"
+                >
                     <Image
                         fill
                         src={feature.imagePath}
@@ -73,7 +78,18 @@ export const FeaturedView = () => {
                         className="object-scale-down"
                     />
                 </div>
-            </Link>
+            ) : (
+                <Link href={feature.link || "#"}>  {/* Fallback sur # si pas de lien */}
+                    <div className="relative w-[130px] h-[130px] rounded-full mb-6 p-10 overflow-hidden transition-transform duration-300 hover:scale-95 cursor-pointer">
+                        <Image
+                            fill
+                            src={feature.imagePath}
+                            alt={feature.imageAlt}
+                            className="object-scale-down"
+                        />
+                    </div>
+                </Link>
+            )}
 
             {/* Titre et description restent non cliquables */}
             <Typography variant="lead" component="h3" weight="medium" className="text-center mb-2.5">

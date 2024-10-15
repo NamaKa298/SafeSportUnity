@@ -3,8 +3,13 @@ import { Button } from "@/ui/design-system/button/button";
 import { Typography } from "@/ui/design-system/typography"
 import Image from "next/image"
 import { RiArrowRightLine, RiCheckboxCircleLine } from "react-icons/ri"
+import { useAuth } from "@/context/AuthUserContext";
+
 
 export const HighLightListView = () => {
+
+  const { authUser } = useAuth();
+
   return (
     <Container className="py-24 space-y-10 bg-gray-400">
       <div className="flex justify-center gap-24">
@@ -13,7 +18,7 @@ export const HighLightListView = () => {
         </div>
         <div className="max-w-md space-y-7">
           <Typography variant="h3" component="h2">
-          Generate custom running workouts to achieve your goal.
+            Generate custom running workouts to achieve your goal.
           </Typography>
           <div className="space y-3">
             <ListPoint>Take 5 minutes to assess your current condition.</ListPoint>
@@ -21,12 +26,15 @@ export const HighLightListView = () => {
             <ListPoint> Put your running shoes on!</ListPoint>
             <ListPoint> Localize your partners and Let's Go Running!! </ListPoint>
           </div>
-          <div className="relative inline-block">
-              <Button baseUrl="/connexion" icon={{icon: RiArrowRightLine}} iconPosition="right">
+
+          {!authUser ?
+            <div className="relative inline-block">
+              <Button baseUrl="/connexion/inscription" icon={{ icon: RiArrowRightLine }} iconPosition="right">
                 Let's go create your account!
               </Button>
               <Image width={15} height={17} src="/assets/svg/cursor.svg" alt="cursor" className="absolute right-10 -bottom-3" />
-          </div>
+            </div>
+            : ""}
         </div>
       </div>
       <div className="flex flex-row-reverse justify-center gap-24">
@@ -35,7 +43,7 @@ export const HighLightListView = () => {
         </div>
         <div className="max-w-md space-y-7">
           <Typography variant="h3" component="h2">
-          Generate custom biking workouts to achieve your goal.
+            Generate custom biking workouts to achieve your goal.
           </Typography>
           <div className="space y-3">
             <ListPoint>Take 5 minutes to assess your current condition.</ListPoint>
@@ -43,11 +51,14 @@ export const HighLightListView = () => {
             <ListPoint> Hop on your bike and let's go!!</ListPoint>
             <ListPoint> Localize your partners and Let's Go Biking!! </ListPoint>
           </div>
-          <div className="relative inline-block">
-              <Button variant="secondary" baseUrl="/connexion" icon={{icon: RiArrowRightLine}} iconPosition="right">
-              Let's go create your account!
+
+          {!authUser ?
+            <div className="relative inline-block">
+              <Button variant="secondary" baseUrl="/connexion/inscription" icon={{ icon: RiArrowRightLine }} iconPosition="right">
+                Let's go create your account!
               </Button>
-          </div>
+            </div>
+            : ""}
         </div>
       </div>
     </Container >
