@@ -18,4 +18,4 @@ export const Layout = ({
             <Footer />
         </Session>
     )
-}
+};

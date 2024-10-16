@@ -21,6 +21,7 @@ interface Props {
     action?: Function;
     type?: "button" | "submit";
     fullWidth?: boolean;
+    onClick?: Function;
 }
 
 export const Button = ({
@@ -37,6 +38,10 @@ export const Button = ({
     type = "button",
     fullWidth = false,
     action = () => { },
+    onClick = () => { 
+        console.log("clicked");
+    },
+    
 }: Props) => {
     let variantStyles: string = "",
         sizeStyles: string = "",
