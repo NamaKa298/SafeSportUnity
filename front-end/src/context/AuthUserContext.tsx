@@ -6,6 +6,7 @@ import { createContext, useContext } from "react";
 const init = {
     uid: "",
     email: "",
+    firstName: "",
     displayName: "",
     emailVerified: false,
     phoneNumber: "",
@@ -31,6 +32,7 @@ export function AuthUserProvider({ children }: Props) {
                     authUser: auth.authUser as {
                         uid: string,
                         email: string,
+                        firstName: string,
                         displayName: string,
                         emailVerified: boolean,
                         phoneNumber: string,

@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, sendEmailVerification } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, sendEmailVerification, updatePassword, getAuth } from "firebase/auth";
 import { auth } from "@/config/firebase-config";
 import { FirebaseError } from "firebase/app";
 
@@ -41,6 +41,29 @@ export const firebaseSignInUser = async (email: string, password: string) => {
         };
     }
 };
+
+export const firebaseUpdatePassword = async (password: any) => {
+    const a = getAuth();
+    const user = a.currentUser;
+    if (user) {
+        try {
+            await updatePassword(
+                user,
+                password
+            );
+            return { data: true };
+        } catch (error) {
+            const firebaseError = error as FirebaseError;
+            //... @todo format error
+            return {
+                error: {
+                    code: firebaseError.code,
+                    message: firebaseError.message,
+                },
+            };
+        }
+    }
+}
 
 export const firebaseLogOutUser = async () => {
     try {
@@ -103,3 +126,29 @@ export const sendEmailVerificationProcedure = async () => {
         }
     }
 };
+
+// export const updateUserIdentificationData = async (uid: string, data: any) => {
+//     const result = await fetch('https//...', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({
+//             uid: uid,
+//             data: data,
+//         }),
+//     }),
+
+// if (!result.ok) {
+//     const errorResponse = await result.json();
+//     const firebaseError = errorResponse as FirebaseError;
+
+//     return {
+//         error: {
+//             code: firebaseError.code,
+//             message: firebaseError.message,
+//         },
+//     };
+// }
+// return { data: true };
+// }

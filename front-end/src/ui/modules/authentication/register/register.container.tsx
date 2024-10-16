@@ -36,7 +36,7 @@ export const RegisterContainer = () => {
         reset();
         sendEmailVerificationProcedure();
     };
-
+    
     const handleCreateUserAuthentication = async ({
         firstName,
         lastName,
@@ -48,12 +48,23 @@ export const RegisterContainer = () => {
         password,
         confirmPassword,
     }: RegisterFormFieldsType) => {
+        if (email !== confirmEmail) {
+            setIsLoading(false);
+            toast.error("Emails do not match");
+            return
+        }
+        if (password !== confirmPassword) {
+            setIsLoading(false);
+            toast.error("Passwords do not match");
+            return
+        }
         const { error, data } = await firebaseCreateUser(email, password);
         if (error) {
             setIsLoading(false);
             toast.error(error.message);
             return
         }
+
 
         const userDocumentData = {
             firstName: firstName,
@@ -62,9 +73,6 @@ export const RegisterContainer = () => {
             postalAddress: postalAddress,
             newEmail: newEmail,
             email: email,
-            confirmEmail: confirmEmail,
-            password: password,
-            confirmPassword: confirmPassword,
             uid: data.uid,
             creation_date: new Date(),
         }

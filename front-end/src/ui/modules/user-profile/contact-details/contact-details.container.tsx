@@ -6,6 +6,8 @@ import { ContactDetailsFormFieldsType } from "@/types/forms";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { firestoreUpdateDocument } from "@/api/firestore";
+import { firebaseUpdatePassword} from "@/api/authentication";
+
 export const ContactDetailsContainer = () => {
     const { authUser } = useAuth();
     const { value: isLoading, setValue: setIsLoading } = useToggle();
@@ -16,7 +18,6 @@ export const ContactDetailsContainer = () => {
         formState: { errors },
         register,
         setValue,
-        setError,
     } = useForm<ContactDetailsFormFieldsType>();
 
     const { firstName, postalAddress, userName, lastName, password, email } = authUser.userDocument;
@@ -39,19 +40,24 @@ export const ContactDetailsContainer = () => {
     const handleUpdateUserDocument = async (
         formData: ContactDetailsFormFieldsType
     ) => {
-        setIsLoading(true);
-        const { error } = await firestoreUpdateDocument(
-            "users",
-            authUser.uid,
-            formData
-        )
-        if (error) {
-            setIsLoading(false);
-            toast.error(error.message);
+        if ( formData.password !== undefined && formData.password.length <= 5) {
+            toast.error("Password must be at least 6 characters long");
             return;
         }
-        toast.success("User details updated successfully");
-        setIsLoading(false);
+        setIsLoading(true);
+            const { error } = await firestoreUpdateDocument(
+                "users",
+                authUser.uid,
+                formData
+            )
+            if (error) {
+                setIsLoading(false);
+                toast.error(error.message);
+                return;
+            }
+            firebaseUpdatePassword(formData.password);
+            toast.success("User details updated successfully");
+            setIsLoading(false);
     };
 
     const onSubmit: SubmitHandler<ContactDetailsFormFieldsType> = async (
@@ -65,32 +71,23 @@ export const ContactDetailsContainer = () => {
             postalAddress !== formData.postalAddress ||
             userName !== formData.userName
         ) {
-
-            if (email !== formData.email || authUser.email !== formData.email) {
-                const body = {email: formData.email,}
-            }
-
-            // const {error} = await updateUserIdentification(
-            //     authUser.uid,
-            //     body
-            // );
-            // if (error) {
-            //     setIsLoading(false);
-            //     toast.error(error.message);
-            //     return;
+            // if (
+            //     firstName !== formData.firstName || authUser.firstName !== formData.firstName
+            // ) {
+            //     const data = {
+            //         firstName: formData.firstName,
+                // };
+                // const { error } = await updateUserIdentificationData(
+                //     authUser.uid,
+                //     data
+                // );
+                // if (error) {
+                //     setIsLoading(false);
+                //     toast.error(error.message);
+                //     return;
+                // }
             // }
-
-            for (const key in formData) {
-                if (
-                    formData.hasOwnProperty(key) &&
-                    formData[key as keyof ContactDetailsFormFieldsType] === undefined
-                ) {
-                    delete formData[key as keyof ContactDetailsFormFieldsType];
-                }
-            }
-
             handleUpdateUserDocument(formData);
-            return;
         }
 
     };
