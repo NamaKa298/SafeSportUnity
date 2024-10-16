@@ -1,0 +1,22 @@
+rules_version = '2';
+
+function isUserAuthenticated() {
+return request.auth != null
+}
+
+function isUserOwner(userId) {
+return request.auth.uid == userId
+}
+
+function isUserAdmin() {
+return request.auth.token.admin == true;
+}
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+  
+    match /users/{userId} {
+      allow read, write: if isUserAuthenticated() && isUserOwner(userId) || isUserAdmin();
+    }
+  }
+}
