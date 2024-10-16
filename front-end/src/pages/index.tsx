@@ -1,31 +1,21 @@
+/* eslint-disable */
+/** COMPONENTS */
+import { Layout } from "@/ui/components/layout/layout";
+import { Footer } from "@/ui/components/navigation/footer";
+import { Navigation } from "@/ui/components/navigation/navigation";
 import { Seo } from "@/ui/components/seo/seo";
-import { Typography } from "@/ui/design-system/typography/typography";
+import { HomePageContainer } from "@/ui/modules/home-page/home-page.container";
 
 export default function Home() {
   return (
-      <>
-          <Seo title="SafeSportUnity" description="Description..." />
-            
-            <div className="space-y-5">
-              <Typography variant = "display" component = "div">
-                  SafeSportUnity.com
-              </Typography>
-              <Typography theme="primary" variant = "body-lg" component = "h1">
-                  SafeSportUnity.com
-              </Typography>
-              <Typography theme="secondary" variant="lead" component = "div">
-                  SafeSportUnity.com
-              </Typography>
-              <Typography variant = "body-sm" component = "div">
-                  SafeSportUnity.com
-              </Typography>
-              <Typography variant = "caption4" component = "div">
-                  SafeSportUnity.com
-              </Typography>
-              <Typography variant = "caption4" weight="medium" component = "div">
-                  SafeSportUnity.com
-              </Typography>
-            </div>
-      </>
+    <>
+      <Seo title="SafeSportUnity" description="Description..." />
+
+      <Layout>
+          <HomePageContainer /> {/* On pourrait mettre une condition pour ne pas afficher la même pas si on est connecté ou non*/}
+      </Layout>
+    </>
+      
   );
+
 }
