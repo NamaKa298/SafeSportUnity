@@ -1,5 +1,5 @@
 import { Container } from "@/ui/components/container/container"
-import { Button } from "@/ui/design-system/button/button";
+import { Button } from "@/ui/design-system/button/button"
 import { Typography } from "@/ui/design-system/typography"
 import Image from "next/image"
 import { RiArrowRightLine, RiCheckboxCircleLine } from "react-icons/ri"
