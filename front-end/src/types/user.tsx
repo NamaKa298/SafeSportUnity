@@ -4,6 +4,7 @@ export interface UserInterface {
     uid: string;
     email: string | null;
     firstName: string;
+    lastName: string;
     displayName: string | null;
     emailVerified: boolean;
     phoneNumber: string | null;
@@ -19,7 +20,7 @@ export interface UserDocument {
     email: string;
     firstName: string;
     lastName: string;
-    newEmail: string;
+    pseudoEmail: string;
     password: string;
     postalAddress: string;
     userName: string;

@@ -12,7 +12,7 @@ export interface RegisterFormFieldsType {
     lastName: string;
     userName: string;
     postalAddress: string;
-    newEmail?: string;
+    pseudoEmail?: string;
     email: string;
     confirmEmail: string;
     password: string;
