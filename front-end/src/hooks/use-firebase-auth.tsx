@@ -10,8 +10,8 @@ export default function useFirebaseAuth() {
 
     const formatAuthUser = (user: UserInterface) => ({
         uid: user.uid,
-        email: user.email,
         firstName: user.firstName,
+        lastName: user.lastName,
         displayName: user.displayName,
         emailVerified: user.emailVerified,
         phoneNumber: user.phoneNumber,
