@@ -6,12 +6,11 @@ import {
     sendEmailVerification,
     updatePassword,
     getAuth,
-    verifyBeforeUpdateEmail
+    verifyBeforeUpdateEmail,
 } from "firebase/auth";
 import { auth } from "@/config/firebase-config";
 import { FirebaseError } from "firebase/app";
-// import {db} from "@/config/firebase-config";
-// import { doc, updateDoc } from "firebase/firestore";
+
 
 export const firebaseCreateUser = async (email: string, password: string) => {
     try {
@@ -101,41 +100,6 @@ export const firebaseUpdateEmail = async (newEmail: string) => {
     }
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-// tester si cela est utile et si cela fonctionne
-// export const firebaseUpdateUser = async (data: any) => {
-//     try {
-//         const auth = getAuth();
-//         const user = auth.currentUser;
-//         if (user) {
-//             // Mise à jour des champs personnalisés dans Firestore
-//             const userDocRef = doc(db, "users", user.uid);
-//             await updateDoc(userDocRef, {
-//                 firstName: data.firstName,
-//                 lastName: data.lastName,
-//                 postalAddress: data.postalAddress,
-//                 userName: data.userName
-//             });
-
-//             console.log("User data updated successfully.");
-//             return { data: true };
-//         } else {
-//             throw new Error("No authenticated user found");
-//         }
-//     } catch (error) {
-//         if (error instanceof FirebaseError) {
-//             console.error("Firebase error updating user: ", error.code, error.message);
-//             return { error: error.message };
-//         } else if (error instanceof Error) {
-//             console.error("Error updating user: ", error.message);
-//             return { error: error.message };
-//         } else {
-//             console.error("Unknown error updating user: ", error);
-//             return { error: "An unknown error occurred" };
-//         }
-//     }
-// }
-
 export const firebaseLogOutUser = async () => {
     try {
         await signOut(
@@ -198,28 +162,29 @@ export const sendEmailVerificationProcedure = async () => {
     }
 };
 
-// export const updateUserIdentificationData = async (uid: string, data: any) => {
-//     const result = await fetch('https//...', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//             uid: uid,
-//             data: data,
-//         }),
-//     }),
+//eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const updateUserIdentificationData = async (uid: string, data: any) => {
+    const result = await fetch("https://us-central1-safesportunity-5bfeb.cloudfunctions.net/updateUser", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            uid: uid,
+            data: data,
+        }),
+    });
 
-// if (!result.ok) {
-//     const errorResponse = await result.json();
-//     const firebaseError = errorResponse as FirebaseError;
+    if (!result.ok) {
+        const errorResponse = await result.json();
+        const firebaseError = errorResponse as FirebaseError;
 
-//     return {
-//         error: {
-//             code: firebaseError.code,
-//             message: firebaseError.message,
-//         },
-//     };
-// }
-// return { data: true };
-// }
+        return {
+            error: {
+                code: firebaseError.code,
+                message: firebaseError.message,
+            },
+        };
+    }
+    return { data: true };
+};
