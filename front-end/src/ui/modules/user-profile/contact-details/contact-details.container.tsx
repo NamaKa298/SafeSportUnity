@@ -41,7 +41,7 @@ export const ContactDetailsContainer = () => {
     const handleUpdateUserDocument = async (
         formData: ContactDetailsFormFieldsType
     ) => {
-        if ( formData.password !== undefined && formData.password.length <= 5) {
+        if (formData.password !== undefined && formData.password.length <= 6) {
             toast.error("Password must be at least 6 characters long");
             return;
         }
@@ -59,14 +59,9 @@ export const ContactDetailsContainer = () => {
                 return;
             }
             await firebaseUpdatePassword(formData.password);
-            if (email !== formData.email)
-            {
+            if (email !== formData.email) {
                 await firebaseUpdateEmail(formData.email);
             }
-            // Tester si cela fonctionne
-            // if (firstName !== formData.firstName || lastName !== formData.lastName || postalAddress !== formData.postalAddress || userName !== formData.userName) {
-            //     await firebaseUpdateUser(formData);
-            // }
             toast.success("User details updated successfully");
             setIsLoading(false);
         };

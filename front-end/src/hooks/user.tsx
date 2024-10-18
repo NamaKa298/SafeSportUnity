@@ -2,8 +2,6 @@ import { Timestamp } from "firebase/firestore";
 
 export interface UserInterface {
     uid: string;
-    firstName: string | null;
-    lastName: string | null;
     displayName: string | null;
     emailVerified: boolean;
     phoneNumber: string | null;
