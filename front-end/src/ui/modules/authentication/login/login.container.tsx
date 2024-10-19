@@ -6,7 +6,6 @@ import { firebaseSignInUser } from "@/api/authentication";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
-
 export const LoginContainer = () => {
     const router = useRouter();
     const { value: isLoading,
@@ -30,6 +29,7 @@ export const LoginContainer = () => {
             toast.error(error.message);
             return;
         }
+
         toast.success("Welcome on SafeSportUnity !");
         setIsLoading(false);
         reset();
