@@ -1,12 +1,12 @@
+import { firebaseUpdatePassword } from "@/api/authentication";
+import { firestoreUpdateDocument } from "@/api/firestore";
 import { useAuth } from "@/context/AuthUserContext";
-import { ContactDetailsView } from "./contact-details.view";
 import { useToggle } from "@/hooks/use-toggle";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { ContactDetailsFormFieldsType } from "@/types/forms";
 import { useEffect } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { firestoreUpdateDocument } from "@/api/firestore";
-import { firebaseUpdatePassword} from "@/api/authentication";
+import { ContactDetailsView } from "./contact-details.view";
 
 export const ContactDetailsContainer = () => {
     const { authUser } = useAuth();

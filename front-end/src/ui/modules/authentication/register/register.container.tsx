@@ -20,10 +20,13 @@ export const RegisterContainer = () => {
         reset,
     } = useForm<RegisterFormFieldsType>();
 
-    const handleCreateUserDocument = async (collectionName: string, documentID: string, document: object) => {
+    const handleCreateUserDocument = async (uid: string, document: object) => {
+        const collectionName = "users";
+        const subCollectionName = "userData"; // Nom de la sous-collection
+                    
         const { error } = await firestoreCreateDocument(
-            collectionName,
-            documentID,
+            `${collectionName}/${uid}/${subCollectionName}`, // Chemin vers la sous-collection
+            "userData", // Nom du document dans la sous-collection
             document
         );
         if (error) {
@@ -77,7 +80,7 @@ export const RegisterContainer = () => {
             creation_date: new Date(),
         }
 
-        handleCreateUserDocument( "users", data.uid, userDocumentData);
+        handleCreateUserDocument(data.uid, userDocumentData);
     };
 
     const onSubmit: SubmitHandler<RegisterFormFieldsType> = async (formData) => {
