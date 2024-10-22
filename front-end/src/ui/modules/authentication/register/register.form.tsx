@@ -60,7 +60,7 @@ export const RegisterForm = ({ form }: Props) => {
                     register={register}
                     errors={errors}
                     errorMsg="Tu dois renseigner ce champ"
-                    id="newEmail"
+                    id="pseudoEmail"
                 />
                 <Input
                     isLoading={isLoading}

@@ -7,6 +7,11 @@ export const firestoreCreateDocument = async (
     documentID: string,
     data: object
 ) => {
+    
+    console.log("collectionPath", collectionPath);
+    console.log("documentID", documentID);
+    console.log("data", data);
+
     try {
         const documentRef = doc(db, collectionPath, documentID);
 
