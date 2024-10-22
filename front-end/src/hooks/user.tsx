@@ -22,3 +22,12 @@ export interface UserDocument {
     postalAddress: string;
     userName: string;
 }
+
+export interface UserProfile {
+    level: number;
+    latitude: number;
+    longitude: number;
+    training_type: string | null;
+    address?: string | null;
+    last_update: Date | null;
+}

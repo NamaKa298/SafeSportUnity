@@ -4,7 +4,6 @@ import { Input } from "@/ui/design-system/forms/input";
 import { Select } from "@/ui/design-system/forms/select";
 import { Checkbox } from "@/ui/design-system/forms/checkbox";
 import { useState } from "react";
-
 interface Props {
     form: FormsType;
 }
