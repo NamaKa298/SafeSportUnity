@@ -2,7 +2,12 @@
 	"folders": [
 		{
 			"path": "front-end"
+		},
+		{
+			"path": "back-end"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"github.copilot.chat.localeOverride": "fr"
+	}
 }

@@ -77,7 +77,7 @@ export const RegisterContainer = () => {
             creation_date: new Date(),
         }
 
-        handleCreateUserDocument( "users", data.uid, userDocumentData);
+        handleCreateUserDocument("users", data.uid, userDocumentData);
     };
 
     const onSubmit: SubmitHandler<RegisterFormFieldsType> = async (formData) => {

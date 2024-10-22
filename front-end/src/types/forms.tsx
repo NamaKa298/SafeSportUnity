@@ -11,8 +11,8 @@ export interface RegisterFormFieldsType {
     firstName: string;
     lastName: string;
     userName: string;
-    postalAddress: string;
     pseudoEmail?: string;
+    postalAddress: string;
     email: string;
     confirmEmail: string;
     password: string;
