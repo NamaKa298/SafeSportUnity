@@ -17,7 +17,7 @@ export interface UserDocument {
     email: string;
     firstName: string;
     lastName: string;
-    pseudoEmail: string;
+    pseudoEmail?: string;
     password: string;
     postalAddress: string;
     userName: string;
