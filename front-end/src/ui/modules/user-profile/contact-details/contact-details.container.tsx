@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { getAuth } from "firebase/auth";
+import { ContactDetailsView } from "./contact-details.view";
 
 export const ContactDetailsContainer = () => {
     const { authUser } = useAuth();
