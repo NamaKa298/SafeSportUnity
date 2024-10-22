@@ -36,3 +36,11 @@ export interface ContactDetailsFormFieldsType {
     password: string;
     email: string;
 }
+
+export interface TrainingPartnersFormFieldsType {
+    address: string;
+    latitude: number;
+    longitude: number;
+    level: string;
+    training_type: string;
+}

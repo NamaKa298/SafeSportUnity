@@ -41,7 +41,7 @@ export const ContactDetailsContainer = () => {
     const handleUpdateUserDocument = async (
         formData: ContactDetailsFormFieldsType
     ) => {
-        if (formData.password !== undefined && formData.password.length <= 6) {
+        if (formData.password !== undefined && formData.password.length <= 5) {
             toast.error("Password must be at least 6 characters long");
             return;
         }

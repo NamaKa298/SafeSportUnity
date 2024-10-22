@@ -1,9 +1,9 @@
 import { Container } from "@/ui/components/container/container";
 import { Typography } from "@/ui/design-system/typography/typography";
-import { MapComponent } from "./training_partner-page.container";
+import { MapComponent } from "./training-partner.container";
 
 
-export const TrainingPartnerPageView = () => {
+export const TrainingPartnersView = () => {
     return (
         <Container className="gap-20 mb-32 pt-32">
             <div className="flex flex-col items-center">
