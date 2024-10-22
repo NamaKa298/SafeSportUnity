@@ -4,16 +4,25 @@ import { Typography } from "@/ui/design-system/typography";
 import Link from "next/link";
 import { RegisterForm } from "./register.form";
 import { FormsType } from "@/types/forms";
+import Image from "next/image";
 
 interface Props {
     form: FormsType;
 }
 export const RegisterView = ({ form }: Props) => {
     return (
-        <Container className="gap-20 mb-32 pt-40">
+        <Container className="grid grid-cols-2 mb-32 mt-32 gap-6">
             <div className="flex items-center">
+                {/* rajout image */}
+                <div className="relative w-full h-full">
+                    <Image fill src="/assets/images/homme_velo2.jpg" alt="Register"                         objectFit="contain" // Utilisez objectFit pour conserver les proportions
+                        className="object-contain" />
+                </div>
+            </div>
+            <div className="flex items-center">
+                {/* fin rajout image */}
                 <Box padding_y="py-5">
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between md:w 1/2">
                         <Typography variant="h5" component="h1">
                             Create An Account
                         </Typography>

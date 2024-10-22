@@ -1,6 +1,16 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, sendEmailVerification, updatePassword, getAuth } from "firebase/auth";
+import {
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    sendPasswordResetEmail,
+    sendEmailVerification,
+    updatePassword,
+    getAuth,
+    verifyBeforeUpdateEmail,
+} from "firebase/auth";
 import { auth } from "@/config/firebase-config";
 import { FirebaseError } from "firebase/app";
+
 
 export const firebaseCreateUser = async (email: string, password: string) => {
     try {
@@ -42,9 +52,9 @@ export const firebaseSignInUser = async (email: string, password: string) => {
     }
 };
 
-export const firebaseUpdatePassword = async (password: any) => {
-    const a = getAuth();
-    const user = a.currentUser;
+export const firebaseUpdatePassword = async (password: string) => {
+    const auth = getAuth();
+    const user = auth.currentUser;
     if (user) {
         try {
             await updatePassword(
@@ -64,6 +74,31 @@ export const firebaseUpdatePassword = async (password: any) => {
         }
     }
 }
+
+export const firebaseUpdateEmail = async (newEmail: string) => {
+    try {
+        const auth = getAuth();
+        const user = auth.currentUser;
+
+        if (user) {
+            await verifyBeforeUpdateEmail(user, newEmail);
+
+            await signOut(auth);
+            window.location.reload(); // recharge la page après avoir déconnecter l'utilisateur
+            return { data: true };
+        } else {
+            console.log("No user is signed in.");
+        }
+    } catch (error) {
+        if (error instanceof FirebaseError) {
+            console.error("Firebase error updating email: ", error.code, error.message);
+            return { error: error.message };
+        } else {
+            console.error("Unknown error updating email: ", error);
+            return { error: "Unknown error" };
+        }
+    }
+};
 
 export const firebaseLogOutUser = async () => {
     try {
@@ -127,28 +162,29 @@ export const sendEmailVerificationProcedure = async () => {
     }
 };
 
-// export const updateUserIdentificationData = async (uid: string, data: any) => {
-//     const result = await fetch('https//...', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//             uid: uid,
-//             data: data,
-//         }),
-//     }),
+//eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const updateUserIdentificationData = async (uid: string, data: any) => {
+    const result = await fetch("https://us-central1-safesportunity-5bfeb.cloudfunctions.net/updateUser", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            uid: uid,
+            data: data,
+        }),
+    });
 
-// if (!result.ok) {
-//     const errorResponse = await result.json();
-//     const firebaseError = errorResponse as FirebaseError;
+    if (!result.ok) {
+        const errorResponse = await result.json();
+        const firebaseError = errorResponse as FirebaseError;
 
-//     return {
-//         error: {
-//             code: firebaseError.code,
-//             message: firebaseError.message,
-//         },
-//     };
-// }
-// return { data: true };
-// }
+        return {
+            error: {
+                code: firebaseError.code,
+                message: firebaseError.message,
+            },
+        };
+    }
+    return { data: true };
+};
