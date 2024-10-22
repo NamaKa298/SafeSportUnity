@@ -1,4 +1,4 @@
-import { firebaseUpdatePassword } from "@/api/authentication";
+import { firebaseUpdatePassword, firebaseUpdateEmail } from "@/api/authentication";
 import { firestoreUpdateDocument } from "@/api/firestore";
 import { useAuth } from "@/context/AuthUserContext";
 import { useToggle } from "@/hooks/use-toggle";
@@ -6,7 +6,7 @@ import { ContactDetailsFormFieldsType } from "@/types/forms";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { ContactDetailsView } from "./contact-details.view";
+import { getAuth } from "firebase/auth";
 
 export const ContactDetailsContainer = () => {
     const { authUser } = useAuth();
@@ -40,11 +40,13 @@ export const ContactDetailsContainer = () => {
     const handleUpdateUserDocument = async (
         formData: ContactDetailsFormFieldsType
     ) => {
-        if ( formData.password !== undefined && formData.password.length <= 5) {
+        if (formData.password !== undefined && formData.password.length <= 6) {
             toast.error("Password must be at least 6 characters long");
             return;
         }
-        setIsLoading(true);
+        const auth = getAuth();
+        if (auth.currentUser) {
+            setIsLoading(true);
             const { error } = await firestoreUpdateDocument(
                 "users",
                 authUser.uid,
@@ -55,9 +57,13 @@ export const ContactDetailsContainer = () => {
                 toast.error(error.message);
                 return;
             }
-            firebaseUpdatePassword(formData.password);
+            await firebaseUpdatePassword(formData.password);
+            if (email !== formData.email) {
+                await firebaseUpdateEmail(formData.email);
+            }
             toast.success("User details updated successfully");
             setIsLoading(false);
+        };
     };
 
     const onSubmit: SubmitHandler<ContactDetailsFormFieldsType> = async (
@@ -71,22 +77,6 @@ export const ContactDetailsContainer = () => {
             postalAddress !== formData.postalAddress ||
             userName !== formData.userName
         ) {
-            // if (
-            //     firstName !== formData.firstName || authUser.firstName !== formData.firstName
-            // ) {
-            //     const data = {
-            //         firstName: formData.firstName,
-                // };
-                // const { error } = await updateUserIdentificationData(
-                //     authUser.uid,
-                //     data
-                // );
-                // if (error) {
-                //     setIsLoading(false);
-                //     toast.error(error.message);
-                //     return;
-                // }
-            // }
             handleUpdateUserDocument(formData);
         }
 

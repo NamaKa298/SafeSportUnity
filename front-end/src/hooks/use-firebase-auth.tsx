@@ -10,8 +10,6 @@ export default function useFirebaseAuth() {
 
     const formatAuthUser = (user: UserInterface) => ({
         uid: user.uid,
-        email: user.email,
-        firstName: user.firstName,
         displayName: user.displayName,
         emailVerified: user.emailVerified,
         phoneNumber: user.phoneNumber,
@@ -46,7 +44,7 @@ export default function useFirebaseAuth() {
         };
         setAuthUserIsLoading(true);
         const formattedUser = formatAuthUser(authState);
-        await getUserDocument(formattedUser);
+        await getUserDocument(formattedUser as UserInterface);
     };
 
     useEffect(() => {

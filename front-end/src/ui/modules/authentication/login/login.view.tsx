@@ -4,6 +4,7 @@ import { Typography } from "@/ui/design-system/typography";
 import Link from "next/link";
 import { LoginForm } from "./login-form";
 import { FormsType } from "@/types/forms";
+import Image from "next/image";
 
 interface Props {
     form: FormsType;
@@ -11,7 +12,14 @@ interface Props {
 
 export const LoginView = ({form}: Props) => {
     return (
-        <Container className="gap-20 mb-32 pt-40">
+        <Container className="grid grid-cols-2 mb-32 mt-32 gap-6">
+            <div className="flex items-center">
+                {/* rajout image */}
+                <div className="relative w-full h-full">
+                    <Image fill src="/assets/images/femme_treaking.jpg" alt="login"                         objectFit="contain" // Utilisez objectFit pour conserver les proportions
+                        className="object-contain" />
+                </div>
+            </div>
             <div className="flex items-center">
                 <Box padding_y="py-5">
                     <div className="flex items-center justify-between">
