@@ -6,7 +6,7 @@ const cors = require("cors")({ origin: true });
  * Update user identification data
  * @param body {String, Object}
  * @return {string} message success | error
- * @forPlay
+ * @forPlay https://us-central1-safesportunity-5bfeb.cloudfunctions.net/updateUser
  * @documentation https://firebase.google.com/docs/auth/admin/manage-users?hl=fr#update_a_user
  */
 exports.updateUser = functions.https.onRequest((req, res) => {
@@ -16,7 +16,7 @@ exports.updateUser = functions.https.onRequest((req, res) => {
     return cors(req, res, async () => {
         try {
             const userRecord = await admin.auth().updateUser(uid, data)
-            res.send(userRecord.toJSON);
+            res.send(userRecord.toJSON());
         } catch (error) {
             res.status(500).send(error);
         }

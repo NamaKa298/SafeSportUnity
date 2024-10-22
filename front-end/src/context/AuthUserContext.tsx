@@ -5,8 +5,6 @@ import { createContext, useContext } from "react";
 // prend toutes nos valeurs à l'initiale
 const init = {
     uid: "",
-    email: "",
-    firstName: "",
     displayName: "",
     emailVerified: false,
     phoneNumber: "",
@@ -31,8 +29,6 @@ export function AuthUserProvider({ children }: Props) {
             value={{
                     authUser: auth.authUser as {
                         uid: string,
-                        email: string,
-                        firstName: string,
                         displayName: string,
                         emailVerified: boolean,
                         phoneNumber: string,
