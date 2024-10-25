@@ -20,6 +20,8 @@
     "css-loader": "^7.1.2",
     "express": "^4.21.1",
     "firebase": "^10.14.0",
+    "leaflet": "^1.9.4",
+    "leaflet-defaulticon-compatibility": "^0.1.2",
     "firebase-admin": "^12.6.0",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.449.0",
