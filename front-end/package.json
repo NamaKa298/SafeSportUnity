@@ -24,7 +24,7 @@
     "firebase-admin": "^12.6.0",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",
-    "leaflet-geocoder-ban": "^1.0.7",,
+    "leaflet-geocoder-ban": "^1.0.7",
     "lucide-react": "^0.449.0",
     "module-alias": "^2.2.3",
     "next": "14.2.13",
