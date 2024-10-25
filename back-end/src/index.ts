@@ -1,6 +1,5 @@
 import 'module-alias/register';
 import express from 'express';
-import axios from 'axios';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import admin, { ServiceAccount } from 'firebase-admin';
@@ -104,6 +103,7 @@ app.post('/generate-plan', async (req, res) => {
             });
             console.log(msg);
         
+            console.log('Plan d\'entraînement généré avec succès:', (msg.content[0] as any)?.text);
             console.log('Plan d\'entraînement généré avec succès:', (msg.content[0] as any)?.text);
          // Stocker le plan dans Firestore
          await storeTrainingPlan(uid, (msg.content[0] as any)?.text);

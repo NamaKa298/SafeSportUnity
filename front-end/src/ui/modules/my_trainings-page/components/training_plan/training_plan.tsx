@@ -4,6 +4,7 @@ import { Typography } from "@/ui/design-system/typography";
 import Image from "next/image";
 import { getFirestore, collection, query, orderBy, limit, getDocs } from "firebase/firestore"; 
 import { getAuth } from "firebase/auth";
+import ReactMarkdown from "react-markdown";
 
 
 export const TrainingView = () => {
@@ -40,8 +41,8 @@ export const TrainingView = () => {
           Plan d'entraînement
         </Typography>
         {trainingPlan ? (
-          <Typography variant="body-lg" component="p" theme="gray" className="max-w-lg">
-            {trainingPlan}
+          <Typography variant="caption2" component="p" theme="gray" className="max-w-lg">
+            <ReactMarkdown>{trainingPlan}</ReactMarkdown>
           </Typography>
         ) : (
           <Typography variant="body-lg" component="p" theme="gray" className="max-w-lg">
