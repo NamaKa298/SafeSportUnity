@@ -21,4 +21,10 @@ export interface UserDocument {
     password: string;
     postalAddress: string;
     userName: string;
+    partnersProfile: {
+        address: string;
+        date: string;
+        hour: string;
+        trainingType: string;
+    },
 }
