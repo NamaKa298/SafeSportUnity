@@ -21,13 +21,10 @@ export interface UserDocument {
     password: string;
     postalAddress: string;
     userName: string;
-}
-
-export interface UserProfile {
-    level: number;
-    latitude: number;
-    longitude: number;
-    training_type: string | null;
-    address?: string | null;
-    last_update: Date | null;
+    partnersProfile: {
+        address: string;
+        date: string;
+        hour: string;
+        trainingType: string;
+    },
 }

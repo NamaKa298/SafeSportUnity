@@ -6,6 +6,7 @@ interface Props {
     isLoading: boolean;
     placeholder: string;
     type?: "text" | "email" | "password" | "url";
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     register: any;
     errors: any;
     errorMsg?: string;
@@ -19,6 +20,7 @@ export const Input = ({
     isLoading,
     placeholder,
     type = "text",
+    onChange,
     register,
     errors,
     errorMsg = "Tu dois renseigner ce champ",
@@ -47,6 +49,7 @@ export const Input = ({
                 <input
                     type={type}
                     placeholder={placeholder}
+                    onChange={onChange}
                     className={clsx(
                         type === "url" ? "rounded-r" : "rounded",
                         isLoading && "cursor-not-allowed",
