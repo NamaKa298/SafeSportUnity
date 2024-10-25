@@ -7,12 +7,13 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Typography } from '@/ui/design-system/typography';
 import { useAuth } from "@/context/AuthUserContext";
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { saveUserData } from "@/api/saveUserData";
+import axios from 'axios';
 
 type page = 'none'
-  | 'user-info' 
-  | 'sport' 
+  | 'user-info'
+  | 'sport'
   | 'weekly-routine'
   | 'user-speed'
   | 'distance'
@@ -41,18 +42,12 @@ export const NewTrainingView = () => {
   const [longRunDays, setLongRunDays] = useState<string[]>([]);
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-  // const MyComponent = () => {
-  //   const userId = authUser.uid;
-
-  //   return <div>User ID: {userId}</div>;
-  // };
-
   const sendUserData = async () => {
     if (!authUser) {
       console.error("User is not authenticated");
       return;
     }
-    
+
     const users = {
       age,
       sex,
@@ -70,34 +65,14 @@ export const NewTrainingView = () => {
       longRunDays,
       uid: authUser.uid,
     };
-  
+
     const result = await saveUserData(authUser.uid, users, users);
     if (result.error) {
       console.error("Erreur lors de l'enregistrement des données utilisateur :", result.error);
     } else {
       console.log("Données enregistrées avec succès");
     }
-    
-    // try {
-    //   const response = await fetch('/api/saveUserData', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //       MyComponent,
-    //       userData,
-    //     }),
-    //   });
-  
-    //   if (response.ok) {
-    //     console.log('Données enregistrées avec succès');
-    //   } else {
-    //     console.error('Erreur lors de l\'enregistrement des données', await response.text());
-    //   }
-    // } catch (error) {
-    //   console.error('Erreur lors de l\'envoi des données :', error);
-    // }
+
   };
 
   const renderUserInfo = () => (
@@ -157,7 +132,7 @@ export const NewTrainingView = () => {
             />
           </div>
         </div>
-        <Button 
+        <Button
           action={() => {
             if (!age || !sex || !height || !weight) {
               alert("Please fill out all fields.");
@@ -166,7 +141,7 @@ export const NewTrainingView = () => {
             setCurrentPage('sport');
           }}
           size="small"
-          style={{paddingTop: 15}}>Next</Button>
+          style={{ paddingTop: 15 }}>Next</Button>
       </CardContent>
     </Card>
   );
@@ -193,7 +168,7 @@ export const NewTrainingView = () => {
         </Select>
         <Button size="small" action={() => {
           setCurrentPage('weekly-routine');
-        }} style={{paddingTop: 15}}>Next</Button>
+        }} style={{ paddingTop: 15 }}>Next</Button>
       </CardContent>
     </Card>
   );
@@ -225,7 +200,7 @@ export const NewTrainingView = () => {
         />
         <Button size="small" action={() => {
           setCurrentPage('user-speed');
-        }} style={{paddingTop: 15}}>Next</Button>
+        }} style={{ paddingTop: 15 }}>Next</Button>
       </CardContent>
     </Card>
   );
@@ -275,7 +250,7 @@ export const NewTrainingView = () => {
         )}
         <Button size="small" action={() => {
           setCurrentPage('distance');
-        }} style={{paddingTop: 15}}>Next</Button>
+        }} style={{ paddingTop: 15 }}>Next</Button>
       </CardContent>
     </Card>
   );
@@ -314,7 +289,7 @@ export const NewTrainingView = () => {
         </Select>
         <Button size="small" action={() => {
           setCurrentPage('goal-type');
-        }} style={{paddingTop: 15}}>Next</Button>
+        }} style={{ paddingTop: 15 }}>Next</Button>
       </CardContent>
     </Card>
   );
@@ -347,57 +322,57 @@ export const NewTrainingView = () => {
               setCurrentPage('selection');
               break;
           };
-        }} style={{paddingTop: 15}}>Next</Button>
+        }} style={{ paddingTop: 15 }}>Next</Button>
       </CardContent>
     </Card>
   );
 
   // Si l'utilisateur a choisi "finisher with a time goal", il peut remplir l'un ou l'autre champ
   const renderGoalTimeOrPace = () => (<Card className="bg-gray-500">
-      <CardHeader>
-        <CardTitle>
-          <Typography variant="h5" theme="black">
-            {sport === 'running' ? 'Choose your goal time or pace' : 'Choose your goal time or speed'}
-          </Typography>
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div>
-          <Label htmlFor="goalTime">Goal Finish Time (hh:mm:ss)</Label>
-          <Input
-            className="bg-primary-300 placeholder-gray"
-            id="goalTime"
-            type="time"
-            step="1"
-            onChange={(e) => {
-              setGoalTime(e.target.value);
-            }}
-          />
-        </div>
-        <div>
-          <Label htmlFor="goalPace">
-            {sport === 'running' ? 'Goal Average Pace (min/km)' : 'Goal Average Speed (km/h)'}
-          </Label>
-          <Input
-            className="bg-primary-300 placeholder-gray"
-            id="goalPace"
-            type="text"
-            pattern="[0-9]{1,2}:[0-5][0-9]"
-            placeholder="Enter pace (e.g., 5:30 for 5 min 30 sec per km)"
-            onChange={(e) => {
-              setGoalPace(e.target.value)
-            }} // Assigner directement la valeur
-          />
-        </div>
-        <Button size="small" action={() => {
-          if (!goalPace && !goalTime) {
-            alert("Please enter either a goal finish time or a goal average pace/speed.");
-            return;
-          };
-          setCurrentPage('days-selection');
-        }} style={{paddingTop: 15}}>Next</Button> {/* Utilise la fonction de validation ici */}
-      </CardContent>
-    </Card>
+    <CardHeader>
+      <CardTitle>
+        <Typography variant="h5" theme="black">
+          {sport === 'running' ? 'Choose your goal time or pace' : 'Choose your goal time or speed'}
+        </Typography>
+      </CardTitle>
+    </CardHeader>
+    <CardContent className="space-y-4">
+      <div>
+        <Label htmlFor="goalTime">Goal Finish Time (hh:mm:ss)</Label>
+        <Input
+          className="bg-primary-300 placeholder-gray"
+          id="goalTime"
+          type="time"
+          step="1"
+          onChange={(e) => {
+            setGoalTime(e.target.value);
+          }}
+        />
+      </div>
+      <div>
+        <Label htmlFor="goalPace">
+          {sport === 'running' ? 'Goal Average Pace (min/km)' : 'Goal Average Speed (km/h)'}
+        </Label>
+        <Input
+          className="bg-primary-300 placeholder-gray"
+          id="goalPace"
+          type="text"
+          pattern="[0-9]{1,2}:[0-5][0-9]"
+          placeholder="Enter pace (e.g., 5:30 for 5 min 30 sec per km)"
+          onChange={(e) => {
+            setGoalPace(e.target.value)
+          }} // Assigner directement la valeur
+        />
+      </div>
+      <Button size="small" action={() => {
+        if (!goalPace && !goalTime) {
+          alert("Please enter either a goal finish time or a goal average pace/speed.");
+          return;
+        };
+        setCurrentPage('days-selection');
+      }} style={{ paddingTop: 15 }}>Next</Button> {/* Utilise la fonction de validation ici */}
+    </CardContent>
+  </Card>
   );
 
   const renderTrainingDaysSelection = () => (
@@ -422,7 +397,7 @@ export const NewTrainingView = () => {
         ))}
         <Button size="small" action={() => {
           setCurrentPage('long-days-selection');
-        }} style={{paddingTop: 15}}>Next</Button>
+        }} style={{ paddingTop: 15 }}>Next</Button>
       </CardContent>
     </Card>
   );
@@ -448,9 +423,9 @@ export const NewTrainingView = () => {
           </div>
         ))}
         <Button size="small" action={() => {
-        validateLongRunDays();
-        sendUserData(); // Envoyer les données après la validation
-      }} style={{paddingTop: 15}}>Next</Button>
+          setCurrentPage('none');
+          sendUserData(); // Envoyer les données après la validation
+        }} style={{ paddingTop: 15 }}>Summary</Button>
       </CardContent>
     </Card>
   );
@@ -475,6 +450,42 @@ export const NewTrainingView = () => {
     }
   };
 
+  const generateTrainingPlan = async () => {
+    if (!authUser) {
+      console.error("User is not authenticated");
+      return;
+    }
+
+    try {
+      const response = await axios.post('http://localhost:5000/generate-plan', {
+        age,
+        goalDistance,
+        goalPace,
+        goalTime,
+        goalType,
+        height,
+        longRunDays,
+        pace,
+        sex,
+        speed,
+        sport,
+        trainingDays,
+        uid: authUser.uid,
+        weeklyDistance,
+        weight
+      });
+
+      if (response.data.success) {
+        console.log("Plan d'entraînement généré avec succès:", response.data.trainingPlan);
+        window.location.href = '/my_trainings';
+      } else {
+        console.error("Erreur lors de la génération du plan d'entraînement:", response.data.error);
+      }
+    } catch (error) {
+      console.error("Erreur lors de la génération du plan d'entraînement:", error);
+    }
+  };
+
   const renderSummary = () => (
     <Card className="bg-gray-500">
       <CardHeader>
@@ -485,16 +496,16 @@ export const NewTrainingView = () => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-          <Typography variant="caption1">
-            Your personnal profile :
-          </Typography>
+        <Typography variant="caption1">
+          Your personnal profile :
+        </Typography>
         <p><strong>Age:</strong> {age}</p>
         <p><strong>Sex:</strong> {sex}</p>
         <p><strong>Height:</strong> {height} cm</p>
         <p><strong>Weight:</strong> {weight} kg</p>
         <br />
         <Typography variant="caption1">
-            Your current <strong>{sport}</strong> level :
+          Your current <strong>{sport}</strong> level :
         </Typography>
         <p><strong>Weekly distance:</strong> {weeklyDistance} km</p>
         {sport === 'running' ? (
@@ -502,11 +513,11 @@ export const NewTrainingView = () => {
         ) : (
           <p><strong>Average speed:</strong> {speed} km/h</p>
         )}
-              
+
         <hr className="my-4" />
         <Typography variant="caption1">
-            Your personnal goals :
-          </Typography>
+          Your personnal goals :
+        </Typography>
         <p><strong>distance:</strong> {goalDistance}</p>
         <p><strong>type:</strong> {goalType}</p>
         {goalType === 'finisher with a time goal' && (
@@ -521,6 +532,13 @@ export const NewTrainingView = () => {
         )}
         <p><strong>Training days:</strong> {trainingDays.join(', ')}</p>
         <p><strong>Preferred long run days:</strong> {longRunDays.join(', ')}</p>
+        <Button size="small" action={() => {
+          validateLongRunDays();
+          sendUserData(); // Envoyer les données après la validation
+        }} style={{ paddingTop: 15 }}>Save Your Training Data</Button>
+        <Button size="small" action={() => {
+          generateTrainingPlan();
+        }} style={{ paddingTop: 15 }}>Generate Plan</Button>
       </CardContent>
     </Card>
   );
@@ -558,4 +576,6 @@ export const NewTrainingView = () => {
       {renderCurrent()}
     </div>
   );
+
 };
+
