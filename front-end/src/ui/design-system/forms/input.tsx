@@ -5,7 +5,7 @@ interface Props {
     label?: string;
     isLoading: boolean;
     placeholder: string;
-    type?: "text" | "email" | "password" | "url";
+    type?: "text" | "email" | "password" | "url" | "time" | "date";
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     register: any;
     errors: any;

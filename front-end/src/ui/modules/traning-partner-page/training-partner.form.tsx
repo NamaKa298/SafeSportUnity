@@ -3,6 +3,7 @@ import { Button } from "@/ui/design-system/button/button";
 import { Input } from "@/ui/design-system/forms/input";
 import { useState } from "react";
 
+
 interface Props {
     form: FormsType;
 }
@@ -79,7 +80,7 @@ export const TrainingPartnersForm = ({ form }: Props) => {
                         label="Date"
                         isLoading={isLoading}
                         placeholder="Date"
-                        type="text"
+                        type="date"
                         register={register}
                         errors={errors}
                         errorMsg="Date is required"
@@ -89,7 +90,7 @@ export const TrainingPartnersForm = ({ form }: Props) => {
                         label="Hour"
                         isLoading={isLoading}
                         placeholder="Hour of the sport activity"
-                        type="text"
+                        type="time"
                         register={register}
                         errors={errors}
                         errorMsg="Hour is required"
