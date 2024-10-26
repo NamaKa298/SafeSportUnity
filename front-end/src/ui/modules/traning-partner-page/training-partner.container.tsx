@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import dynamic from "next/dynamic";
 import { TrainingPartnersView } from './training-partner.view';
 import { TrainingPartnersFormFieldsType } from '@/types/forms';
 import { useAuth } from '@/context/AuthUserContext';
 import { useToggle } from '@/hooks/use-toggle';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { firestoreUpdateDocument } from "@/api/firestore";
-import { getAuth } from "firebase/auth";
+import { collection, doc,  getDocs,  setDoc, Timestamp } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+
 
 
 
@@ -14,74 +16,78 @@ const MapWithNoSSR = dynamic(() => import('@/ui/modules/traning-partner-page/com
 	ssr: false,
 });
 
+const saveTrainingPartnersDataToFirestore = async (data: TrainingPartnersFormFieldsType) => {
+    const auth = getAuth();
+    if (auth.currentUser) {
+        const userId = auth.currentUser.uid;
+        const firestore = getFirestore();
+
+        try {
+            // Accéder à la sous-collection pour compter les documents existants
+            const activitiesCollection = collection(firestore, "users", userId, "trainingWithPartners");
+            const activitiesSnapshot = await getDocs(activitiesCollection);
+            const activityCount = activitiesSnapshot.size + 1; // +1 pour la nouvelle activité
+
+            const activityId = `activity${activityCount}`; // Définir un ID unique pour chaque activité
+
+            await setDoc(doc(activitiesCollection, activityId), {
+                traininWithPartners: data,
+                last_update: Timestamp.now(),
+            });
+            
+            console.log(`Données d'entraînement enregistrées sous l'ID ${activityId} :`, data);
+        } catch (error) {
+            console.error("Erreur lors de l'enregistrement des données d'entraînement :", error);
+        }
+    } else {
+        console.error("Utilisateur non authentifié !");
+    }
+};
+
 export default function TrainingPartnersContainer() {
+    useAuth();
+    const { value: isLoading, setValue: setIsLoading } = useToggle();
 
-	const { authUser } = useAuth();
-	const { value: isLoading, setValue: setIsLoading } = useToggle();
+    const {
+        handleSubmit,
+        control,
+		reset,
+        formState: { errors },
+        register,
+    } = useForm<TrainingPartnersFormFieldsType>();
 
-	const {
-		handleSubmit,
-		control,
-		formState: { errors },
-		register,
-		setValue,
-	} = useForm<TrainingPartnersFormFieldsType>();
+    const onSubmit: SubmitHandler<TrainingPartnersFormFieldsType> = async (data) => {
+        setIsLoading(true);
+        try {
+            await saveTrainingPartnersDataToFirestore(data);
+            alert('Training data saved successfully!');
+			reset();
+        } catch (error) {
+            console.error('Error saving training data: ', error);
+            alert('Failed to save training data.');
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
-	const { address, date, hour, trainingType } = authUser.userDocument;
+return (
+	<div className='flex'>
+		<TrainingPartnersView
+			form={{
+				errors,
+				handleSubmit,
+				isLoading,
+				onSubmit,
+				register,
+				control,
+			}}
 
-	useEffect(() => {
-		const fieldsToUpdate: (
-			| "address"
-			| "date"
-			| "hour"
-			| "trainingType"
-		)[] = ["address", "date", "hour", "trainingType"];
+		/>
+		<MapWithNoSSR />
+		{/* Appel du composant Map */}
 
-		for (const field of fieldsToUpdate) {
-			setValue(field, authUser.userDocument[field]);
-		}
-	}, []);
-
-	const handleUpdateUserDocument = async (
-		formData: TrainingPartnersFormFieldsType
-	) => {
-		const auth = getAuth();
-		if (auth.currentUser) {
-			setIsLoading(true);
-			const { error } = await firestoreUpdateDocument(
-				"users",
-				authUser.uid,
-				formData
-			)
-			if (error) {
-				setIsLoading(false);
-				return;
-			}
-		};
-	};
-
-	const onSubmit: SubmitHandler<TrainingPartnersFormFieldsType> = async (formData) => {
-		handleUpdateUserDocument(formData);
-	};
-
-	return (
-		<div className='flex'>
-			<TrainingPartnersView
-				form={{
-					errors,
-					handleSubmit,
-					isLoading,
-					onSubmit,
-					register,
-					control,
-				}}
-				
-			/>
-			<MapWithNoSSR />
-			{/* Appel du composant Map */}
-			
-		</div>
-	);
+	</div>
+);
 };
 
 // import dynamic from 'next/dynamic';
