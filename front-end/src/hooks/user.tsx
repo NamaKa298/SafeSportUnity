@@ -21,10 +21,12 @@ export interface UserDocument {
     password: string;
     postalAddress: string;
     userName: string;
-    partnersProfile: {
-        address: string;
-        date: string;
-        hour: string;
-        trainingType: string;
-    },
+}
+
+export interface trainingWithPartners {
+    address: string;
+    date: Date;
+    hour: Timestamp;
+    trainingType: string;
+    uid: string;
 }

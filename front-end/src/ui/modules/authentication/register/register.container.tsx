@@ -74,12 +74,6 @@ export const RegisterContainer = () => {
             pseudoEmail: pseudoEmail,
             email: email,
             uid: data.uid,
-            partnersProfile: {
-                date: null,
-                hour: null,
-                trainingType: null,
-                address: null,
-            },
             creation_date: new Date(),
         }
 
