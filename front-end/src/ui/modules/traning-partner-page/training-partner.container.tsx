@@ -54,6 +54,15 @@ export default function TrainingPartnersContainer() {
     } = useForm<TrainingPartnersFormFieldsType>();
 
     const onSubmit: SubmitHandler<TrainingPartnersFormFieldsType> = async (data) => {
+        const currentDate = new Date();
+        const activityDate = new Date(data.date);
+        const [activityHour, activityMinute] = data.hour.split(':').map(Number);
+        activityDate.setHours(activityHour, activityMinute);
+
+        if (activityDate < currentDate) {
+            toast.error('The event date and time have already passed.');
+            return;
+        }
         setIsLoading(true);
         try {
             await saveTrainingPartnersDataToFirestore(data);
