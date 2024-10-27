@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthUserContext';
-import { collection, getDocs, getFirestore } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, getFirestore } from 'firebase/firestore';
 
 interface Activity {
     id: string;
@@ -33,7 +33,21 @@ const TrainingPartnerList: React.FC = () => {
                         };
                     }) as Activity[];
                     console.log('Fetched activities:', activitiesList); // Log the fetched activities
-                    setActivities(activitiesList);
+                    const currentDate = new Date();
+                    const validActivities = activitiesList.filter(activity => {
+                        const activityDate = new Date(activity.date);
+                        const [activityHour, activityMinute] = activity.hour.split(':').map(Number);
+                        activityDate.setHours(activityHour, activityMinute);
+
+                        if (activityDate < currentDate) {
+                            // Supprimer l'événement passé de Firestore
+                            deleteDoc(doc(db, 'users', authUser.uid, 'trainingWithPartners', activity.id));
+                            return false;
+                        }
+                        return true;
+                    });
+
+                    setActivities(validActivities);
                 } catch (error) {
                     console.error('Error fetching activities:', error);
                 } finally {
