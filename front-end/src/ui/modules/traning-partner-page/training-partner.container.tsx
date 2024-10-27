@@ -1,20 +1,17 @@
 import React from 'react';
-import dynamic from "next/dynamic";
 import { TrainingPartnersView } from './training-partner.view';
 import { TrainingPartnersFormFieldsType } from '@/types/forms';
 import { useAuth } from '@/context/AuthUserContext';
 import { useToggle } from '@/hooks/use-toggle';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { collection, doc,  getDocs,  setDoc, Timestamp } from 'firebase/firestore';
+import { collection, doc, getDocs, setDoc, Timestamp } from 'firebase/firestore';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
+import { toast } from 'react-toastify';
 
 
 
 
-const MapWithNoSSR = dynamic(() => import('@/ui/modules/traning-partner-page/component/Maps'), {
-	ssr: false,
-});
 
 const saveTrainingPartnersDataToFirestore = async (data: TrainingPartnersFormFieldsType) => {
     const auth = getAuth();
@@ -34,7 +31,7 @@ const saveTrainingPartnersDataToFirestore = async (data: TrainingPartnersFormFie
                 traininWithPartners: data,
                 last_update: Timestamp.now(),
             });
-            
+
             console.log(`Données d'entraînement enregistrées sous l'ID ${activityId} :`, data);
         } catch (error) {
             console.error("Erreur lors de l'enregistrement des données d'entraînement :", error);
@@ -51,7 +48,7 @@ export default function TrainingPartnersContainer() {
     const {
         handleSubmit,
         control,
-		reset,
+        reset,
         formState: { errors },
         register,
     } = useForm<TrainingPartnersFormFieldsType>();
@@ -60,8 +57,8 @@ export default function TrainingPartnersContainer() {
         setIsLoading(true);
         try {
             await saveTrainingPartnersDataToFirestore(data);
-            alert('Training data saved successfully!');
-			reset();
+            toast.success('Training data saved successfully!');
+            reset();
         } catch (error) {
             console.error('Error saving training data: ', error);
             alert('Failed to save training data.');
@@ -70,24 +67,19 @@ export default function TrainingPartnersContainer() {
         }
     };
 
-return (
-	<div className='flex'>
-		<TrainingPartnersView
-			form={{
-				errors,
-				handleSubmit,
-				isLoading,
-				onSubmit,
-				register,
-				control,
-			}}
+    return (
+        <TrainingPartnersView
+            form={{
+                errors,
+                handleSubmit,
+                isLoading,
+                onSubmit,
+                register,
+                control,
+            }}
 
-		/>
-		<MapWithNoSSR />
-		{/* Appel du composant Map */}
-
-	</div>
-);
+        />
+    );
 };
 
 // import dynamic from 'next/dynamic';
