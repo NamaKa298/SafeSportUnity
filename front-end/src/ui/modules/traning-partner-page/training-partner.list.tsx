@@ -70,9 +70,9 @@ const TrainingPartnerList: React.FC = () => {
                 >
                     <h2 className="text-lg font-bold pb-4">{authUser.userDocument.userName}</h2>
                     <div className='flex justify-between'>
-                    <p><div className='font-bold'> Date </div>{activity.date}</p>
-                    <p><div className='font-bold'>Hour </div>{activity.hour}</p>
-                    <p><div className='font-bold'>Training Type </div>{activity.trainingType}</p>
+                    <div><div className='font-bold'> Date </div>{activity.date}</div>
+                    <div><div className='font-bold'>Hour </div>{activity.hour}</div>
+                    <div><div className='font-bold'>Training Type </div>{activity.trainingType}</div>
                     </div>
                 </div>
             ))}
