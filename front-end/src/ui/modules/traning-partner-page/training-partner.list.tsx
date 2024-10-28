@@ -7,6 +7,7 @@ interface Activity {
     date: string;
     hour: string;
     trainingType: string;
+    createdBy: string; // Ajoutez ce champ pour vérifier l'auteur
 }
 
 const TrainingPartnerList: React.FC = () => {
@@ -30,6 +31,7 @@ const TrainingPartnerList: React.FC = () => {
                             date: trainingData.date,
                             hour: trainingData.hour,
                             trainingType: trainingData.trainingType,
+                            createdBy: data.createdBy,
                         };
                     }) as Activity[];
                     console.log('Fetched activities:', activitiesList); // Log the fetched activities
