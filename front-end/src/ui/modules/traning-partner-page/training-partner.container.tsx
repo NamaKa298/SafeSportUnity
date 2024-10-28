@@ -4,7 +4,7 @@ import { TrainingPartnersFormFieldsType } from '@/types/forms';
 import { useAuth } from '@/context/AuthUserContext';
 import { useToggle } from '@/hooks/use-toggle';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { collection, doc, getDocs, setDoc, Timestamp } from 'firebase/firestore';
+import { collection, doc, setDoc, Timestamp } from 'firebase/firestore';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { toast } from 'react-toastify';
@@ -22,17 +22,17 @@ const saveTrainingPartnersDataToFirestore = async (data: TrainingPartnersFormFie
         try {
             // Accéder à la sous-collection pour compter les documents existants
             const activitiesCollection = collection(firestore, "users", userId, "trainingWithPartners");
-            const activitiesSnapshot = await getDocs(activitiesCollection);
-            const activityCount = activitiesSnapshot.size + 1; // +1 pour la nouvelle activité
 
-            const activityId = `activity${activityCount}`; // Définir un ID unique pour chaque activité
+            // Utiliser Firestore pour générer un ID unique pour chaque activité
+            const activityDocRef = doc(activitiesCollection);
 
-            await setDoc(doc(activitiesCollection, activityId), {
+            await setDoc(activityDocRef, {
                 traininWithPartners: data,
+                createdBy: userId, // Ajoutez ce champ pour vérifier l'auteur
                 last_update: Timestamp.now(),
             });
 
-            console.log(`Données d'entraînement enregistrées sous l'ID ${activityId} :`, data);
+            console.log(`Données d'entraînement enregistrées sous l'ID ${activityDocRef.id} :`, data);
         } catch (error) {
             console.error("Erreur lors de l'enregistrement des données d'entraînement :", error);
         }

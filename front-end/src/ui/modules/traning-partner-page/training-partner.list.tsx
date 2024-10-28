@@ -7,6 +7,7 @@ interface Activity {
     date: string;
     hour: string;
     trainingType: string;
+    createdBy: string; // Ajoutez ce champ pour vérifier l'auteur
 }
 
 const TrainingPartnerList: React.FC = () => {
@@ -30,6 +31,7 @@ const TrainingPartnerList: React.FC = () => {
                             date: trainingData.date,
                             hour: trainingData.hour,
                             trainingType: trainingData.trainingType,
+                            createdBy: data.createdBy,
                         };
                     }) as Activity[];
                     console.log('Fetched activities:', activitiesList); // Log the fetched activities
@@ -70,9 +72,9 @@ const TrainingPartnerList: React.FC = () => {
                 >
                     <h2 className="text-lg font-bold pb-4">{authUser.userDocument.userName}</h2>
                     <div className='flex justify-between'>
-                    <p><div className='font-bold'> Date </div>{activity.date}</p>
-                    <p><div className='font-bold'>Hour </div>{activity.hour}</p>
-                    <p><div className='font-bold'>Training Type </div>{activity.trainingType}</p>
+                    <div><div className='font-bold'> Date </div>{activity.date}</div>
+                    <div><div className='font-bold'>Hour </div>{activity.hour}</div>
+                    <div><div className='font-bold'>Training Type </div>{activity.trainingType}</div>
                     </div>
                 </div>
             ))}
