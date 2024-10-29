@@ -10,6 +10,7 @@ import { useAuth } from "@/context/AuthUserContext";
 import React, { useState } from 'react';
 import { saveUserData } from "@/api/saveUserData";
 import axios from 'axios';
+import { Spinner } from "@/ui/design-system/spinner/spinner";
 
 type page = 'none'
   | 'user-info'
@@ -534,9 +535,6 @@ export const NewTrainingView = () => {
         <p><strong>Preferred long run days:</strong> {longRunDays.join(', ')}</p>
         <Button size="small" action={() => {
           validateLongRunDays();
-          sendUserData(); // Envoyer les données après la validation
-        }} style={{ paddingTop: 15 }}>Save Your Training Data</Button>
-        <Button size="small" action={() => {
           generateTrainingPlan();
         }} style={{ paddingTop: 15 }}>Generate Plan</Button>
       </CardContent>

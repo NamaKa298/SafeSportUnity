@@ -33,6 +33,7 @@
     "react-leaflet": "^4.2.1",
     "react-markdown": "^9.0.1",
     "react-toastify": "^10.0.5",
+    "remark-gfm": "^4.0.0",
     "style-loader": "^4.0.0",
     "tailwind-merge": "^2.5.3",
     "tailwindcss-animate": "^1.0.7",
