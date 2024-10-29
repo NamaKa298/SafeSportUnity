@@ -1,6 +1,5 @@
 import 'module-alias/register';
 import express from 'express';
-import axios from 'axios';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import admin, { ServiceAccount } from 'firebase-admin';
@@ -28,18 +27,18 @@ const port = 5000;
 app.use(cors());
 app.use(express.json());
 
-// Fonction pour récupérer les données de userTrainingData
-const getUserTrainingData = async (userId: string) => {
-    try {
-        const userTrainingCollectionRef = firestore.collection(`/users/${userId}/userTrainingData`);
-        const querySnapshot = await userTrainingCollectionRef.get(); // Utilisation de la méthode 'get()' avec firebase-admin
-        const trainingData = querySnapshot.docs.map(doc => doc.data());
-        return trainingData;
-    } catch (error) {
-        console.error("Erreur lors de la récupération des données d'entraînement:", error);
-        throw new Error('Impossible de récupérer les données utilisateur');
-    }
-};
+// // Fonction pour récupérer les données de userTrainingData
+// const getUserTrainingData = async (userId: string) => {
+//     try {
+//         const userTrainingCollectionRef = firestore.collection(`/users/${userId}/userTrainingData`);
+//         const querySnapshot = await userTrainingCollectionRef.get(); // Utilisation de la méthode 'get()' avec firebase-admin
+//         const trainingData = querySnapshot.docs.map(doc => doc.data());
+//         return trainingData;
+//     } catch (error) {
+//         console.error("Erreur lors de la récupération des données d'entraînement:", error);
+//         throw new Error('Impossible de récupérer les données utilisateur');
+//     }
+// };
 
 
 // Fonction pour stocker le plan d'entraînement dans Firebase
@@ -80,7 +79,11 @@ app.post('/generate-plan', async (req, res) => {
 
         Il peut s'entraîner ${trainingDaysSafe.join(', ')} par semaine et souhaite un plan d'entrainement sur 3 mois.
         les jours de préférence dans la semaine pour un entrainement supérieur à 1 heure sont : ${longRunDaysSafe.join(', ')}.
+        fait une synthèse de l'utilisateur et de son objectif.
         Propose un plan d'entraînement détaillé jour par jour pendant 3 mois pour atteindre cet objectif.
+        prend bien en compte le poids, la taille, l'âge de l'utilisateur et sa distance de course actuelle dans le plan d'entraînement.
+        Si tu penses que l'objectif est trop ambitieux, suggère et propose un objectif plus réaliste.
+        formate le texte en markdown titre en gras, double saut de ligne entre les titres, sous-titre en italique et liste à puce.
         `;
 
         // Envoi du prompt à l'API ChatGPT
@@ -102,8 +105,9 @@ app.post('/generate-plan', async (req, res) => {
                 }
             ]
             });
-            console.log(msg);
+            // console.log(msg);
         
+            // console.log('Plan d\'entraînement généré avec succès:', (msg.content[0] as any)?.text);
             console.log('Plan d\'entraînement généré avec succès:', (msg.content[0] as any)?.text);
          // Stocker le plan dans Firestore
          await storeTrainingPlan(uid, (msg.content[0] as any)?.text);

@@ -1,61 +1,96 @@
 import { useEffect, useState } from "react";
 import { Container } from "@/ui/components/container/container";
 import { Typography } from "@/ui/design-system/typography";
-import Image from "next/image";
-import { getFirestore, collection, query, orderBy, limit, getDocs } from "firebase/firestore"; 
+import { getFirestore, collection, query, orderBy, getDocs, deleteDoc, doc } from "firebase/firestore"; 
 import { getAuth } from "firebase/auth";
-
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export const TrainingView = () => {
-  const [trainingPlan, setTrainingPlan] = useState<string | null>(null);
- 
+  interface TrainingPlan {
+    id: string;
+    plan: string;
+    date: string;
+  }
+
+  const [trainingPlans, setTrainingPlans] = useState<TrainingPlan[]>([]);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+
   useEffect(() => {
-    const fetchTrainingPlan = async () => {
+    const fetchTrainingPlans = async () => {
       try {
         const auth = getAuth();
         const userId = auth.currentUser?.uid;
         const db = getFirestore();
         const trainingPlanRef = query(
           collection(db, `users/${userId}/UserTrainingPlans`),
-          orderBy("date", "desc"),
-          limit(1)
+          orderBy("date", "desc")
         );
         const querySnapshot = await getDocs(trainingPlanRef);
-        if (!querySnapshot.empty) {
-          const latestPlan = querySnapshot.docs[0].data().plan;
-          setTrainingPlan(typeof latestPlan === 'string' ? latestPlan : JSON.stringify(latestPlan));
+        const plans = querySnapshot.docs.map(doc => ({ id: doc.id, plan: doc.data().plan, date: doc.data().date }));
+        setTrainingPlans(plans);
+        if (plans.length > 0) {
+          setSelectedPlan(typeof plans[0].plan === 'string' ? plans[0].plan : JSON.stringify(plans[0].plan));
         }
       } catch (error) {
-        console.error("Erreur lors de la récupération du plan d'entraînement:", error);
+        console.error("Erreur lors de la récupération des plans d'entraînement:", error);
       }
     };
 
-    fetchTrainingPlan();
+    fetchTrainingPlans();
   }, []);
 
+  const handleDelete = async (planId: string) => {
+    try {
+      const auth = getAuth();
+      const userId = auth.currentUser?.uid;
+      const db = getFirestore();
+      await deleteDoc(doc(db, `users/${userId}/UserTrainingPlans`, planId));
+      setTrainingPlans(trainingPlans.filter(plan => plan.id !== planId));
+      if (selectedPlan === planId) {
+        setSelectedPlan(null);
+      }
+    } catch (error) {
+      console.error("Erreur lors de la suppression du plan d'entraînement:", error);
+    }
+  };
+
   return (
-    <Container className="flex justify-between">
-      <div className="flex flex-col justify-center max-w-2xl space-y-5">
+    <Container className="flex justify-between w-full max-w-screen-xl mx-auto mb-8">
+      <div className="flex flex-col w-1/3 space-y-5">
         <Typography variant="h2" component="h2">
-          Plan d'entraînement
+          Liste des Plans d'Entraînement
         </Typography>
-        {trainingPlan ? (
-          <Typography variant="body-lg" component="p" theme="gray" className="max-w-lg">
-            {trainingPlan}
-          </Typography>
-        ) : (
-          <Typography variant="body-lg" component="p" theme="gray" className="max-w-lg">
-            Chargement du plan d'entraînement...
-          </Typography>
-        )}
+        <table className="min-w-full bg-white">
+          <thead>
+            <tr>
+              <th className="py-2">Date</th>
+              <th className="py-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {trainingPlans.map(plan => (
+              <tr key={plan.id} className="border-t">
+                <td className="py-2 cursor-pointer" onClick={() => setSelectedPlan(typeof plan.plan === 'string' ? plan.plan : JSON.stringify(plan.plan))}>
+                  {new Date(plan.date).toLocaleDateString()}
+                </td>
+                <td className="py-2">
+                  <button onClick={() => handleDelete(plan.id)} className="text-red-500">Supprimer</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      <div className="relative w-[600px] h-[600px]">
-        <Image
-          sizes="50%"
-          fill
-          src={"/assets/images/icone_training.jpg"}
-          alt="logo SafeSportUnity"
-        />
+      <div className="flex flex-col justify-center w-2/3 space-y-5">
+        <Typography variant="h2" component="h2">
+          Plan d'Entraînement
+        </Typography>
+        {selectedPlan ? (
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{selectedPlan}</ReactMarkdown>
+        ) : (
+          <Typography variant="body-lg">Sélectionnez un plan d'entraînement pour l'afficher.</Typography>
+        )}
       </div>
     </Container>
   );
