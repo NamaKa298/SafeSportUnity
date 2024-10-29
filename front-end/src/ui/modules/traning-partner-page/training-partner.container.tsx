@@ -1,125 +1,139 @@
-import 'leaflet/dist/leaflet.css';
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'; // Import de l'icône par défaut
-import dynamic from 'next/dynamic';
-import 'leaflet-defaulticon-compatibility'; // Répare les icônes par défaut pour Leaflet
-import { useEffect, useState } from 'react';
-import { LatLngExpression } from 'leaflet';
-import { Marker, Popup } from 'react-leaflet';
-import { collection, getDocs } from 'firebase/firestore';
-import { useToggle } from '@/hooks/use-toggle';
-import { TrainingPartnersFormFieldsType } from '@/types/forms';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import React from 'react';
 import { TrainingPartnersView } from './training-partner.view';
-import { db } from '@/config/firebase-config';
+import { TrainingPartnersFormFieldsType } from '@/types/forms';
+import { useAuth } from '@/context/AuthUserContext';
+import { useToggle } from '@/hooks/use-toggle';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { collection, doc, setDoc, Timestamp } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import { toast } from 'react-toastify';
 
-const MapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), { ssr: false });
-const TileLayer = dynamic(() => import('react-leaflet').then((mod) => mod.TileLayer), { ssr: false });
 
-export const MapComponent: React.FC = () => {
-    const [position, setPosition] = useState<LatLngExpression>({ lat: 48.8566, lng: 2.3522 }); // Paris par défaut
-    const [partners, setPartners] = useState([]);
 
-    useEffect(() => {
-        if (navigator.geolocation) {
-            navigator.geolocation.watchPosition(
-                (pos) => {
-                    const { latitude, longitude } = pos.coords;
-                    setPosition([latitude, longitude]);
-                },
-                (err) => {
-                    console.error("Erreur de géolocalisation : ", err);
-                }
-            );
-        } else {
-            console.error("La géolocalisation n'est pas supportée par ce navigateur.");
+
+
+const saveTrainingPartnersDataToFirestore = async (data: TrainingPartnersFormFieldsType) => {
+    const auth = getAuth();
+    if (auth.currentUser) {
+        const userId = auth.currentUser.uid;
+        const firestore = getFirestore();
+
+        try {
+            // Accéder à la sous-collection pour compter les documents existants
+            const activitiesCollection = collection(firestore, "users", userId, "trainingWithPartners");
+
+            // Utiliser Firestore pour générer un ID unique pour chaque activité
+            const activityDocRef = doc(activitiesCollection);
+
+            await setDoc(activityDocRef, {
+                traininWithPartners: data,
+                createdBy: userId, // Ajoutez ce champ pour vérifier l'auteur
+                last_update: Timestamp.now(),
+            });
+
+            console.log(`Données d'entraînement enregistrées sous l'ID ${activityDocRef.id} :`, data);
+        } catch (error) {
+            console.error("Erreur lors de l'enregistrement des données d'entraînement :", error);
         }
-    }, []);
+    } else {
+        console.error("Utilisateur non authentifié !");
+    }
+};
 
-    useEffect(() => {
-        const fetchPartners = async () => {
-            try {
-                const querySnapshot = await getDocs(collection(db, "users_partners"));
-                const partnersList = querySnapshot.docs.map(doc => doc.data());
-                setPartners(partnersList);
-            } catch (error) {
-                console.error("Error fetching partners: ", error);
-            }
-        };
-        fetchPartners();
-    }, []);
-
-    return (
-        <MapContainer center={position} zoom={13} style={{ height: "400px", width: "400px" }}>
-            {/* Ajout des tuiles OpenStreetMap */}
-            <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            {/* Marqueur à la position actuelle */}
-            <Marker position={position}>
-                <Popup>Vous êtes ici</Popup>
-            </Marker>
-            {/* Afficher les partenaires sur la carte */}
-            {partners.map((partner, index) => (
-                <Marker key={index} position={[partner.latitude, partner.longitude]}>
-                    <Popup>
-                        {partner.training_type} - Niveau: {partner.level}
-                    </Popup>
-                </Marker>
-            ))}
-        </MapContainer>
-    );
-}
-
-export const TrainingPartnersContainer = () => {
+export default function TrainingPartnersContainer() {
+    useAuth();
     const { value: isLoading, setValue: setIsLoading } = useToggle();
 
     const {
         handleSubmit,
         control,
+        reset,
         formState: { errors },
         register,
     } = useForm<TrainingPartnersFormFieldsType>();
 
+    const onSubmit: SubmitHandler<TrainingPartnersFormFieldsType> = async (data) => {
+        const currentDate = new Date();
+        const activityDate = new Date(data.date);
+        const [activityHour, activityMinute] = data.hour.split(':').map(Number);
+        activityDate.setHours(activityHour, activityMinute);
 
-    const handleCreateUserPartners = async ({
-        address,
-        latitude,
-        longitude,
-        level,
-        training_type,
-    }: TrainingPartnersFormFieldsType) => {
-
-
-        const userDocumentData = {
-            address: address,
-            latitude: latitude,
-            longitude: longitude,
-            level: level,
-            training_type: training_type,
-            uid: data.uid,
-            creation_date: new Date(),
+        if (activityDate < currentDate) {
+            toast.error('The event date and time have already passed.');
+            return;
         }
-        handleCreateUserPartners("users_partners", data.uid, userDocumentData);
-    }
-    const onSubmit: SubmitHandler<TrainingPartnersFormFieldsType> = async (formData) => {
         setIsLoading(true);
-
-        handleCreateUserPartners(formData);
-        setIsLoading(false);
+        try {
+            await saveTrainingPartnersDataToFirestore(data);
+            toast.success('Training data saved successfully!');
+            reset();
+        } catch (error) {
+            console.error('Error saving training data: ', error);
+            alert('Failed to save training data.');
+        } finally {
+            setIsLoading(false);
+        }
     };
-
 
     return (
         <TrainingPartnersView
             form={{
                 errors,
-                control,
-                register,
                 handleSubmit,
-                onSubmit,
                 isLoading,
+                onSubmit,
+                register,
+                control,
             }}
+
         />
     );
 };
+
+// import dynamic from 'next/dynamic';
+// import { useEffect, useState, useMemo } from 'react';
+// import { LatLngExpression, Map } from 'leaflet'; // Import Map type
+// import { collection, doc, getDocs, setDoc, Timestamp } from 'firebase/firestore';
+// import { useToggle } from '@/hooks/use-toggle';
+// import { TrainingPartnersFormFieldsType } from '@/types/forms';
+// import { SubmitHandler, useForm } from 'react-hook-form';
+// import { db } from '@/config/firebase-config';
+// import { getAuth } from 'firebase/auth';
+// import { UserDocument } from '@/types/user';
+
+// if (typeof window !== 'undefined') {
+//     import('leaflet/dist/leaflet.css').then(() => { });
+//     import('leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css').then(() => { });
+//     import('leaflet-defaulticon-compatibility').then(() => { });
+// }
+
+// declare module 'leaflet-defaulticon-compatibility';
+
+// const MapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), { ssr: false });
+// const TileLayer = dynamic(() => import('react-leaflet').then((mod) => mod.TileLayer), { ssr: false });
+// const Marker = dynamic(() => import('react-leaflet').then((mod) => mod.Marker), { ssr: false });
+// const Popup = dynamic(() => import('react-leaflet').then((mod) => mod.Popup), { ssr: false });
+
+// const savePositionToFirestore = async (latitude: number, longitude: number) => {
+//     const auth = getAuth();
+//     if (auth.currentUser) {
+//         const userId = auth.currentUser.uid;
+//         try {
+//             await setDoc(doc(db, "users", userId), {
+//                 partnersProfile: {
+//                     latitude,
+//                     longitude,
+//                     last_update: Timestamp.now(),
+//                 },
+//             }, { merge: true });
+//             console.log("Position enregistrée :", { latitude, longitude });
+//         } catch (error) {
+//             console.error("Erreur lors de l'enregistrement de la position :", error);
+//         }
+//     } else {
+//         console.error("Utilisateur non authentifié !");
+//     }
+// };
+
+

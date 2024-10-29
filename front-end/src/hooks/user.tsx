@@ -22,3 +22,11 @@ export interface UserDocument {
     postalAddress: string;
     userName: string;
 }
+
+export interface trainingWithPartners {
+    address: string;
+    date: Date;
+    hour: Timestamp;
+    trainingType: string;
+    uid: string;
+}

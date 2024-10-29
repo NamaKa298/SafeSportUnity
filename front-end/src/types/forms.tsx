@@ -39,8 +39,7 @@ export interface ContactDetailsFormFieldsType {
 
 export interface TrainingPartnersFormFieldsType {
     address: string;
-    latitude: number;
-    longitude: number;
-    level: string;
-    training_type: string;
+    date: string;
+    hour: string;
+    trainingType: string;
 }
