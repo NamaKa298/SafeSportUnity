@@ -49,7 +49,6 @@ export const getAllTrainingActivities = async () => {
 } catch (error) {
     console.error("Erreur lors de la récupération des activités d'entraînement pour tous les utilisateurs :", error);
 }
-
     console.log("voilà toutes les activités allActivities:", allActivities);
     return allActivities;
 };
