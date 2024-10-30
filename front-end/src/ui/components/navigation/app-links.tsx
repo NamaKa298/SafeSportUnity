@@ -24,6 +24,11 @@ const footerRessourcesLinks: AppLinks[] = [
 ];
 
 const footerAboutLinks: AppLinks[] = [
+        {
+        label: "About Us",
+        baseUrl: "/",
+        type: "internal",
+    },
     {
         label: "Termes & Conditions",
         baseUrl: "/",

@@ -34,6 +34,7 @@ export const TrainingPartnersView = ({ form }: Props) => {
                     <ActivityList />
                 </div>
             </div>
+            
         </div >
         </Container>
     )

@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export interface FormsType {
     control?: any;
     onSubmit: any;
@@ -11,7 +13,6 @@ export interface RegisterFormFieldsType {
     firstName: string;
     lastName: string;
     userName: string;
-    pseudoEmail?: string;
     postalAddress: string;
     email: string;
     confirmEmail: string;
@@ -42,4 +43,6 @@ export interface TrainingPartnersFormFieldsType {
     date: string;
     hour: string;
     trainingType: string;
+    createdBy: string; // L'ID de l'utilisateur
+    last_update: Timestamp; // Change le type en Timestamp
 }
