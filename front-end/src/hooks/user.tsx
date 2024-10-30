@@ -17,7 +17,6 @@ export interface UserDocument {
     email: string;
     firstName: string;
     lastName: string;
-    pseudoEmail?: string;
     password: string;
     postalAddress: string;
     userName: string;
@@ -25,8 +24,8 @@ export interface UserDocument {
 
 export interface trainingWithPartners {
     address: string;
-    date: Date;
-    hour: Timestamp;
+    date: string;
+    hour: string;
     trainingType: string;
     uid: string;
 }

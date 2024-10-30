@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthUserContext';
 import { collection, deleteDoc, doc, getDocs, getFirestore } from 'firebase/firestore';
+import { getAllTrainingActivities } from './TrainingActivityData';
+import { Activity } from 'lucide-react';
 
 interface Activity {
     id: string;
     date: string;
     hour: string;
     trainingType: string;
-    createdBy: string; // Ajoutez ce champ pour vérifier l'auteur
+    createdBy: string; // Vérification du nom d'auteur
+    userName: string;
 }
 
 const TrainingPartnerList: React.FC = () => {
@@ -24,17 +27,19 @@ const TrainingPartnerList: React.FC = () => {
                     const activitiesSnapshot = await getDocs(activitiesCollection);
                     const activitiesList = activitiesSnapshot.docs.map(doc => {
                         const data = doc.data();
-                        console.log('Fetched data:', data); // Log the fetched data
-                        const trainingData = data.traininWithPartners; // Accéder aux données imbriquées
+                        console.log('Fetched data:', data);
+                        const trainingData = data.trainingWithPartners;
                         return {
+                            userName: authUser.userDocument.userName,
                             id: doc.id,
-                            date: trainingData.date,
-                            hour: trainingData.hour,
-                            trainingType: trainingData.trainingType,
-                            createdBy: data.createdBy,
+                            date: data.date,
+                            hour: data.hour,
+                            trainingType: data.trainingType,
+                            createdBy: data.createdBy || authUser.userDocument.userName, // Utilise le nom de l'utilisateur actuel par défaut
                         };
                     }) as Activity[];
-                    console.log('Fetched activities:', activitiesList); // Log the fetched activities
+                    
+                    console.log('Fetched activities:', activitiesList);
                     const currentDate = new Date();
                     const validActivities = activitiesList.filter(activity => {
                         const activityDate = new Date(activity.date);
@@ -42,7 +47,6 @@ const TrainingPartnerList: React.FC = () => {
                         activityDate.setHours(activityHour, activityMinute);
 
                         if (activityDate < currentDate) {
-                            // Supprimer l'événement passé de Firestore
                             deleteDoc(doc(db, 'users', authUser.uid, 'trainingWithPartners', activity.id));
                             return false;
                         }
@@ -57,9 +61,24 @@ const TrainingPartnerList: React.FC = () => {
                 }
             }
         };
-
         fetchActivities();
     }, [authUser]);
+
+    useEffect(() => {
+        const recupactivites = async () => {
+            try {
+                const externalActivities = await getAllTrainingActivities();
+                console.log("voilà toutes les activités :", externalActivities);
+                setActivities(prevActivities => [...prevActivities, ...externalActivities]);
+            } catch (error) {
+                console.error("Erreur lors de la récupération des activités :", error);
+            }
+        };
+
+        recupactivites();
+    }, []);
+
+    console.log('Activities return:', activities);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -68,13 +87,12 @@ const TrainingPartnerList: React.FC = () => {
     return (
         <div className="flex flex-col grid-cols-2 space-y-3">
             {activities.map(activity => (
-                <div key={activity.id} className="p-4 border rounded shadow bg-gray-200  border-gray-400 bg-white"
-                >
-                    <h2 className="text-lg font-bold pb-4">{authUser.userDocument.userName}</h2>
-                    <div className='flex justify-between'>
-                    <div><div className='font-bold'> Date </div>{activity.date}</div>
-                    <div><div className='font-bold'>Hour </div>{activity.hour}</div>
-                    <div><div className='font-bold'>Training Type </div>{activity.trainingType}</div>
+                <div key={activity.id} className="p-4 border rounded shadow bg-gray-200 border-gray-400 bg-white">
+                    <h2 className="text-lg font-bold pb-4">{activity.userName}</h2>
+                    <div className="flex justify-between">
+                        <div><div className="font-bold">Date</div>{new Date(activity.date).toLocaleDateString()}</div>
+                        <div><div className="font-bold">Hour</div>{activity.hour}</div>
+                        <div><div className="font-bold">Training Type</div>{activity.trainingType}</div>
                     </div>
                 </div>
             ))}

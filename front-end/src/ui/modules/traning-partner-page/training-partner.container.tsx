@@ -11,8 +11,6 @@ import { toast } from 'react-toastify';
 
 
 
-
-
 const saveTrainingPartnersDataToFirestore = async (data: TrainingPartnersFormFieldsType) => {
     const auth = getAuth();
     if (auth.currentUser) {
@@ -27,8 +25,10 @@ const saveTrainingPartnersDataToFirestore = async (data: TrainingPartnersFormFie
             const activityDocRef = doc(activitiesCollection);
 
             await setDoc(activityDocRef, {
-                traininWithPartners: data,
+                trainingWithPartners: data,
                 createdBy: userId, // Ajoutez ce champ pour vérifier l'auteur
+                date: data.date,
+                hour: data.hour,
                 last_update: Timestamp.now(),
             });
 
@@ -74,20 +74,25 @@ export default function TrainingPartnersContainer() {
         } finally {
             setIsLoading(false);
         }
+
     };
 
-    return (
-        <TrainingPartnersView
-            form={{
-                errors,
-                handleSubmit,
-                isLoading,
-                onSubmit,
-                register,
-                control,
-            }}
+    
 
-        />
+    return (
+        <>
+            <TrainingPartnersView
+                form={{
+                    errors,
+                    handleSubmit,
+                    isLoading,
+                    onSubmit,
+                    register,
+                    control,
+                }}
+
+            />
+        </>
     );
 };
 
