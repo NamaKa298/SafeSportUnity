@@ -28,7 +28,6 @@ const TrainingPartnerList: React.FC = () => {
                     const activitiesList = activitiesSnapshot.docs.map(doc => {
                         const data = doc.data();
                         console.log('Fetched data:', data);
-                        const trainingData = data.trainingWithPartners;
                         return {
                             userName: authUser.userDocument.userName,
                             id: doc.id,
@@ -69,7 +68,9 @@ const TrainingPartnerList: React.FC = () => {
             try {
                 const externalActivities = await getAllTrainingActivities();
                 console.log("voilà toutes les activités :", externalActivities);
+                
                 setActivities(prevActivities => [...prevActivities, ...externalActivities]);
+                
             } catch (error) {
                 console.error("Erreur lors de la récupération des activités :", error);
             }
@@ -80,13 +81,22 @@ const TrainingPartnerList: React.FC = () => {
 
     console.log('Activities return:', activities);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+    const sortedActivities = activities.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+
+        // Comparer les dates d'abord
+        if (dateA < dateB) return -1;
+        if (dateA > dateB) return 1;
+
+        // Comparer les heures si les dates sont identiques
+        return a.hour.localeCompare(b.hour);
+    });
+
 
     return (
-        <div className="flex flex-col grid-cols-2 space-y-3">
-            {activities.map(activity => (
+        <div className="flex flex-col grid-cols-2 space-y-3 pb-4">
+            {sortedActivities.map(activity => (
                 <div key={activity.id} className="p-4 border rounded shadow bg-gray-200 border-gray-400 bg-white">
                     <h2 className="text-lg font-bold pb-4">{activity.userName}</h2>
                     <div className="flex justify-between">
