@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "back-end"
+		},
+		{
+			"path": "landing_page"
 		}
 	],
 	"settings": {
