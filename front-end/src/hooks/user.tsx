@@ -28,4 +28,6 @@ export interface trainingWithPartners {
     hour: string;
     trainingType: string;
     uid: string;
+    email: string;
+    userName: string;
 }

@@ -17,7 +17,7 @@ export const getAllTrainingActivities = async () => {
             const activitiesSnapshot = await getDocs(activitiesRef);
             const userData = userDoc.data();
             const userName = userData.userName; // Assure-toi que le champ s'appelle 'userName'
-
+            const email = userData.email;
             
             // Ajouter les activités de cet utilisateur au tableau
             activitiesSnapshot.docs.forEach(activityDoc => {
@@ -30,25 +30,14 @@ export const getAllTrainingActivities = async () => {
                     trainingType: activityData.trainingWithPartners.trainingType,
                     createdBy: userId, // ajouter l'ID utilisateur pour chaque activité
                     userName: userName, // utiliser le nom d'utilisateur récupéré
+                    email: email,
                 });
             });
         }
-    
-    // Trier les activités par date et heure
-    allActivities.sort((a, b) => {
-        const dateA = new Date(a.date);
-        const dateB = new Date(b.date);
         
-        // Comparer d'abord les dates
-        if (dateA < dateB) return -1;
-        if (dateA > dateB) return 1;
-
-        // Si les dates sont identiques, comparer les heures
-        return a.hour.toMillis() - b.hour.toMillis();
-    });
-} catch (error) {
-    console.error("Erreur lors de la récupération des activités d'entraînement pour tous les utilisateurs :", error);
-}
+    } catch (error) {
+        console.error("Erreur lors de la récupération des activités d'entraînement pour tous les utilisateurs :", error);
+    }
     console.log("voilà toutes les activités allActivities:", allActivities);
     return allActivities;
 };
