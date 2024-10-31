@@ -5,12 +5,15 @@ import { getFirestore, collection, query, orderBy, getDocs, deleteDoc, doc } fro
 import { getAuth } from "firebase/auth";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { Button } from "@/ui/design-system/button/button";
 
 export const TrainingView = () => {
   interface TrainingPlan {
     id: string;
     plan: string;
     date: string;
+    sport: string;
+    goal: string;
   }
 
   const [trainingPlans, setTrainingPlans] = useState<TrainingPlan[]>([]);
@@ -27,7 +30,13 @@ export const TrainingView = () => {
           orderBy("date", "desc")
         );
         const querySnapshot = await getDocs(trainingPlanRef);
-        const plans = querySnapshot.docs.map(doc => ({ id: doc.id, plan: doc.data().plan, date: doc.data().date }));
+        const plans = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          plan: doc.data().plan,
+          date: doc.data().date,
+          sport: doc.data().sport,
+          goal: doc.data().goalDistance
+        }));
         setTrainingPlans(plans);
         if (plans.length > 0) {
           setSelectedPlan(typeof plans[0].plan === 'string' ? plans[0].plan : JSON.stringify(plans[0].plan));
@@ -56,40 +65,43 @@ export const TrainingView = () => {
   };
 
   return (
-    <Container className="flex justify-between w-full max-w-screen-xl mx-auto mb-8">
-      <div className="flex flex-col w-1/3 space-y-5">
-        <Typography variant="h2" component="h2">
-          Liste des Plans d'Entraînement
+    <Container className="flex flex-col space-y-8 w-full max-w-screen-xl mx-auto mb-8 px-8">
+      <div className="flex flex-col w-full p-4 bg-primary-400 rounded-lg space-y-5 items-center">
+        <Typography variant="h4" component="h4">
+          Training Plan History
         </Typography>
-        <table className="min-w-full bg-white">
+        <table className="w-full bg-primary-300 rounded">
           <thead>
             <tr>
-              <th className="py-2">Date</th>
-              <th className="py-2">Actions</th>
+              <th className="text-center">Created Date</th>
+              <th className="text-center">Sport</th>
+              <th className="text-center">Goal Distance</th>
             </tr>
           </thead>
           <tbody>
             {trainingPlans.map(plan => (
               <tr key={plan.id} className="border-t">
-                <td className="py-2 cursor-pointer" onClick={() => setSelectedPlan(typeof plan.plan === 'string' ? plan.plan : JSON.stringify(plan.plan))}>
+                <td className="text-center cursor-pointer" onClick={() => setSelectedPlan(typeof plan.plan === 'string' ? plan.plan : JSON.stringify(plan.plan))}>
                   {new Date(plan.date).toLocaleDateString()}
                 </td>
-                <td className="py-2">
-                  <button onClick={() => handleDelete(plan.id)} className="text-red-500">Supprimer</button>
+                <td className="text-center">{plan.sport}</td>
+                <td className="text-center">{plan.goal}</td>
+                <td className="py-2 px-4 text-right">
+                  <Button variant="danger" size="small" action={() => handleDelete(plan.id)}>Delete</Button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="flex flex-col justify-center w-2/3 space-y-5">
-        <Typography variant="h2" component="h2">
-          Plan d'Entraînement
+      <div className="flex flex-col w-full p-4 bg-primary-400 rounded-lg space-y-5">
+        <Typography variant="h3" component="h2">
+         Training Plan
         </Typography>
         {selectedPlan ? (
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{selectedPlan}</ReactMarkdown>
         ) : (
-          <Typography variant="body-lg">Sélectionnez un plan d'entraînement pour l'afficher.</Typography>
+          <Typography variant="body-lg">Go to generate a training plan</Typography>
         )}
       </div>
     </Container>

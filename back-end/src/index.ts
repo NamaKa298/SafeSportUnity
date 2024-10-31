@@ -42,12 +42,14 @@ app.use(express.json());
 
 
 // Fonction pour stocker le plan d'entraînement dans Firebase
-const storeTrainingPlan = async (userId: string, trainingPlan: any) => {
+const storeTrainingPlan = async (userId: string, trainingPlan: any, sport: string, goalDistance: number) => {
     try {
         const trainingPlanRef = firestore.collection(`users/${userId}/UserTrainingPlans`);
         const newTrainingPlan = {
             date: new Date().toISOString(),
-            plan: trainingPlan
+            plan: trainingPlan,
+            sport: sport,
+            goalDistance: goalDistance
         };
         await trainingPlanRef.add(newTrainingPlan);
         console.log('Plan d\'entraînement sauvegardé avec succès.');
@@ -83,6 +85,7 @@ app.post('/generate-plan', async (req, res) => {
         Propose un plan d'entraînement détaillé jour par jour pendant 3 mois pour atteindre cet objectif.
         prend bien en compte le poids, la taille, l'âge de l'utilisateur et sa distance de course actuelle dans le plan d'entraînement.
         Si tu penses que l'objectif est trop ambitieux, suggère et propose un objectif plus réaliste.
+        Attention au clacul des vitesses et des allures moyennes dans le plan d'entraînement par rapport à la distance de course.
         formate le texte en markdown titre en gras, double saut de ligne entre les titres, sous-titre en italique et liste à puce.
         `;
 
@@ -110,7 +113,7 @@ app.post('/generate-plan', async (req, res) => {
             // console.log('Plan d\'entraînement généré avec succès:', (msg.content[0] as any)?.text);
             console.log('Plan d\'entraînement généré avec succès:', (msg.content[0] as any)?.text);
          // Stocker le plan dans Firestore
-         await storeTrainingPlan(uid, (msg.content[0] as any)?.text);
+         await storeTrainingPlan(uid, (msg.content[0] as any)?.text, sport, goalDistance);
         
         // Retourner le plan généré au frontend
         res.json({ success: true, trainingPlan: (msg.content[0] as any)?.text });
