@@ -13,6 +13,7 @@ interface Props {
     id: string;
     required?: boolean;
     isAutoCompleted?: boolean;
+    value?: string;
 }
 
 export const Input = ({
@@ -23,6 +24,7 @@ export const Input = ({
     onChange,
     register,
     errors,
+    value,
     errorMsg = "Tu dois renseigner ce champ",
     id,
     required = true,

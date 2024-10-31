@@ -18,7 +18,6 @@ export const getAllTrainingActivities = async () => {
             const userData = userDoc.data();
             const userName = userData.userName; // Assure-toi que le champ s'appelle 'userName'
             const email = userData.email;
-            
             // Ajouter les activités de cet utilisateur au tableau
             activitiesSnapshot.docs.forEach(activityDoc => {
                 const activityData = activityDoc.data();

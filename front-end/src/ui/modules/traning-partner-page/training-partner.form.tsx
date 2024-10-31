@@ -6,6 +6,7 @@ import { useState } from "react";
 
 interface Props {
     form: FormsType;
+    address: string;
 }
 
 export const TrainingPartnersForm = ({ form }: Props) => {
@@ -14,38 +15,35 @@ export const TrainingPartnersForm = ({ form }: Props) => {
     const [addressSuggestions, setAddressSuggestions] = useState<string[]>([]);
     const [address, setAddress] = useState('');
 
-    const fetchAddressSuggestions = async (query: string) => {
-        try {
-            const response = await fetch(
-                `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&limit=5`
-            );
-
-            if (!response.ok) {
-                throw new Error('Erreur lors de la récupération des suggestions');
-            }
-
-            const data = await response.json();
-            /*eslint-disable-next-line*/
-            setAddressSuggestions(data.features.map((feature: any) => feature.properties.label));
-        } catch (error) {
-            console.error(error);
+    const handleAddressChange = async (query: string) => {
+        console.log("Recherche d'adresse pour :", query); // Ajoutez
+        if (query.length < 3) {
             setAddressSuggestions([]);
+            return; // Ne pas faire de requête si moins de 3 caractères
         }
-    };
-
-    const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const query = e.target.value;
-        setAddress(query);
-        if (query.length > 2) {
-            fetchAddressSuggestions(query);
-        } else {
+        try {
+            const response = await fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&limit=5`);
+            console.log("Réponse de l'API :", response); // Ajoutez ceci pour vérifier la réponse
+            const data = await response.json();
+            console.log("Données récupérées de l'API :", data); // Vérifiez les données ici
+            if (data.features) {
+                const options = data.features.map((item: any) => ({
+                    value: item.properties.label,
+                    label: item.properties.label,
+                }));
+                setAddressSuggestions(options);
+            } else {
+                setAddressSuggestions([]); // Vider les suggestions si aucune donnée
+            }
+        } catch (error) {
+            console.error("Erreur lors de la récupération des adresses :", error);
             setAddressSuggestions([]);
         }
     };
 
     const handleSuggestionClick = (suggestion: string) => {
         setAddress(suggestion);
-        setAddressSuggestions([]);
+        setAddressSuggestions([]); // Vider les suggestions après sélection
     };
 
     return (
@@ -57,12 +55,15 @@ export const TrainingPartnersForm = ({ form }: Props) => {
                         isLoading={isLoading}
                         placeholder="Place of the sport activity"
                         type="text"
-                        onChange={handleAddressChange}
+                        value={address}
+                        onChange={(e) => {
+                            setAddress(e.target.value);
+                            handleAddressChange(e.target.value);
+                        }}
                         register={register}
                         errors={errors}
                         errorMsg="Address is required"
                         id="address"
-                        isAutoCompleted={true}
                     />
                     {addressSuggestions.length > 0 && (
                         <ul className="suggestions-list">
