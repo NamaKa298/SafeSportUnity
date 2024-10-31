@@ -29,4 +29,6 @@ export interface trainingWithPartners {
     date: Date;
     hour: Timestamp;
     trainingType: string;
+    email: string;
+    userName: string;
 }

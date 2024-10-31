@@ -3,6 +3,9 @@ import { useAuth } from '@/context/AuthUserContext';
 import { collection, deleteDoc, doc, getDocs, getFirestore } from 'firebase/firestore';
 import { getAllTrainingActivities } from './TrainingActivityData';
 import { Activity } from 'lucide-react';
+import { handleEmailClick } from './component/envoi-email';
+import { Button } from '@/components/ui/button';
+
 
 interface Activity {
     id: string;
@@ -11,6 +14,7 @@ interface Activity {
     trainingType: string;
     createdBy: string; // Vérification du nom d'auteur
     userName: string;
+    email: string;
 }
 
 const TrainingPartnerList: React.FC = () => {
@@ -30,6 +34,7 @@ const TrainingPartnerList: React.FC = () => {
                         console.log('Fetched data:', data);
                         return {
                             userName: authUser.userDocument.userName,
+                            email: authUser.userDocument.email, // Ajoutez l'adresse e-mail ici
                             id: doc.id,
                             date: data.date,
                             hour: data.hour,
@@ -37,7 +42,7 @@ const TrainingPartnerList: React.FC = () => {
                             createdBy: data.createdBy || authUser.userDocument.userName, // Utilise le nom de l'utilisateur actuel par défaut
                         };
                     }) as Activity[];
-                    
+
                     console.log('Fetched activities:', activitiesList);
                     const currentDate = new Date();
                     const validActivities = activitiesList.filter(activity => {
@@ -68,11 +73,14 @@ const TrainingPartnerList: React.FC = () => {
             try {
                 const externalActivities = await getAllTrainingActivities();
                 console.log("voilà toutes les activités :", externalActivities);
-                
+
                 setActivities(prevActivities => [...prevActivities, ...externalActivities]);
-                
+
             } catch (error) {
                 console.error("Erreur lors de la récupération des activités :", error);
+            }
+            finally {
+                setLoading(false);
             }
         };
 
@@ -93,7 +101,6 @@ const TrainingPartnerList: React.FC = () => {
         return a.hour.localeCompare(b.hour);
     });
 
-
     return (
         <div className="flex flex-col grid-cols-2 space-y-3 pb-4">
             {sortedActivities.map(activity => (
@@ -104,6 +111,15 @@ const TrainingPartnerList: React.FC = () => {
                         <div><div className="font-bold">Hour</div>{activity.hour}</div>
                         <div><div className="font-bold">Training Type</div>{activity.trainingType}</div>
                     </div>
+                    {activity.email !== authUser.userDocument.email && ( // Vérifiez si ce n'est pas l'utilisateur actuel
+
+                    <Button 
+                        onClick={() => handleEmailClick(activity.userName, activity.email)} // Passez l'objet activity complet
+                        className="mt-2 p-2 bg-primary text-white rounded "
+                    >
+                        Contact
+                        </Button>
+                    )}
                 </div>
             ))}
         </div>
