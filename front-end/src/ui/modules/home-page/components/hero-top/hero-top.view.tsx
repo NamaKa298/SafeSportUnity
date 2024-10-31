@@ -23,7 +23,7 @@ export const HeroTopView = () => {
     return (
         <div className="relative w-screen m-0">
             {/* Carrousel avec une hauteur définie */}
-            <div className="relative w-screen h-[300px] m-0 p-0">
+            <div className="relative w-screen h-[410px] m-0 p-0">
                 <div
                     className={`absolute top-0 left-0 w-full h-full transition-opacity duration-2000 ${currentIndex === 1 ? 'opacity-100' : 'opacity-0'
                         }`}
@@ -93,7 +93,6 @@ export const HeroTopView = () => {
                     </Typography>
                 </div>
             </Container>
-            <hr/>
 
 
 
