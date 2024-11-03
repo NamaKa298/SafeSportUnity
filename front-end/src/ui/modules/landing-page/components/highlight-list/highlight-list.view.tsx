@@ -63,7 +63,7 @@ export const HighLightListView = () => {
           </div>
           <div className="relative inline-block">
               <Button variant="secondary" baseUrl="/" icon={{icon: RiArrowRightLine}} iconPosition="right">
-                try and find your !
+                try and find your partner and more!
               </Button>
           </div>
         </div>
