@@ -11,6 +11,7 @@ export interface AppLinks {
     baseUrl: string;
     type: LinkType;
     icon?: IconType;
+    link?: string;
 }
  
 export interface FooterLinks {
