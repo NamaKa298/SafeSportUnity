@@ -16,8 +16,12 @@ export const LoginView = ({form}: Props) => {
             <div className="flex items-center">
                 {/* rajout image */}
                 <div className="relative w-full h-full">
-                    <Image fill src="/assets/images/femme_treaking.jpg" alt="login" objectFit="contain" // Utilisez objectFit pour conserver les proportions
-                        className="object-contain" />
+                    <Image
+                        fill
+                        src="/assets/images/femme_treaking.jpg"
+                        alt="login"
+                        objectFit="cover" // Utilisez objectFit pour conserver les proportions
+                        className="object-contain rounded" />
                 </div>
             </div>
             <div className="flex items-center">

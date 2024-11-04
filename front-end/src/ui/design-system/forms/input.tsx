@@ -32,7 +32,7 @@ export const Input = ({
         <div className="space-y-2">
             {label && (
                 <Typography
-                    variant="caption4"
+                    variant="caption1"
                     component="div"
                     theme={errors[id] ? "danger" : "gray-600"}>
                     {label}
