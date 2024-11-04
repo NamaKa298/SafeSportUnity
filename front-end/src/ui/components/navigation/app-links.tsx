@@ -2,7 +2,6 @@
 
 import { AppLinks } from "@/types/app-links";
 import { RiInstagramFill, RiLinkedinFill, RiTwitterFill } from "react-icons/ri";
-
 const footerLogoLinks: AppLinks[] = [
     {
         label: "COMPANY",
@@ -26,7 +25,7 @@ const footerRessourcesLinks: AppLinks[] = [
 const footerAboutLinks: AppLinks[] = [
         {
         label: "About Us",
-        baseUrl: "/",
+        baseUrl: "/landing_page",
         type: "internal",
     },
     {
