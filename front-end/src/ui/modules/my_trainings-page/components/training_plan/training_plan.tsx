@@ -66,11 +66,11 @@ export const TrainingView = () => {
 
   return (
     <Container className="flex flex-col space-y-8 w-full max-w-screen-xl mx-auto mb-8 px-8">
-      <div className="flex flex-col w-full p-4 bg-primary-400 rounded-lg space-y-5 items-center">
+      <div className="flex flex-col w-full p-4 bg-primary-300 rounded-lg space-y-5 items-center">
         <Typography variant="h4" component="h4">
           Training Plan History
         </Typography>
-        <table className="w-full bg-primary-300 rounded">
+        <table className="w-full bg-primary-200 rounded">
           <thead>
             <tr>
               <th className="text-center">Created Date</th>
@@ -94,10 +94,12 @@ export const TrainingView = () => {
           </tbody>
         </table>
       </div>
-      <div className="flex flex-col w-full p-4 bg-primary-400 rounded-lg space-y-5">
+      <div className="flex flex-col w-full p-4 bg-primary-400 rounded-lg space-y-5 items-center">
         <Typography variant="h3" component="h2">
          Training Plan
         </Typography>
+        </div>
+        <div className="flex flex-col w-full p-4 bg-primary-300 rounded-lg space-y-5">
         {selectedPlan ? (
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{selectedPlan}</ReactMarkdown>
         ) : (
