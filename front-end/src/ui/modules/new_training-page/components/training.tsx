@@ -90,7 +90,7 @@ export const NewTrainingView = () => {
           <div>
             <Label htmlFor="age">Your Age</Label>
             <Input
-              className="bg-primary-300 placeholder-gray mt-2"
+              className="bg-white border-none shadow-lg placeholder-gray mt-2 text-gray"
               id="age"
               type="number"
               min="0"
@@ -101,10 +101,10 @@ export const NewTrainingView = () => {
           <div>
             <Label htmlFor="sex">Your Sex</Label>
             <Select onValueChange={(value: string) => setSex(value)}>
-              <SelectTrigger className="bg-primary-300 mt-2">
+              <SelectTrigger className="bg-white border-none shadow-lg mt-2">
                 <SelectValue placeholder="Select your sex" />
               </SelectTrigger>
-              <SelectContent className="bg-primary-300">
+              <SelectContent className="bg-white border-none">
                 <SelectItem value="male">Male</SelectItem>
                 <SelectItem value="female">Female</SelectItem>
               </SelectContent>
@@ -113,7 +113,7 @@ export const NewTrainingView = () => {
           <div>
             <Label htmlFor="height">Your Height (in cm)</Label>
             <Input
-              className="bg-primary-300 placeholder-gray mt-2"
+              className="bg-white border-none shadow-lg placeholder-gray mt-2 text-gray"
               id="height"
               type="number"
               min="0"
@@ -124,7 +124,7 @@ export const NewTrainingView = () => {
           <div>
             <Label htmlFor="weight">Your Weight (in kg)</Label>
             <Input
-              className="bg-primary-300 placeholder-gray mt-2"
+              className="bg-white border-none shadow-lg placeholder-gray mt-2 text-gray"
               id="weight"
               type="number"
               min="0"
@@ -159,10 +159,10 @@ export const NewTrainingView = () => {
       </CardHeader>
       <CardContent>
         <Select onValueChange={(value: string) => setSport(value)}>
-          <SelectTrigger className="bg-primary-300">
+          <SelectTrigger className="bg-white border-none shadow-lg placeholder-gray mt-2 text-gray">
             <SelectValue placeholder="Sport select" />
           </SelectTrigger>
-          <SelectContent className="bg-primary-300">
+          <SelectContent className="bg-white border-none">
             <SelectItem value="running">Running</SelectItem>
             <SelectItem value="cycling">Cycling</SelectItem>
           </SelectContent>
@@ -186,7 +186,7 @@ export const NewTrainingView = () => {
       <CardContent>
         <Label htmlFor="weeklyDistance">How many kilometers per week ?</Label>
         <Input
-          className="bg-primary-300 placeholder-gray mt-2"
+          className="bg-white border-none shadow-lg placeholder-gray mt-2 text-gray"
           id="weeklyDistance"
           type="number"
           step="0.01"
@@ -220,7 +220,7 @@ export const NewTrainingView = () => {
           <div>
             <Label htmlFor="pace">Average Pace (min/km)</Label>
             <Input
-              className="bg-primary-300 placeholder-gray mt-2"
+              className="bg-white border-none shadow-lg placeholder-gray mt-2 text-gray"
               id="pace"
               type="text"
               pattern="[0-9]{1,2}:[0-5][0-9]"
@@ -234,7 +234,7 @@ export const NewTrainingView = () => {
           <div>
             <Label htmlFor="speed">Average Speed (km/h)</Label>
             <Input
-              className="bg-primary-300 placeholder-gray mt-2"
+              className="bg-white border-none shadow-lg placeholder-gray mt-2 text-gray"
               id="speed"
               type="number"
               step="0.1"
@@ -267,10 +267,10 @@ export const NewTrainingView = () => {
       </CardHeader>
       <CardContent>
         <Select onValueChange={(value: string) => setGoalDistance(value)}>
-          <SelectTrigger className="bg-primary-300">
+          <SelectTrigger className="bg-white border-none shadow-lg placeholder-gray mt-2 text-gray">
             <SelectValue placeholder="Goals select" />
           </SelectTrigger>
-          <SelectContent className="bg-primary-300">
+          <SelectContent className="bg-white border-none">
             {sport === 'running' ? (
               <>
                 <SelectItem value="5 km">5 km</SelectItem>
@@ -306,10 +306,10 @@ export const NewTrainingView = () => {
       </CardHeader>
       <CardContent>
         <Select onValueChange={(value: string) => setGoalType(value)}>
-          <SelectTrigger className="bg-primary-300">
+          <SelectTrigger className="bg-white border-none shadow-lg placeholder-gray mt-2 text-gray">
             <SelectValue placeholder="Goals objectives select" />
           </SelectTrigger>
-          <SelectContent className="bg-primary-300">
+          <SelectContent className="bg-white border-none">
             <SelectItem value="finisher">Finisher</SelectItem>
             <SelectItem value="finisher with a time goal">Finisher with a time goal</SelectItem>
           </SelectContent>
