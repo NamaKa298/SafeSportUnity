@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthUserContext';
 import { collection, deleteDoc, doc, getDocs, getFirestore } from 'firebase/firestore';
 import { getAllTrainingActivities } from './TrainingActivityData';
-import { Activity } from 'lucide-react';
-import { handleEmailClick } from './component/envoi-email';
 import { Button } from '@/components/ui/button';
-
+import { handleEmailClick } from './component/envoi-email';
 
 interface Activity {
     id: string;
@@ -31,33 +29,23 @@ const TrainingPartnerList: React.FC = () => {
                     const activitiesSnapshot = await getDocs(activitiesCollection);
                     const activitiesList = activitiesSnapshot.docs.map(doc => {
                         const data = doc.data();
-                        console.log('Fetched data:', data);
                         return {
                             userName: authUser.userDocument.userName,
-                            email: authUser.userDocument.email, // Ajoutez l'adresse e-mail ici
+                            email: authUser.userDocument.email,
                             id: doc.id,
                             date: data.date,
                             hour: data.hour,
                             trainingType: data.trainingType,
-                            createdBy: data.createdBy || authUser.userDocument.userName, // Utilise le nom de l'utilisateur actuel par défaut
+                            createdBy: data.createdBy || authUser.userDocument.userName,
                         };
                     }) as Activity[];
 
-                    console.log('Fetched activities:', activitiesList);
-                    const currentDate = new Date();
-                    const validActivities = activitiesList.filter(activity => {
-                        const activityDate = new Date(activity.date);
-                        const [activityHour, activityMinute] = activity.hour.split(':').map(Number);
-                        activityDate.setHours(activityHour, activityMinute);
+                    // Filtrer les activités vides
+                    const filteredActivitiesList = activitiesList.filter(activity => 
+                        activity.date && activity.hour && activity.trainingType
+                    );
 
-                        if (activityDate < currentDate) {
-                            deleteDoc(doc(db, 'users', authUser.uid, 'trainingWithPartners', activity.id));
-                            return false;
-                        }
-                        return true;
-                    });
-
-                    setActivities(validActivities);
+                    setActivities(filteredActivitiesList);
                 } catch (error) {
                     console.error('Error fetching activities:', error);
                 } finally {
@@ -74,12 +62,21 @@ const TrainingPartnerList: React.FC = () => {
                 const externalActivities = await getAllTrainingActivities();
                 console.log("voilà toutes les activités :", externalActivities);
 
-                setActivities(prevActivities => [...prevActivities, ...externalActivities]);
+                // Filtrer les activités vides
+                const filteredExternalActivities = externalActivities.filter(activity => 
+                    activity.date && activity.hour && activity.trainingType
+                );
+
+                // Utiliser un ensemble pour éviter les doublons
+                const existingIds = new Set(activities.map(activity => activity.id));
+                const newActivities = filteredExternalActivities.filter(activity => !existingIds.has(activity.id));
+
+                // Mettre à jour l'état avec les nouvelles activités
+                setActivities(prevActivities => [...prevActivities, ...newActivities]);
 
             } catch (error) {
                 console.error("Erreur lors de la récupération des activités :", error);
-            }
-            finally {
+            } finally {
                 setLoading(false);
             }
         };
@@ -87,9 +84,25 @@ const TrainingPartnerList: React.FC = () => {
         recupactivites();
     }, []);
 
-    console.log('Activities return:', activities);
+    // Vérification des dates et suppression des activités expirées
+    const currentDate = new Date();
+    const validActivities = activities.filter(activity => {
+        const activityDate = new Date(activity.date);
+        const [activityHour, activityMinute] = activity.hour.split(':').map(Number);
+        activityDate.setHours(activityHour, activityMinute);
 
-    const sortedActivities = activities.sort((a, b) => {
+        if (activityDate < currentDate) {
+            // Supprimer l'activité de la base de données
+            const db = getFirestore();
+            deleteDoc(doc(db, 'users', authUser.uid, 'trainingWithPartners', activity.id))
+                .then(() => console.log(`Activité supprimée : ${activity.id}`))
+                .catch(error => console.error(`Erreur lors de la suppression de l'activité : ${error}`));
+            return false; // Ne pas inclure l'activité dans la liste
+        }
+        return true; // Inclure l'activité dans la liste
+    });
+
+    const sortedActivities = validActivities.sort((a, b) => {
         const dateA = new Date(a.date);
         const dateB = new Date(b.date);
 
@@ -111,13 +124,12 @@ const TrainingPartnerList: React.FC = () => {
                         <div><div className="font-bold">Hour</div>{activity.hour}</div>
                         <div><div className="font-bold">Training Type</div>{activity.trainingType}</div>
                     </div>
-                    {activity.email !== authUser.userDocument.email && ( // Vérifiez si ce n'est pas l'utilisateur actuel
-
-                    <Button 
-                        onClick={() => handleEmailClick(activity.userName, activity.email)} // Passez l'objet activity complet
-                        className="mt-2 p-2 bg-primary text-white rounded "
-                    >
-                        Contact
+                    {activity.email !== authUser.userDocument.email && (
+                        <Button 
+                            onClick={() => handleEmailClick(activity.userName, activity.email)}
+                            className="mt-2 p-2 bg-primary text-white rounded "
+                        >
+                            Contact
                         </Button>
                     )}
                 </div>
