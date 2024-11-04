@@ -77,11 +77,11 @@ export const NewTrainingView = () => {
   };
 
   const renderUserInfo = () => (
-    <Card className="bg-gray-500">
+    <Card className="bg-primary-200 border-primary-200 shadow-lg">
       <CardHeader>
         <CardTitle>
           <Typography variant="h5" theme="black">
-            Tell us more about yourself:
+            Tell us more about yourself :
           </Typography>
         </CardTitle>
       </CardHeader>
@@ -90,7 +90,7 @@ export const NewTrainingView = () => {
           <div>
             <Label htmlFor="age">Your Age</Label>
             <Input
-              className="bg-primary-300 placeholder-gray"
+              className="bg-primary-300 placeholder-gray mt-2"
               id="age"
               type="number"
               min="0"
@@ -101,7 +101,7 @@ export const NewTrainingView = () => {
           <div>
             <Label htmlFor="sex">Your Sex</Label>
             <Select onValueChange={(value: string) => setSex(value)}>
-              <SelectTrigger className="bg-primary-300">
+              <SelectTrigger className="bg-primary-300 mt-2">
                 <SelectValue placeholder="Select your sex" />
               </SelectTrigger>
               <SelectContent className="bg-primary-300">
@@ -113,7 +113,7 @@ export const NewTrainingView = () => {
           <div>
             <Label htmlFor="height">Your Height (in cm)</Label>
             <Input
-              className="bg-primary-300 placeholder-gray"
+              className="bg-primary-300 placeholder-gray mt-2"
               id="height"
               type="number"
               min="0"
@@ -124,7 +124,7 @@ export const NewTrainingView = () => {
           <div>
             <Label htmlFor="weight">Your Weight (in kg)</Label>
             <Input
-              className="bg-primary-300 placeholder-gray"
+              className="bg-primary-300 placeholder-gray mt-2"
               id="weight"
               type="number"
               min="0"
@@ -149,11 +149,11 @@ export const NewTrainingView = () => {
 
 
   const renderSportSelection = () => (
-    <Card className="bg-gray-500">
+    <Card className="bg-primary-200 border-primary-200 shadow-lg">
       <CardHeader>
         <CardTitle>
           <Typography variant="h5" theme="black">
-            What sport do you want to establish a training plan for?
+            What sport do you want to establish a training plan for ?
           </Typography>
         </CardTitle>
       </CardHeader>
@@ -175,18 +175,18 @@ export const NewTrainingView = () => {
   );
 
   const renderWeeklyRoutine = () => (
-    <Card className="bg-gray-500">
+    <Card className="bg-primary-200 border-primary-200 shadow-lg">
       <CardHeader>
         <CardTitle>
           <Typography variant="h5" theme="black">
-            Tell us about your weekly {sport} routine:
+            Tell us about your weekly {sport} routine :
           </Typography>
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <Label htmlFor="weeklyDistance">How many kilometers per week?</Label>
+        <Label htmlFor="weeklyDistance">How many kilometers per week ?</Label>
         <Input
-          className="bg-primary-300 placeholder-gray"
+          className="bg-primary-300 placeholder-gray mt-2"
           id="weeklyDistance"
           type="number"
           step="0.01"
@@ -207,7 +207,7 @@ export const NewTrainingView = () => {
   );
 
   const renderPaceOrSpeed = () => (
-    <Card className="bg-gray-500">
+    <Card className="bg-primary-200 border-primary-200 shadow-lg">
       <CardHeader>
         <CardTitle>
           <Typography variant="h5" theme="black">
@@ -220,7 +220,7 @@ export const NewTrainingView = () => {
           <div>
             <Label htmlFor="pace">Average Pace (min/km)</Label>
             <Input
-              className="bg-primary-300 placeholder-gray"
+              className="bg-primary-300 placeholder-gray mt-2"
               id="pace"
               type="text"
               pattern="[0-9]{1,2}:[0-5][0-9]"
@@ -234,7 +234,7 @@ export const NewTrainingView = () => {
           <div>
             <Label htmlFor="speed">Average Speed (km/h)</Label>
             <Input
-              className="bg-primary-300 placeholder-gray"
+              className="bg-primary-300 placeholder-gray mt-2"
               id="speed"
               type="number"
               step="0.1"
@@ -257,11 +257,11 @@ export const NewTrainingView = () => {
   );
 
   const renderGoalDistance = () => (
-    <Card className="bg-gray-500">
+    <Card className="bg-primary-200 border-primary-200 shadow-lg">
       <CardHeader>
         <CardTitle>
           <Typography variant="h5" theme="black">
-            What distance do you want to train for?
+            What distance do you want to train for ?
           </Typography>
         </CardTitle>
       </CardHeader>
@@ -296,7 +296,7 @@ export const NewTrainingView = () => {
   );
 
   const renderGoalType = () => (
-    <Card className="bg-gray-500">
+    <Card className="bg-primary-200 border-primary-200 shadow-lg">
       <CardHeader>
         <CardTitle>
           <Typography variant="h5" theme="black">
@@ -377,7 +377,7 @@ export const NewTrainingView = () => {
   );
 
   const renderTrainingDaysSelection = () => (
-    <Card className="bg-gray-500">
+    <Card className="bg-primary-200 border-primary-200 shadow-lg">
       <CardHeader>
         <CardTitle>
           <Typography variant="h5" theme="black">
@@ -387,7 +387,7 @@ export const NewTrainingView = () => {
       </CardHeader>
       <CardContent>
         {daysOfWeek.map((day) => (
-          <div key={day} className="flex items-center space-x-2">
+          <div key={day} className="flex items-center space-x-2 pb-4">
             <Checkbox
               id={`training-day-${day}`}
               checked={trainingDays.includes(day)}
@@ -404,17 +404,17 @@ export const NewTrainingView = () => {
   );
 
   const renderLongRunDaysSelection = () => (
-    <Card className="bg-gray-500">
+    <Card className="bg-primary-200 border-primary-200 shadow-lg">
       <CardHeader>
         <CardTitle>
           <Typography variant="h5" theme="black">
-            Which days are preferable for long training sessions?
+            Which days are preferable for long training sessions ?
           </Typography>
         </CardTitle>
       </CardHeader>
       <CardContent>
         {daysOfWeek.map((day) => (
-          <div key={day} className="flex items-center space-x-2">
+          <div key={day} className="flex items-center space-x-2 pb-4">
             <Checkbox
               id={`long-run-day-${day}`}
               checked={longRunDays.includes(day)}
@@ -488,7 +488,7 @@ export const NewTrainingView = () => {
   };
 
   const renderSummary = () => (
-    <Card className="bg-gray-500">
+    <Card className="bg-primary-200 border-primary-200 shadow-lg">
       <CardHeader>
         <CardTitle>
           <Typography variant="h5" theme="black">
@@ -500,39 +500,39 @@ export const NewTrainingView = () => {
         <Typography variant="caption1">
           Your personnal profile :
         </Typography>
-        <p><strong>Age:</strong> {age}</p>
-        <p><strong>Sex:</strong> {sex}</p>
-        <p><strong>Height:</strong> {height} cm</p>
-        <p><strong>Weight:</strong> {weight} kg</p>
+        <p><strong>Age :</strong> {age}</p>
+        <p><strong>Sex :</strong> {sex}</p>
+        <p><strong>Height :</strong> {height} cm</p>
+        <p><strong>Weight :</strong> {weight} kg</p>
         <br />
         <Typography variant="caption1">
           Your current <strong>{sport}</strong> level :
         </Typography>
-        <p><strong>Weekly distance:</strong> {weeklyDistance} km</p>
+        <p><strong>Weekly distance :</strong> {weeklyDistance} km</p>
         {sport === 'running' ? (
-          <p><strong>Average pace:</strong> {pace} min/km</p>
+          <p><strong>Average pace :</strong> {pace} min/km</p>
         ) : (
-          <p><strong>Average speed:</strong> {speed} km/h</p>
+          <p><strong>Average speed :</strong> {speed} km/h</p>
         )}
 
         <hr className="my-4" />
         <Typography variant="caption1">
           Your personnal goals :
         </Typography>
-        <p><strong>distance:</strong> {goalDistance}</p>
-        <p><strong>type:</strong> {goalType}</p>
+        <p><strong>distance :</strong> {goalDistance}</p>
+        <p><strong>type :</strong> {goalType}</p>
         {goalType === 'finisher with a time goal' && (
           <>
-            <p><strong>Goal finish time:</strong> {goalTime}</p>
+            <p><strong>Goal finish time :</strong> {goalTime}</p>
             {sport === 'running' ? (
-              <p><strong>Goal average pace:</strong> {goalPace} min/km</p>
+              <p><strong>Goal average pace :</strong> {goalPace} min/km</p>
             ) : (
-              <p><strong>Goal average speed:</strong> {goalPace} km/h</p>
+              <p><strong>Goal average speed :</strong> {goalPace} km/h</p>
             )}
           </>
         )}
-        <p><strong>Training days:</strong> {trainingDays.join(', ')}</p>
-        <p><strong>Preferred long run days:</strong> {longRunDays.join(', ')}</p>
+        <p><strong>Training days :</strong> {trainingDays.join(', ')}</p>
+        <p><strong>Preferred long run days :</strong> {longRunDays.join(', ')}</p>
         <Button size="small" action={() => {
           validateLongRunDays();
           generateTrainingPlan();
