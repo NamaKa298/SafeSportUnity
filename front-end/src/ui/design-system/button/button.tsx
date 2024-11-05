@@ -22,6 +22,7 @@ interface Props {
     type?: "button" | "submit";
     fullWidth?: boolean;
     style?: React.CSSProperties;
+    className?: string;
 }
 
 export const Button = ({
