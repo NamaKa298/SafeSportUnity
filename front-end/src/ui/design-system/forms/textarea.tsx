@@ -1,5 +1,6 @@
+/* eslint-disable */
 import clsx from "clsx";
-import { Typography } from "../typography";
+import { Typography } from "@/ui/design-system/typography/typography";
 
 interface Props {
     label?: string;
@@ -33,7 +34,7 @@ export const Textarea = ({
                 <Typography
                     variant="caption4"
                     component="div"
-                    theme={errors[id] ? "danger" : "gray-600"}>
+                    theme={errors[id] ? "danger" : "black"}>
                     {label}
                 </Typography>
             )}

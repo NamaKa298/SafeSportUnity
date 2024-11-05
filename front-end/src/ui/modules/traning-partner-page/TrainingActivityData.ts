@@ -4,7 +4,7 @@ import { getFirestore } from 'firebase/firestore';
 export const getAllTrainingActivities = async () => {
     const db = getFirestore();
     const usersRef = collection(db, "users");
-    const allActivities = [];
+    const allActivities: Array<{ id: string; date: string; hour: string; trainingType: string; createdBy: string; userName: string; email: string }> = [];
 
     try {
         // Récupérer tous les utilisateurs

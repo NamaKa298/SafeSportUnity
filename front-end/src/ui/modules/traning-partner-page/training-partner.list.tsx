@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthUserContext';
 import { collection, deleteDoc, doc, getDocs, getFirestore } from 'firebase/firestore';

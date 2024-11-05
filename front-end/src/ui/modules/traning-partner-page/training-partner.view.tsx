@@ -8,13 +8,13 @@ import { Container } from "@/ui/components/container/container";
 
 interface Props {
     form: FormsType;
+    address: string;
 }
 
 
 const MapWithNoSSR = dynamic(() => import('@/ui/modules/traning-partner-page/component/Maps'), {
     ssr: false,
 });
-
 export const TrainingPartnersView = ({ form }: Props) => {
     return (
         <Container>
@@ -28,7 +28,7 @@ export const TrainingPartnersView = ({ form }: Props) => {
                         <MapWithNoSSR />
                         {/* Appel du composant Map */}
                     </div>
-                    <TrainingPartnersForm form={form} />
+                    <TrainingPartnersForm form={form} address={""} />
                 </div>
                 <div className="col-span-1 gap-6 ml-30">
                     <ActivityList />
