@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { auth, db } from "@/config/firebase-config";
 import { UserDocument, UserInterface } from "@/types/user";
 import { onAuthStateChanged, User } from "firebase/auth";

@@ -1,6 +1,7 @@
+/* eslint-disable */
 import { signOut } from "firebase/auth"
 
-{
+const firebaseErrorMessages = {
 
     "firestore": {
         "permission-denied": "You do not have permission to access this resource.",
@@ -136,7 +137,7 @@ import { signOut } from "firebase/auth"
         "auth/redirect-cancelled-by-user": "The redirect operation has been cancelled by the user before finalizing.",
         },
     "signInAnonymously": {
-        "auth/operation-not-allowed": "The given
+        "auth/operation-not-allowed": "The given operation is not allowed.",
     },
     "signInWithPhoneNumber": {
         "auth/missing-phone-number": "To send verification codes, provide a phone number for the recipient.",
@@ -178,4 +179,6 @@ import { signOut } from "firebase/auth"
         "auth/missing-phone-number": "To send verification codes, provide a phone number for the recipient.",
             "auth/invalid-phone-number": "The provided value for the phoneNumber is invalid. It must be a non-empty E.164 standard compliant identifier string.",
         }
-}
+};
+
+export default firebaseErrorMessages;

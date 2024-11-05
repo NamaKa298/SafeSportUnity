@@ -2,7 +2,7 @@ import { LinkTypes } from "@/lib/link-type"
 import { Container } from "@/ui/components/container/container"
 import { Button } from "@/ui/design-system/button/button"
 import { Logo } from "@/ui/design-system/logo/logo"
-import { Typography } from "@/ui/design-system/typography"
+import { Typography } from "@/ui/design-system/typography/typography"
 import Image from "next/image"
 
 export const SlackView = () => {

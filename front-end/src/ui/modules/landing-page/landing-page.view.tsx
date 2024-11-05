@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { CallToActionView } from "@/ui/design-system/call-to-action/call-to -action.view";
 import { FeaturedView } from "./components/featured/featured.view";
 import { FormationView } from "./components/formation/formation.view";

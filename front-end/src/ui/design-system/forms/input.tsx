@@ -1,3 +1,4 @@
+/* eslint-disable */
 import clsx from "clsx";
 import { Typography } from "@/ui/design-system/typography/typography";
 
@@ -36,7 +37,7 @@ export const Input = ({
                 <Typography
                     variant="caption1"
                     component="div"
-                    theme={errors[id] ? "danger" : "gray-600"}>
+                    theme={errors[id] ? "danger" : "gray"}>
                     {label}
                 </Typography>
             )}

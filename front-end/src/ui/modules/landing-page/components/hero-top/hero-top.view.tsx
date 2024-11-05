@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Container } from "@/ui/components/container/container";
-import { Typography } from "@/ui/design-system/typography";
+import { Typography } from "@/ui/design-system/typography/typography";
 
 export const HeroTopView = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
