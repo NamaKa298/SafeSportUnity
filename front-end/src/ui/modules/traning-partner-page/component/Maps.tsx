@@ -11,7 +11,7 @@ L.Icon.Default.mergeOptions({
     shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
 });
 
-const Map = () => {
+const Map = ({markers, setMarkers}) => {
 
     const [coords, setCoords] = useState([43.6000611, 1.4434283]);
 
@@ -32,7 +32,13 @@ const Map = () => {
         });
     }, []);
 
+
+    useEffect(() => {
+        console.log("Markers updated: ", markers);
+    }, [markers]);
+
     return (
+        <div className='relative z-0'>
         <MapContainer center={coords} zoom={25} style={{ height: "400px", width: "100%" }}>
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -43,8 +49,24 @@ const Map = () => {
                     A pretty CSS3 popup. <br /> Easily customizable.
                 </Popup>
             </Marker>
+
+            {markers.map((marker, index) => (
+                <Marker key={index} position={marker.coordinates}>
+                    <Popup>
+                        <div>
+                            <p>{marker.address}</p>
+                            <p>{marker.type}</p>
+                            <p>{marker.date}</p>
+                            <p>{marker.hour}</p>
+                        </div>
+                    </Popup>
+                </Marker>
+            ))}
+
+
             <RecenterAutomatically lat={coords[0]} lng={coords[1]} />
         </MapContainer>
+        </div>
     );
 };
 
