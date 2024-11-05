@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <AuthUserProvider>
       <ToastContainer
         position="top-center"
-        autoClose={8000}
+        autoClose={2000}
         transition={ Flip }
       />
       <Component {...pageProps} />

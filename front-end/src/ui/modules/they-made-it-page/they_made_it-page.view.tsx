@@ -1,4 +1,4 @@
-import { Typography } from "@/ui/design-system/typography";
+import { Typography } from "@/ui/design-system/typography/typography";
 import { Container } from "@/ui/components/container/container";
 import { Box } from "@/ui/design-system/box/box";
 import Image from "next/image";

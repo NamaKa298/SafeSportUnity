@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Typography } from "../typography";
+import { Typography } from "@/ui/design-system/typography/typography";
 
 interface Props {
     label?: string;
@@ -13,6 +13,7 @@ interface Props {
     id: string;
     required?: boolean;
     isAutoCompleted?: boolean;
+    value?: string;
 }
 
 export const Input = ({
@@ -23,6 +24,7 @@ export const Input = ({
     onChange,
     register,
     errors,
+    value,
     errorMsg = "Tu dois renseigner ce champ",
     id,
     required = true,

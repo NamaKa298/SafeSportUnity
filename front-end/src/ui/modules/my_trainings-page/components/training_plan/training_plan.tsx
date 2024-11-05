@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container } from "@/ui/components/container/container";
-import { Typography } from "@/ui/design-system/typography";
+import { Typography } from "@/ui/design-system/typography/typography";
 import { getFirestore, collection, query, orderBy, getDocs, deleteDoc, doc } from "firebase/firestore"; 
 import { getAuth } from "firebase/auth";
 import ReactMarkdown from "react-markdown";
