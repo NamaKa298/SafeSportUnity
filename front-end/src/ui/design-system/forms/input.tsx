@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Typography } from "../typography";
+import { Typography } from "@/ui/design-system/typography/typography";
 
 interface Props {
     label?: string;

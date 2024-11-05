@@ -1,22 +1,9 @@
-import { useState } from "react";
 import { Container } from "@/ui/components/container/container";
-import { Typography } from "@/ui/design-system/typography";
+import { Typography } from "@/ui/design-system/typography/typography";
 import Image from "next/image";
-import { RiPlayCircleLine, RiCloseCircleLine } from "react-icons/ri"; // Importer une icône pour le bouton de fermeture
 import { Button } from "@/ui/design-system/button/button"
 
 export const FormationView = () => {
-//   const [showVideo, setShowVideo] = useState(false); // État pour afficher ou non la vidéo
-
-//   // Fonction appelée pour fermer la vidéo et réafficher l'image
-//   const closeVideo = () => {
-//     setShowVideo(false);
-//   };
-
-//   // Fonction appelée à la fin de la vidéo pour la cacher automatiquement
-//   const handleVideoEnd = () => {
-//     setShowVideo(false);
-//   };
 
   return (
     <div className="bg-gray-300">

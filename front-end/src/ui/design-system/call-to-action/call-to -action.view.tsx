@@ -1,5 +1,5 @@
 import { Container } from "@/ui/components/container/container"
-import { Typography } from "../typography"
+import { Typography } from "@/ui/design-system/typography/typography"
 import Image from "next/image"
 
 export const CallToActionView = () => {
