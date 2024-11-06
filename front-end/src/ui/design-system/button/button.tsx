@@ -21,6 +21,8 @@ interface Props {
     action?: Function;
     type?: "button" | "submit";
     fullWidth?: boolean;
+    style?: React.CSSProperties;
+    className?: string;
 }
 
 export const Button = ({
@@ -37,12 +39,11 @@ export const Button = ({
     type = "button",
     fullWidth = false,
     action = () => { },
+    style = {}
 }: Props) => {
     let variantStyles: string = "",
         sizeStyles: string = "",
         icoSize: number = 0;
-
-    console.log(icon);
 
     switch (variant) {
         case "accent": //Default
@@ -99,7 +100,6 @@ export const Button = ({
         if (action) {
             action()
         }
-
     }
 
     const buttonContent = (
@@ -154,7 +154,7 @@ export const Button = ({
     if (baseUrl) {
         if (linkType === LinkTypes.EXTERNAL) {
             return (
-                <a href={baseUrl} target="_blank">
+                <a href={baseUrl} target="_blank" style={style}>
                     {buttonElement}
                 </a>
             )
@@ -163,5 +163,5 @@ export const Button = ({
         }
     }
 
-    return buttonElement
+    return <><div style={style}>{buttonElement}</div></>
 };

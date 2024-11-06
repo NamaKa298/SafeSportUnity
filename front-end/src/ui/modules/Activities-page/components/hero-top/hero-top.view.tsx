@@ -1,5 +1,5 @@
 import { Container } from "@/ui/components/container/container";
-import { Typography } from "@/ui/design-system/typography";
+import { Typography } from "@/ui/design-system/typography/typography";
 import { Typewriter } from "../typewriter/typewriter";
 
 export const HeroTopView = () => {

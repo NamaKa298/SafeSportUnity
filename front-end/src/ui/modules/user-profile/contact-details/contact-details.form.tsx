@@ -14,7 +14,7 @@ export const ContactDetailsForm = ({ form }: Props) => {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="grid grid-cols-12 gap-6 ml-40 mr-40">
                 <div className="col-span-6 space-y-4">
-                    <Input
+                    <Input 
                         label="First Name"
                         isLoading={isLoading}
                         placeholder="First Name"

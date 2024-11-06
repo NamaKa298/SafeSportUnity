@@ -42,7 +42,6 @@ export const RegisterContainer = () => {
         lastName,
         userName,
         postalAddress,
-        newEmail,
         email,
         confirmEmail,
         password,
@@ -71,13 +70,12 @@ export const RegisterContainer = () => {
             lastName: lastName,
             userName: userName,
             postalAddress: postalAddress,
-            newEmail: newEmail,
             email: email,
             uid: data.uid,
             creation_date: new Date(),
         }
 
-        handleCreateUserDocument( "users", data.uid, userDocumentData);
+        handleCreateUserDocument("users", data.uid, userDocumentData);
     };
 
     const onSubmit: SubmitHandler<RegisterFormFieldsType> = async (formData) => {

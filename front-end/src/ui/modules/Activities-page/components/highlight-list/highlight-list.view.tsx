@@ -1,6 +1,6 @@
 import { Container } from "@/ui/components/container/container"
 import { Button } from "@/ui/design-system/button/button";
-import { Typography } from "@/ui/design-system/typography"
+import { Typography } from "@/ui/design-system/typography/typography"
 import Image from "next/image"
 import { RiArrowRightLine, RiCheckboxCircleLine } from "react-icons/ri"
 import { useAuth } from "@/context/AuthUserContext";
@@ -14,7 +14,7 @@ export const HighLightListView = () => {
     <Container className="py-24 space-y-10 bg-gray-400">
       <div className="flex justify-center gap-24">
         <div className="w-[520px] h-[350px] relative mt-10">
-          <Image fill src="/assets/images/marathon.jpg" alt="cake picture" />
+          <Image className="rounded" fill src="/assets/images/marathon.jpg" alt="cake picture" />
         </div>
         <div className="max-w-md space-y-7">
           <Typography variant="h3" component="h2">
@@ -39,7 +39,7 @@ export const HighLightListView = () => {
       </div>
       <div className="flex flex-row-reverse justify-center gap-24">
         <div className="w-[520px] h-[350px] relative mt-10">
-          <Image fill src="/assets/images/bike.jpg" alt="bike picture" />
+          <Image className="rounded" fill src="/assets/images/bike.jpg" alt="bike picture" />
         </div>
         <div className="max-w-md space-y-7">
           <Typography variant="h3" component="h2">

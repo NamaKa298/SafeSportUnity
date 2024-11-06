@@ -1,5 +1,4 @@
 import { FormsType } from "@/types/forms";
-import { Box } from "@/ui/design-system/box/box";
 import { Button } from "@/ui/design-system/button/button";
 import { Input } from "@/ui/design-system/forms/input";
 
@@ -49,38 +48,25 @@ export const RegisterForm = ({ form }: Props) => {
                 errorMsg="Tu dois renseigner ce champ"
                 id="userName"
             />
-            <Box padding_y="py-5" className="pt-8 pb-5 space-y-4">
-                <div>
-                    For more security, we suggest you create a specific email @ssu.com in order to be able to get in touch with other ssu members.
-                </div>
-                <Input
-                    isLoading={isLoading}
-                    placeholder="Create a new email with @ssu"
-                    type="email"
-                    register={register}
-                    errors={errors}
-                    errorMsg="Tu dois renseigner ce champ"
-                    id="newEmail"
-                />
-                <Input
-                    isLoading={isLoading}
-                    placeholder="Email"
-                    type="email"
-                    register={register}
-                    errors={errors}
-                    errorMsg="Tu dois renseigner ce champ"
-                    id="email"
-                />
-                <Input
-                    isLoading={isLoading}
-                    placeholder="Confirm Email"
-                    type="email"
-                    register={register}
-                    errors={errors}
-                    errorMsg="Tu dois renseigner ce champ"
-                    id="confirmEmail"
-                />
-            </Box>
+
+            <Input
+                isLoading={isLoading}
+                placeholder="Email"
+                type="email"
+                register={register}
+                errors={errors}
+                errorMsg="Tu dois renseigner ce champ"
+                id="email"
+            />
+            <Input
+                isLoading={isLoading}
+                placeholder="Confirm Email"
+                type="email"
+                register={register}
+                errors={errors}
+                errorMsg="Tu dois renseigner ce champ"
+                id="confirmEmail"
+            />
             <Input
                 isLoading={isLoading}
                 placeholder="Password"

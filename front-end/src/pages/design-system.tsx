@@ -8,7 +8,7 @@ import { Avatar } from "@/ui/design-system/avatar/avatar";
 import { Button } from "@/ui/design-system/button/button";
 import { Logo } from "@/ui/design-system/logo/logo";
 import { Spinner } from "@/ui/design-system/spinner/spinner";
-import { Typography } from "@/ui/design-system/typography";
+import { Typography } from "@/ui/design-system/typography/typography";
 
 // ICO
 import { RiUser6Fill } from "react-icons/ri";

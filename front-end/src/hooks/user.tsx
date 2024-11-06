@@ -2,8 +2,6 @@ import { Timestamp } from "firebase/firestore";
 
 export interface UserInterface {
     uid: string;
-    email: string | null;
-    firstName: string | null;
     displayName: string | null;
     emailVerified: boolean;
     phoneNumber: string | null;
@@ -19,8 +17,17 @@ export interface UserDocument {
     email: string;
     firstName: string;
     lastName: string;
-    newEmail: string;
     password: string;
     postalAddress: string;
+    userName: string;
+}
+
+export interface trainingWithPartners {
+    address: string;
+    date: string;
+    hour: string;
+    trainingType: string;
+    uid: string;
+    email: string;
     userName: string;
 }

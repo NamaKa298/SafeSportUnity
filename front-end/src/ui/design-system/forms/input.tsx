@@ -1,17 +1,20 @@
+/* eslint-disable */
 import clsx from "clsx";
-import { Typography } from "../typography";
+import { Typography } from "@/ui/design-system/typography/typography";
 
 interface Props {
     label?: string;
     isLoading: boolean;
     placeholder: string;
-    type?: "text" | "email" | "password" | "url";
+    type?: "text" | "email" | "password" | "url" | "time" | "date";
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     register: any;
     errors: any;
     errorMsg?: string;
     id: string;
     required?: boolean;
     isAutoCompleted?: boolean;
+    value?: string;
 }
 
 export const Input = ({
@@ -19,8 +22,10 @@ export const Input = ({
     isLoading,
     placeholder,
     type = "text",
+    onChange,
     register,
     errors,
+    value,
     errorMsg = "Tu dois renseigner ce champ",
     id,
     required = true,
@@ -30,9 +35,9 @@ export const Input = ({
         <div className="space-y-2">
             {label && (
                 <Typography
-                    variant="caption4"
+                    variant="caption1"
                     component="div"
-                    theme={errors[id] ? "danger" : "gray-600"}>
+                    theme={errors[id] ? "danger" : "gray"}>
                     {label}
                 </Typography>
             )}
@@ -47,10 +52,11 @@ export const Input = ({
                 <input
                     type={type}
                     placeholder={placeholder}
+                    onChange={onChange}
                     className={clsx(
                         type === "url" ? "rounded-r" : "rounded",
                         isLoading && "cursor-not-allowed",
-                        errors[id]
+                        errors && errors[id]
                             ? "placeholder-alert-danger text-alert-danger"
                             : " placeholder-gray-600",
                         "w-full p-4 font-light border border-gray-400 rounded focus:outline-none focus:ring-1 focus:ring-primary",

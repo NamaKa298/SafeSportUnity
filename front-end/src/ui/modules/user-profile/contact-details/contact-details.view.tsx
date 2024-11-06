@@ -7,8 +7,8 @@ interface Props {
 }
 export const ContactDetailsView = ({form}: Props) => {
     return (
-        <div className="space-y-5">
-            <Typography variant="h1" component="h1">
+        <div className="space-y-5 bg-gray-300">
+            <Typography className="text-center" variant="h2" component="h2">
                 Contact Details
             </Typography>
             <ContactDetailsForm form={form}/>

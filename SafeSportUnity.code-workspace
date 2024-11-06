@@ -2,7 +2,16 @@
 	"folders": [
 		{
 			"path": "front-end"
+		},
+		{
+			"path": "back-end"
+		},
+		{
+			"path": "README"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"github.copilot.chat.localeOverride": "fr",
+		"liveServer.settings.multiRootWorkspaceName": "front-end"
+	}
 }

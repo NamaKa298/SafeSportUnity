@@ -3,12 +3,17 @@ import { db } from "@/config/firebase-config"
 import { FirebaseError } from "firebase/app";
 
 export const firestoreCreateDocument = async (
-    collectionName: string,
+    collectionPath: string,
     documentID: string,
     data: object
 ) => {
+    
+    console.log("collectionPath", collectionPath);
+    console.log("documentID", documentID);
+    console.log("data", data);
+
     try {
-        const documentRef = doc(db, collectionName, documentID);
+        const documentRef = doc(db, collectionPath, documentID);
 
         await setDoc(documentRef, data);
         return { data: true };
@@ -25,12 +30,12 @@ export const firestoreCreateDocument = async (
 };
 
 export const firestoreUpdateDocument = async (
-    collectionName: string,
+    collectionPath: string,
     documentID: string,
     data: object
 ) => {
     try {
-        const documentRef = doc(db, collectionName, documentID);
+        const documentRef = doc(db, collectionPath, documentID);
 
         await updateDoc(documentRef, data);
         return { data: true };

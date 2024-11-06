@@ -1,12 +1,12 @@
 // This file is used to initialize the Firebase SDK and connect to the Firebase project.
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { Firestore, getFirestore } from "firebase/firestore";
 
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyAE8rHxz6aACrNBgtcbGk39tRm_YagBdIk",
+  apiKey: "AIzaSyAE8rHxz6aACrNBgtcbGk39tRm_YagBdIk",
   authDomain: "safesportunity-5bfeb.firebaseapp.com",
   projectId: "safesportunity-5bfeb",
   storageBucket: "safesportunity-5bfeb.appspot.com",
@@ -19,3 +19,4 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+export const firestore = Firestore;
