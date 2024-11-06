@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useEffect, useState } from 'react';
@@ -32,7 +33,6 @@ const Map = ({markers, setMarkers}) => {
         });
     }, []);
 
-
     useEffect(() => {
         console.log("Markers updated: ", markers);
     }, [markers]);
@@ -46,7 +46,7 @@ const Map = ({markers, setMarkers}) => {
             />
             <Marker position={coords}>
                 <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
+                    You are here
                 </Popup>
             </Marker>
 

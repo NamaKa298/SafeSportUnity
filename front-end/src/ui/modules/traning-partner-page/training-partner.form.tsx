@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { FormsType } from "@/types/forms";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

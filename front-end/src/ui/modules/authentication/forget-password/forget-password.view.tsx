@@ -1,6 +1,6 @@
 import { Container } from "@/ui/components/container/container";
 import { Box } from "@/ui/design-system/box/box";
-import { Typography } from "@/ui/design-system/typography";
+import { Typography } from "@/ui/design-system/typography/typography";
 import Link from "next/link";
 import { ForgetPasswordForm } from "./forget-password-form";
 import { FormsType } from "@/types/forms";

@@ -70,23 +70,23 @@ app.post('/generate-plan', async (req, res) => {
         const longRunDaysSafe = Array.isArray(longRunDays) ? longRunDays : [];
 
         const userPrompt = `
-        L'utilisateur est un/une : ${sex}.
-        Il/elle a : ${age} ans.
-        Il/elle mesure : ${height} cm et pèse : ${weight} kg.
-        L'utilisateur souhaite faire du : ${sport}.
-        il fait actuellement : ${weeklyDistance} km par semaine a une vitesse moyenne de : ${speed} km/h ou une allure de : ${pace} min/km.
-        Objectif de l'utilisateur :
-            ${goalType === 'finisher' ? `L'utilisateur souhaite simplement parvenir à terminer ${goalDistance}, sans objectif de temps, de vitesse moyenne, ni d'allure moyenne.` : ''}
-            ${goalType === 'finisher with a time goal' ? `L'utilisateur souhaite terminer ${goalDistance} avec un objectif de temps de ${goalTime} ou avec un objectif de vitesse/allure moyenne de ${goalPace}.` : ''}
+        The user is: ${sex}.
+        They are: ${age} years old.
+        Their height is: ${height} cm and weight is: ${weight} kg.
+        The user wants to practice: ${sport}.
+        They currently run: ${weeklyDistance} km per week at an average speed of: ${speed} km/h or a pace of: ${pace} min/km.
+        User's goal:
+            ${goalType === 'finisher' ? `The user simply wants to complete ${goalDistance}, without a specific goal for time, average speed, or average pace.` : ''}
+            ${goalType === 'finisher with a time goal' ? `The user wants to finish ${goalDistance} with a time goal of ${goalTime} or an average speed/pace goal of ${goalPace}.` : ''}
 
-        Il peut s'entraîner ${trainingDaysSafe.join(', ')} par semaine et souhaite un plan d'entrainement sur 3 mois.
-        les jours de préférence dans la semaine pour un entrainement supérieur à 1 heure sont : ${longRunDaysSafe.join(', ')}.
-        fait une synthèse de l'utilisateur et de son objectif.
-        Propose un plan d'entraînement détaillé jour par jour pendant 3 mois pour atteindre cet objectif.
-        prend bien en compte le poids, la taille, l'âge de l'utilisateur et sa distance de course actuelle dans le plan d'entraînement.
-        Si tu penses que l'objectif est trop ambitieux, suggère et propose un objectif plus réaliste.
-        Attention au clacul des vitesses et des allures moyennes dans le plan d'entraînement par rapport à la distance de course.
-        formate le texte en markdown titre en gras, double saut de ligne entre les titres, sous-titre en italique et liste à puce.
+        They can train ${trainingDaysSafe.join(', ')} per week and desire a 3-month training plan.
+        Preferred days of the week for training sessions over 1 hour are: ${longRunDaysSafe.join(', ')}.
+        Summarize the user's profile and goal.
+        Propose a detailed day-by-day training plan over 3 months to achieve this goal.
+        Take into account the user's weight, height, age, and current running distance in the training plan.
+        If the goal seems too ambitious, suggest and propose a more realistic goal.
+        Pay attention to the calculation of average speeds and paces in the training plan relative to the race distance.
+        Format the text in markdown with bold titles, double line breaks between titles, italicized subtitles, and bullet-point lists.
         `;
 
         // Envoi du prompt à l'API ChatGPT

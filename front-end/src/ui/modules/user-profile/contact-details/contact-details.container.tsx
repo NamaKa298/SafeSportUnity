@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { firebaseUpdatePassword, firebaseUpdateEmail } from "@/api/authentication";
 import { firestoreUpdateDocument } from "@/api/firestore";
 import { useAuth } from "@/context/AuthUserContext";

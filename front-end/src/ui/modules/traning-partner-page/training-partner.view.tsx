@@ -41,7 +41,6 @@ export const TrainingPartnersView = ({ form}: Props) => {
                     <ActivityList markers={markers} setMarkers={setMarkers} />
                 </div>
             </div>
-            
         </div >
         </Container>
     )
