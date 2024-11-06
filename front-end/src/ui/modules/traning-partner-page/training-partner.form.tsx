@@ -88,12 +88,12 @@ export const TrainingPartnersForm = ({ form }: Props) => {
                                 {addressSuggestions.length > 0 && (
                                     <CommandList>
                                         {addressSuggestions.map((suggestion) => (
-                                            <div onClick={() => handleSuggestionClick(suggestion.label)}>
+                                            <div onClick={() => handleSuggestionClick(suggestion)}>
                                             <CommandItem
-                                                key={suggestion.label}
+                                                key={suggestion}
                                                 className="p-2 cursor-pointer hover:bg-gray-100"
                                             >
-                                                    {suggestion.label}
+                                                    {suggestion}
                                             </CommandItem>
                                             </div>
                                         ))}

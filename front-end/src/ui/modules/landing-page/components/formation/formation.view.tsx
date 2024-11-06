@@ -6,7 +6,7 @@ import { Button } from "@/ui/design-system/button/button"
 export const FormationView = () => {
 
   return (
-    <div className="bg-gray-300">
+    <div>
       <Container className="py-24 text-center">
         <Typography variant="h2" component="h2" className="mb-2.5">
         Where it all begins!!

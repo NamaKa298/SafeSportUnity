@@ -32,6 +32,7 @@
     "next": "14.2.13",
     "postcss-loader": "^8.1.1",
     "react": "^18.3.1",
+    "react-dialog": "^0.1.0",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.0",
     "react-icons": "^5.3.0",

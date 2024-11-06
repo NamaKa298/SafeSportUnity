@@ -20,7 +20,7 @@ export const SlackView = () => {
         <Typography variant="h3" component="h3">
           SafeSportUnity Define Your Next Training Plan and Find your Sparing Partners!.
         </Typography>
-        <Typography variant="body-lg" component="p" theme="gray" className="max-w-lg">
+        <Typography variant="lead" component="h3" className="max-w-lg">
           Welcome to the landing page dedicated to our end-of-first-year programming fundamentals project <br /> <br />
 
           We are Marion and Benoit, students at Holberton School in Rodez, France.<br /> <br />
