@@ -155,7 +155,7 @@ const TrainingPartnerList: React.FC = ({markers, setMarkers}) => {
                     {activity.email !== authUser.userDocument.email && (
                         <Button 
                             onClick={() => handleEmailClick(activity.userName, activity.email)}
-                            className="mt-2 p-2 bg-primary text-white rounded "
+                            className="mt-2 p-2 bg-primary hover:bg-primary-400 text-white rounded"
                         >
                             Contact
                         </Button>

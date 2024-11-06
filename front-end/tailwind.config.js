@@ -8,18 +8,18 @@ module.exports = {
 		colors: {
 			white: '#FFFFFF',
 			primary: {
-				'200': '#efeffc',
-				'300': '#cfd0f6',
-				'400': '#7f81e8',
-				'600': '#5658CB',
-				DEFAULT: '#5F62E2'
+				'200': 'rgb(236 254 255)', // couleur de fond login quand je suis pas dessus
+				'300': 'rgb(6 182 212)', //couleur de fond du login quand je passe dessus
+				'400': 'rgb(6 182 212)', //couleur autre bouton quand je passe dessus
+				'600': 'rgb(8 145 178)',
+				DEFAULT: 'rgb(14 116 144)'
 			},
 			secondary: {
-				'200': '#eaf8f4',
-				'300': '#bfe9de',
-				'400': '#56c4a7',
-				'600': '#26a482',
-				DEFAULT: '#2AB691'
+				'200': '#F5F7FA',
+				'300': '#E4E7EB',
+				'400': '#CBD2D9',
+				'600': '#9AA5B1',
+				DEFAULT: '#EF5F00'
 			},
 			gray: {
 				'300': '#fafafa',
