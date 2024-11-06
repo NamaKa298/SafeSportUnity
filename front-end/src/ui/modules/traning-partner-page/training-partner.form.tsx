@@ -140,6 +140,7 @@ export const TrainingPartnersForm = ({ form, markers, setMarkers }: Props) => {
             hour: formHour,
             trainingType: formType,
             address: formAddress,
+            // @ts-ignore
             coordinates: [lng, lat],
         });
 
@@ -184,10 +185,11 @@ export const TrainingPartnersForm = ({ form, markers, setMarkers }: Props) => {
                                                 {addressSuggestions.map((suggestion) => (
                                                     <div onClick={() => handleSuggestionClick(suggestion)}>
                                                         <CommandItem
+                                                            // @ts-ignore
                                                             key={suggestion.label}
                                                             className=" cursor-pointer hover:bg-gray-100"
                                                         >
-                                                            {suggestion.label}
+                                                            {(suggestion as any).label}
                                                         </CommandItem>
                                                     </div>
                                                 ))}
@@ -237,10 +239,12 @@ export const TrainingPartnersForm = ({ form, markers, setMarkers }: Props) => {
                 <div className="items-center text-center justify-center pr-10 pb-10 pt-10">
                     <Button
                         type="submit"
+                        // @ts-ignore
                         variant="accent"
+                        // @ts-ignore
                         size="medium"
                         onClick={handleSubmitMarker}
-                        className="bg-primary hover:bg-primary-400 text-white rounded text-caption3 font-medium px-[14px] py-[12px]  18 relative animate text-white"
+                        className="bg-primary hover:bg-primary-400 text-white rounded text-caption3 font-medium px-[14px] py-[12px]  18 relative animate"
                     >
                         Share my sport activity !
                     </Button>

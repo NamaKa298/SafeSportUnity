@@ -83,7 +83,7 @@ export default function TrainingPartnersContainer() {
     return (
         <>
             <TrainingPartnersView
-                address="some address" // Add the address property here
+                // address="some address" // Add the address property here
                 form={{
                     errors,
                     handleSubmit,

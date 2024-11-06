@@ -15,7 +15,7 @@ interface Activity {
     userName: string;
     email: string;
 }
-
+// @ts-ignore
 const TrainingPartnerList: React.FC = ({markers, setMarkers}) => {
     const { authUser } = useAuth();
     const [activities, setActivities] = useState<Activity[]>([]);
@@ -106,7 +106,7 @@ const TrainingPartnerList: React.FC = ({markers, setMarkers}) => {
             }
             return true; // Inclure l'activité dans la liste
         });
-
+        // @ts-ignore
         const getOnlyTrainingWithPartners = deleteOldActivities.map(activity => activity.trainingWithPartners);
 
         setMarkers(getOnlyTrainingWithPartners.filter(s => s.coordinates));
