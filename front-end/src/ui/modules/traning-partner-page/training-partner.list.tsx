@@ -16,7 +16,7 @@ interface Activity {
     email: string;
 }
 
-const TrainingPartnerList: React.FC = () => {
+const TrainingPartnerList: React.FC = ({markers, setMarkers}) => {
     const { authUser } = useAuth();
     const [activities, setActivities] = useState<Activity[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -75,6 +75,8 @@ const TrainingPartnerList: React.FC = () => {
                 // Mettre à jour l'état avec les nouvelles activités
                 setActivities(prevActivities => [...prevActivities, ...newActivities]);
 
+
+
             } catch (error) {
                 console.error("Erreur lors de la récupération des activités :", error);
             } finally {
@@ -84,6 +86,32 @@ const TrainingPartnerList: React.FC = () => {
 
         recupactivites();
     }, []);
+
+
+    useEffect(() => {
+
+        const deleteOldActivities = activities.filter(activity => {
+            const currentDate = new Date();
+            const activityDate = new Date(activity.date);
+            const [activityHour, activityMinute] = activity.hour.split(':').map(Number);
+            activityDate.setHours(activityHour, activityMinute);
+
+            if (activityDate < currentDate) {
+                // Supprimer l'activité de la base de données
+                const db = getFirestore();
+                deleteDoc(doc(db, 'users', authUser.uid, 'trainingWithPartners', activity.id))
+                    .then(() => console.log(`Activité supprimée : ${activity.id}`))
+                    .catch(error => console.error(`Erreur lors de la suppression de l'activité : ${error}`));
+                return false; // Ne pas inclure l'activité dans la liste
+            }
+            return true; // Inclure l'activité dans la liste
+        });
+
+        const getOnlyTrainingWithPartners = deleteOldActivities.map(activity => activity.trainingWithPartners);
+
+        setMarkers(getOnlyTrainingWithPartners.filter(s => s.coordinates));
+
+    }, [activities]);
 
     // Vérification des dates et suppression des activités expirées
     const currentDate = new Date();
@@ -128,7 +156,7 @@ const TrainingPartnerList: React.FC = () => {
                     {activity.email !== authUser.userDocument.email && (
                         <Button 
                             onClick={() => handleEmailClick(activity.userName, activity.email)}
-                            className="mt-2 p-2 bg-primary text-white rounded "
+                            className="mt-2 p-2 bg-primary hover:bg-primary-400 text-white rounded"
                         >
                             Contact
                         </Button>

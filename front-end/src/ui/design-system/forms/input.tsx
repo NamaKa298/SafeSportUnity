@@ -56,7 +56,7 @@ export const Input = ({
                     className={clsx(
                         type === "url" ? "rounded-r" : "rounded",
                         isLoading && "cursor-not-allowed",
-                        errors[id]
+                        errors && errors[id]
                             ? "placeholder-alert-danger text-alert-danger"
                             : " placeholder-gray-600",
                         "w-full p-4 font-light border border-gray-400 rounded focus:outline-none focus:ring-1 focus:ring-primary",
