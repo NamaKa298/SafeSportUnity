@@ -5,17 +5,18 @@ import { useEffect, useState } from 'react';
 import L from 'leaflet';
 import { useMap } from 'react-leaflet/hooks';
 
+delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
     iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
     shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
 });
 
-const Map = () => {
+const Map = ({markers, setMarkers}) => {
 
     const [coords, setCoords] = useState([43.6000611, 1.4434283]);
 
-    const RecenterAutomatically = ({ lat, lng }: { lat: number; lng: number }) => {
+    const RecenterAutomatically = ({lat,lng}) => {
         const map = useMap();
         useEffect(() => {
             map.setView([lat, lng], 15);
@@ -32,19 +33,40 @@ const Map = () => {
         });
     }, []);
 
+    useEffect(() => {
+        console.log("Markers updated: ", markers);
+    }, [markers]);
+
     return (
-        <MapContainer center={coords.length === 2 ? (coords as [number, number]) : [0, 0]} zoom={25} style={{ height: "400px", width: "100%" }}>
-    <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    />
-    <Marker position={coords.length === 2 ? (coords as [number, number]) : [0, 0]}>
-        <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
-    </Marker>
-    <RecenterAutomatically lat={coords[0]} lng={coords[1]} />
-</MapContainer>
+        <div className='relative z-0'>
+        <MapContainer center={coords} zoom={25} style={{ height: "400px", width: "100%" }}>
+            <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            <Marker position={coords}>
+                <Popup>
+                    You are here
+                </Popup>
+            </Marker>
+
+            {markers.map((marker, index) => (
+                <Marker key={index} position={marker.coordinates}>
+                    <Popup>
+                        <div>
+                            <p>{marker.address}</p>
+                            <p>{marker.type}</p>
+                            <p>{marker.date}</p>
+                            <p>{marker.hour}</p>
+                        </div>
+                    </Popup>
+                </Marker>
+            ))}
+
+
+            <RecenterAutomatically lat={coords[0]} lng={coords[1]} />
+        </MapContainer>
+        </div>
     );
 };
 

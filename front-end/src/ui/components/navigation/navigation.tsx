@@ -22,7 +22,7 @@ export const Navigation = ({ }: Props) => {
   );
 
   return (
-    <div className="border-b-2 border-white shadow-xl sticky top-0 w-full z-50 bg-white">
+    <div className="border-b-2 border-white shadow-lg sticky top-0 w-full z-50 bg-white">
       <Container className="flex items-center justify-between py-0 gap-7">
         <Link href="/">
           <div className="flex items-center gap-2.5">
