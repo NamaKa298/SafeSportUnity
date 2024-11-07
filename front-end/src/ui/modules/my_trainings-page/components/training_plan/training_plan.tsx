@@ -121,7 +121,7 @@ export const TrainingView = () => {
           </tbody>
         </table>
       </div>
-      <div className="flex flex-col w-full p-4 bg-primary-400 rounded-lg space-y-5 items-center ">
+      <div className="flex flex-col w-full p-4 bg-primary-300 rounded-lg space-y-5 items-center ">
         <div className="flex justify-between w-full items-center relative">
           <Typography variant="h3" component="h2" className="text-center flex-grow">
             Training Plan
@@ -133,7 +133,7 @@ export const TrainingView = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col w-full p-4 bg-primary-300 rounded-lg space-y-5">
+      <div className="flex flex-col w-full p-4 bg-primary-200 rounded-lg space-y-5 shadow-inner">
         {selectedPlan ? (
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{selectedPlan}</ReactMarkdown>
         ) : (
