@@ -1,16 +1,9 @@
 SafeSportUnity
 
-Capture d'écran de SafeSportUnity
-À propos de SafeSportUnity
-
 SafeSportUnity est une application web innovante dédiée à la création de plans d'entraînement personnalisés pour les athlètes de tous niveaux. En exploitant la puissance de Claude AI, notre plateforme génère des programmes sur mesure adaptés aux objectifs et aux besoins spécifiques de chaque utilisateur. Que vous soyez un débutant cherchant à adopter une routine sportive ou un athlète confirmé visant à optimiser vos performances, SafeSportUnity vous accompagne dans votre parcours.
 Développeurs
 
 Je m'appelle Benoit BETI, étudiant à l'école Holberton, passionné par le développement web et les technologies de l'intelligence artificielle. Ce projet de fin d'année, réalisé en binôme avec Marion Saint Martin, reflète notre engagement à fusionner technologie et sport pour offrir des solutions innovantes aux utilisateurs.
-
-    Mon profil LinkedIn
-    Mon alias Twitter
-    Repository du projet
 
 Histoire du développement
 
